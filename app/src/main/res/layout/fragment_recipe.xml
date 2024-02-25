@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RecipeFragment"
-    android:background="@color/purple_200">
+    android:background="@color/teal_200">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Recipe Page"
+        android:text="Recipe Screen"
         android:textSize="26dp"
         android:layout_gravity="center"/>
 
