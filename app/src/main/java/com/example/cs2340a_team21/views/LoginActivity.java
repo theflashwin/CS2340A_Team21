@@ -3,6 +3,9 @@ package com.example.cs2340a_team21.views;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.view.View;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -67,11 +70,14 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        Button btnExit = findViewById(R.id.btnExit);
+        btnExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finishAffinity(); // Close all activities
+                System.exit(0); // Exit the application
+            }
 
+        });
     }
-
-
-
-
-
 }
