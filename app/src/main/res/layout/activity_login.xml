@@ -11,8 +11,8 @@
         android:id="@+id/usernameInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:layout_marginEnd="140dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="100dp"
         android:ems="10"
         android:hint="username"
         android:inputType="text"
@@ -23,8 +23,8 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="152dp"
-        android:layout_marginEnd="188dp"
+        android:layout_marginTop="148dp"
+        android:layout_marginEnd="144dp"
         android:text="Login Page"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +35,7 @@
         android:layout_width="189dp"
         android:layout_height="51dp"
         android:layout_marginTop="36dp"
-        android:layout_marginEnd="148dp"
+        android:layout_marginEnd="108dp"
         android:text="Login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordInput" />
@@ -44,8 +44,8 @@
         android:id="@+id/signUpPageLink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="176dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="132dp"
         android:text="Sign Up Here"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/submitButton" />
@@ -54,12 +54,20 @@
         android:id="@+id/passwordInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="140dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="96dp"
         android:ems="10"
         android:hint="password"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/usernameInput" />
+
+    <Button
+        android:id="@+id/btnExit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Exit App"
+        tools:layout_editor_absoluteX="10dp"
+        tools:layout_editor_absoluteY="10dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
