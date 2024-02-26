@@ -1,14 +1,16 @@
-package com.example.cs2340a_team21;
+package com.example.cs2340a_team21.views;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.cs2340a_team21.R;
+import com.example.cs2340a_team21.viewmodels.SignInViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -33,42 +35,22 @@ public class SignUpActivity extends AppCompatActivity {
 
         this.auth = FirebaseAuth.getInstance();
 
-        auth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
         submitButton.setOnClickListener(v -> {
 
             String username = this.usernameInput.getText().toString();
             String password = this.passwordInput.getText().toString();
 
-            auth.createUserWithEmailAndPassword(username, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(intent);
-
-                    }
-                }
-            });
-
-
+            if (SignInViewModel.verifySignUp(username, password)) {
+                Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                startActivity(intent);
+            } else {
+                Toast toast = Toast.makeText(this, "Some error occurred when making your account", Toast.LENGTH_SHORT);
+                toast.show();
+            }
 
         });
 
     }
 
-    private void createNewUser(String username, String password) {
-
-
-
-    }
 
 }
