@@ -1,4 +1,4 @@
-package com.example.cs2340a_team21;
+package com.example.cs2340a_team21.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -7,7 +7,9 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 
+import com.example.cs2340a_team21.R;
 import com.example.cs2340a_team21.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,18 +24,20 @@ public class MainActivity extends AppCompatActivity {
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
 
-            switch(item.getItemId()) {
+            Log.d("item", item.toString());
 
-                case R.id.Meal:
+            switch(item.toString()) {
+
+                case "Input Meal":
                     replaceFragment(new InputMealFragment());
                     break;
-                case R.id.Recipe:
+                case "Recipe":
                     replaceFragment(new RecipeFragment());
                     break;
-                case R.id.Ingredients:
+                case "Ingredients":
                     replaceFragment(new IngredientsFragment());
                     break;
-                case R.id.List:
+                case "Shopping List":
                     replaceFragment(new ShoppingListFragment());
                     break;
 
