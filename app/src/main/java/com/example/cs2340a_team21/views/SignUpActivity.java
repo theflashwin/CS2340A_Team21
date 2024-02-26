@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.cs2340a_team21.R;
+import com.example.cs2340a_team21.viewmodels.LoginViewModel;
 import com.example.cs2340a_team21.viewmodels.SignInViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -35,14 +37,17 @@ public class SignUpActivity extends AppCompatActivity {
 
         this.auth = FirebaseAuth.getInstance();
 
-        submitButton.setOnClickListener(v -> {
+        this.submitButton.setOnClickListener(v -> {
 
             String username = this.usernameInput.getText().toString();
             String password = this.passwordInput.getText().toString();
 
+            boolean successful = SignInViewModel.verifySignUp(username, password);
+
             // sends to SignInView model
 
-            if (SignInViewModel.verifySignUp(username, password)) {
+            if (successful) {
+                Log.d("here:","signInWithCustomToken:success");
                 Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
                 startActivity(intent);
             } else {

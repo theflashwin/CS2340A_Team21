@@ -51,11 +51,13 @@ public class LoginActivity extends AppCompatActivity {
             // sends to LoginViewModel
 
             if (successful) {
+                Toast toast = Toast.makeText(this, "Login Successful!!", Toast.LENGTH_SHORT);
+                toast.show();
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
             } else {
 
-                Toast toast = Toast.makeText(this, "Login Unsuccesful", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(this, "Login Unsuccessful", Toast.LENGTH_SHORT);
                 toast.show();
 
             }
