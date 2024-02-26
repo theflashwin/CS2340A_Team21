@@ -11,6 +11,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class User {
 
@@ -34,8 +35,6 @@ public class User {
             }
         });
 
-        Log.d("eoig: ", Boolean.toString(ret));
-
         return ret;
 
     }
@@ -48,8 +47,11 @@ public class User {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
+                    Log.d("here:", "Success!");
+                    FirebaseUser user = auth.getCurrentUser();
                     User.ret2 = true;
                 } else {
+                    Log.d("here:", "Didn't work.");
                     User.ret2 = false;
                 }
             }
