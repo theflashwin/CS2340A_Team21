@@ -48,6 +48,8 @@ public class LoginActivity extends AppCompatActivity {
             String password = this.passwordInput.getText().toString();
             boolean successful = LoginViewModel.verifyLoginInputs(username, password);
 
+            // sends to LoginViewModel
+
             if (successful) {
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
