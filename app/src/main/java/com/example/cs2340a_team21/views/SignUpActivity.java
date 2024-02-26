@@ -40,6 +40,8 @@ public class SignUpActivity extends AppCompatActivity {
             String username = this.usernameInput.getText().toString();
             String password = this.passwordInput.getText().toString();
 
+            // sends to SignInView model
+
             if (SignInViewModel.verifySignUp(username, password)) {
                 Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
                 startActivity(intent);
