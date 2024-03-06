@@ -17,4 +17,9 @@
         android:icon="@drawable/shopping_list"
         android:id="@+id/List"
         android:title="Shopping List"/>
+    <item
+        android:icon="@drawable/outline_accessibility_24"
+        android:id="@+id/Personal"
+        android:title="Personal Info"/>
+
 </menu>
