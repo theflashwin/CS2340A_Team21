@@ -37,7 +37,7 @@
             android:inputType="numberSigned" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="43dp"
             android:text="Select Gender"
