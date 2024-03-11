@@ -8,6 +8,9 @@ public class SignInViewModel {
     public static boolean verifySignUp(String username, String password) {
 
         // verify inputs
+        if (username == null || password == null) {
+            return false;
+        }
 
         // send to model
         return User.signup(username, password);
