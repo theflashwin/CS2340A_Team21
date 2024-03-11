@@ -21,7 +21,7 @@
             android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/editTextNumberSigned"
+            android:id="@+id/editTextHeight"
             android:layout_width="match_parent"
             android:layout_height="97dp"
             android:ems="10"
@@ -29,7 +29,7 @@
             android:inputType="numberSigned" />
 
         <EditText
-            android:id="@+id/editTextNumberSigned2"
+            android:id="@+id/editTextWeight"
             android:layout_width="match_parent"
             android:layout_height="92dp"
             android:ems="10"
@@ -44,7 +44,7 @@
             android:textSize="18sp" />
 
         <RadioGroup
-            android:id="@+id/radioGrp"
+            android:id="@+id/radioGroupGender"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -73,6 +73,12 @@
                 android:text="Female"
                 />
         </RadioGroup>
+
+        <Button
+            android:id="@+id/submitButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
