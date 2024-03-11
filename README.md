@@ -7,6 +7,7 @@ FIREBASE NOTES:
 
 only accepts emails
 password has to be longer than 6 characters
+Includes a digit
 
 Team Members: Ashwin, Neeti, Yashad, Mukund, Sachin, Suhas
 =======
