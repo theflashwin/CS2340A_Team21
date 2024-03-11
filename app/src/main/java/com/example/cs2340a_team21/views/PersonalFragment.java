@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioGroup;
 
 import com.example.cs2340a_team21.R;
 
@@ -21,10 +24,15 @@ public class PersonalFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    // adding text fields
+
+    private EditText height;
+    private EditText weight;
+    private RadioGroup gender;
+    private Button submitButton;
 
     public PersonalFragment() {
         // Required empty public constructor
@@ -51,6 +59,13 @@ public class PersonalFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+//        this.height = getView().findViewById(R.id.editTextHeight);
+//        this.height = new EditText(R.id.editTextWeight);
+//
+//        this.gender = new RadioGroup(R.id.radioGroupGender);
+//        this.submitButton = new Button(R.id.submitButton);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -61,6 +76,18 @@ public class PersonalFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_personal, container, false);
+        View view = inflater.inflate(R.layout.fragment_personal, container, false);
+        this.height = (EditText) view.findViewById(R.id.editTextHeight);
+        this.weight = (EditText) view.findViewById(R.id.editTextWeight);
+        this.gender = (RadioGroup) view.findViewById(R.id.radioGroupGender);
+        this.submitButton = (Button) view.findViewById(R.id.submitButton);
+
+        this.submitButton.setOnClickListener(v -> {
+
+
+
+        });
+
+        return view;
     }
 }
