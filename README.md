@@ -19,4 +19,3 @@ Tasks for Sprint 2
 Personal info Screen
 Link Meal and User Databases
 2 Visualization buttons
->>>>>>> origin/Yashad
