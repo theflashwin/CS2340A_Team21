@@ -4,38 +4,40 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.example.cs2340a_team21.R;
-import com.example.cs2340a_team21.viewmodels.InputMealViewModel;
+import com.example.cs2340a_team21.viewmodels.PersonalInfoViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link InputMealFragment#newInstance} factory method to
+ * Use the {@link PersonalFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class InputMealFragment extends Fragment {
+public class PersonalFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
-    // Layout Widgets
+    // adding text fields
 
-    private EditText nameInput;
-    private EditText caloriesInput;
+    private EditText height;
+    private EditText weight;
+    private RadioGroup gender;
     private Button submitButton;
 
-    public InputMealFragment() {
+    public PersonalFragment() {
         // Required empty public constructor
     }
 
@@ -45,11 +47,11 @@ public class InputMealFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment InputMealFragment.
+     * @return A new instance of fragment PersonalFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static InputMealFragment newInstance(String param1, String param2) {
-        InputMealFragment fragment = new InputMealFragment();
+    public static PersonalFragment newInstance(String param1, String param2) {
+        PersonalFragment fragment = new PersonalFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -60,6 +62,13 @@ public class InputMealFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+//        this.height = getView().findViewById(R.id.editTextHeight);
+//        this.height = new EditText(R.id.editTextWeight);
+//
+//        this.gender = new RadioGroup(R.id.radioGroupGender);
+//        this.submitButton = new Button(R.id.submitButton);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -70,16 +79,21 @@ public class InputMealFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_input_meal, container, false);
-
-        this.nameInput = (EditText) view.findViewById(R.id.mealNameInput);
-        this.caloriesInput = (EditText) view.findViewById(R.id.mealCaloriesInput);
-        this.submitButton = (Button) view.findViewById(R.id.mealSubmit);
+        View view = inflater.inflate(R.layout.fragment_personal, container, false);
+        this.height = (EditText) view.findViewById(R.id.editTextHeight);
+        this.weight = (EditText) view.findViewById(R.id.editTextWeight);
+        this.gender = (RadioGroup) view.findViewById(R.id.radioGroupGender);
+        this.submitButton = (Button) view.findViewById(R.id.submitButton);
 
         this.submitButton.setOnClickListener(v -> {
-            InputMealViewModel.sendMeal(this.nameInput.getText().toString(), this.caloriesInput.getText().toString());
-        });
 
+            RadioButton selectedGender = view.findViewById(gender.getCheckedRadioButtonId());
+
+
+            PersonalInfoViewModel.setUserInfo(this.height.getText().toString(), this.weight.getText().toString(), selectedGender.getText().toString());
+            Log.d("Submit Button: ", String.valueOf(gender.getCheckedRadioButtonId()));
+
+        });
 
         return view;
     }
