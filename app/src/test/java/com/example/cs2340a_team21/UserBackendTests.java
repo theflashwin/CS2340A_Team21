@@ -34,7 +34,7 @@ public class UserBackendTests {
 
     }
 
-    // someone say they did these
+    // another user info null test: Suhas
 
     @Test
     public void userInfoNull3() {
@@ -43,6 +43,8 @@ public class UserBackendTests {
         assertEquals(false, x);
 
     }
+
+    // user info empty test: Suhas
 
     @Test
     public void userInfoEmpty1() {
