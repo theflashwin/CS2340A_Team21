@@ -17,4 +17,5 @@
         android:icon="@drawable/shopping_list"
         android:id="@+id/List"
         android:title="Shopping List"/>
+
 </menu>
