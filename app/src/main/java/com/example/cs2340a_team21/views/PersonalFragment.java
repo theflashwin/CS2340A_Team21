@@ -4,14 +4,17 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.example.cs2340a_team21.R;
+import com.example.cs2340a_team21.viewmodels.PersonalInfoViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -84,7 +87,11 @@ public class PersonalFragment extends Fragment {
 
         this.submitButton.setOnClickListener(v -> {
 
+            RadioButton selectedGender = view.findViewById(gender.getCheckedRadioButtonId());
 
+
+            PersonalInfoViewModel.setUserInfo(this.height.getText().toString(), this.weight.getText().toString(), selectedGender.getText().toString());
+            Log.d("Submit Button: ", String.valueOf(gender.getCheckedRadioButtonId()));
 
         });
 
