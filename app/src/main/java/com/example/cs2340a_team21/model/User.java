@@ -15,21 +15,33 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class User {
 
-    private static final FirebaseAuth auth = FirebaseAuth.getInstance();
-
     static boolean ret = false; // login return value
 
     static boolean ret2 = false; // signup return value
 
+    private static int height = 0;
+    private static int weight = 0;
+
+    private static String gender = "";
+
+    private static boolean foundUser = true;
+
     public static boolean login(String username, String password) {
+
+        FirebaseAuth auth = FirebaseAuth.getInstance();
 
         auth.signInWithEmailAndPassword(username, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -49,6 +61,8 @@ public class User {
 
     public static boolean signup(String username, String password) {
 
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+
         auth.createUserWithEmailAndPassword(username, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -67,6 +81,16 @@ public class User {
 
     }
 
+    public static boolean userExists(String id) {
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        Query q = db.collection("users").whereEqualTo("user", id);
+        QuerySnapshot user = q.get().getResult();
+
+        return !user.isEmpty();
+
+    }
+
     public static boolean updateInfo(int height, int weight, String gender) {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -75,7 +99,10 @@ public class User {
         user.put("weight", weight);
         user.put("height", height);
         user.put("gender", gender);
-        user.put("user", auth.getUid());
+        user.put("user", getUserId());
+        user.put("timestamp", FieldValue.serverTimestamp());
+
+        Log.d("ener", "ekljbwerg");
 
         db.collection("users").add(user)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -91,8 +118,101 @@ public class User {
                     }
                 });
 
+        //        db.collection("users").whereEqualTo("user", getUserId()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                if (task.isSuccessful()) {
+//                    for (QueryDocumentSnapshot document : task.getResult()) {
+//                       if (document.exists()) {
+//                           db.collection("users").document(document.getId()).update("weight", weight);
+//                           db.collection("users").document(document.getId()).update("height", height);
+//                           db.collection("users").document(document.getId()).update("gender", gender);
+//                       }
+//                    }
+//                } else {
+//                    Log.d("Couldn't get", "Error getting documents: ", task.getException());
+//                }
+//            }
+//        });
+
+//        if (userExists(getUserId())) {
+//
+//        }
+
         return true;
 
     }
+
+    public static String getUserId() {
+
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+
+        return auth.getUid();
+    }
+
+    public static int getUserHeight() {
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        CollectionReference users = db.collection("users");
+        users.whereEqualTo("user", getUserId()).orderBy("timestamp").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        height = (Integer) document.get("height");
+                        Log.d("Got successfully", document.getId() + " => " + document.get("height"));
+                    }
+                } else {
+                    Log.d("Couldn't get", "Error getting documents: ", task.getException());
+                }
+            }
+        });
+
+        return height;
+
+    }
+
+    public static int getUserWeight() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        CollectionReference users = db.collection("users");
+        users.whereEqualTo("user", getUserId()).orderBy("timestamp").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        weight = (Integer) document.get("weight");
+                        Log.d("Got successfully", document.getId() + " => " + document.getData());
+                    }
+                } else {
+                    Log.d("Couldn't get", "Error getting documents: ", task.getException());
+                }
+            }
+        });
+
+        return weight;
+    }
+
+    public static String getGender() {
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        CollectionReference users = db.collection("users");
+        users.whereEqualTo("user", getUserId()).orderBy("timestamp").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        gender = (String) document.get("gender");
+                        Log.d("Got successfully", document.getId() + " => " + document.getData());
+                    }
+                } else {
+                    Log.d("Couldn't get", "Error getting documents: ", task.getException());
+                }
+            }
+        });
+
+        return gender;
+
+    }
+
 
 }
