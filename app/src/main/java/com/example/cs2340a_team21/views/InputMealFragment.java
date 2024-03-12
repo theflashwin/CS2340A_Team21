@@ -7,8 +7,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.example.cs2340a_team21.R;
+import com.example.cs2340a_team21.viewmodels.InputMealViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +28,12 @@ public class InputMealFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    // Layout Widgets
+
+    private EditText nameInput;
+    private EditText caloriesInput;
+    private Button submitButton;
 
     public InputMealFragment() {
         // Required empty public constructor
@@ -61,6 +70,17 @@ public class InputMealFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_input_meal, container, false);
+        View view = inflater.inflate(R.layout.fragment_input_meal, container, false);
+
+        this.nameInput = (EditText) view.findViewById(R.id.mealNameInput);
+        this.caloriesInput = (EditText) view.findViewById(R.id.mealCaloriesInput);
+        this.submitButton = (Button) view.findViewById(R.id.mealSubmit);
+
+        this.submitButton.setOnClickListener(v -> {
+            InputMealViewModel.sendMeal(this.nameInput.getText().toString(), this.caloriesInput.getText().toString());
+        });
+
+
+        return view;
     }
 }
