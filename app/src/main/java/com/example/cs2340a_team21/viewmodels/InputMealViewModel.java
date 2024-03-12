@@ -8,12 +8,16 @@ public class InputMealViewModel {
 
     public static boolean sendMeal(String name, String calories) {
 
-        if (name.equals("")) {
-            Log.d("Input Error", "Name is invalid");
+        if (name == null || calories == null) {
+            return false;
         }
 
         if (name.equals("")) {
-            Log.d("Input Error", "calories is invalid");
+            return false;
+        }
+
+        if (calories.equals("")) {
+            return false;
         }
 
         try {
