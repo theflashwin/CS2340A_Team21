@@ -40,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
                 case "Shopping List":
                     replaceFragment(new ShoppingListFragment());
                     break;
+                case "Personal Info":
+                    replaceFragment(new PersonalFragment());
+                    break;
 
             }
 
