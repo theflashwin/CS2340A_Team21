@@ -16,6 +16,15 @@ public class UserBackendTests {
 
     }
 
+    // valid info - Mukund
+    @Test
+    public void userInfoCorrect() {
+
+        boolean x = PersonalInfoViewModel.setUserInfo("70", "150", "Male");
+        assertEquals(true, x);
+
+    }
+
     // user info null checks - Ashwin
     @Test
     public void userInfoNull() {
@@ -80,6 +89,15 @@ public class UserBackendTests {
     public void userInfoNotNumber2() {
 
         boolean x = PersonalInfoViewModel.setUserInfo("34", "34e", "Male");
+        assertEquals(false, x);
+
+    }
+
+    // valid info - Mukund
+    @Test
+    public void mealInfoCorrect() {
+
+        boolean x = InputMealViewModel.sendMeal("Brownie", "150");
         assertEquals(false, x);
 
     }
