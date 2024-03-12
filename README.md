@@ -7,6 +7,7 @@ FIREBASE NOTES:
 
 only accepts emails
 password has to be longer than 6 characters
+Includes a digit
 
 Team Members: Ashwin, Neeti, Yashad, Mukund, Sachin, Suhas
 =======
@@ -19,4 +20,3 @@ Tasks for Sprint 2
 Personal info Screen
 Link Meal and User Databases
 2 Visualization buttons
->>>>>>> origin/Yashad
