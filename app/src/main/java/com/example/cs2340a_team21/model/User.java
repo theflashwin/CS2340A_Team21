@@ -28,16 +28,16 @@ import java.util.Map;
 
 public class User {
 
-    static boolean ret = false; // login return value
+    static boolean ret = false; // result of login attempt
 
-    static boolean ret2 = false; // signup return value
+    static boolean ret2 = false; // result of signup attempt
 
     private static int height = 0;
     private static int weight = 0;
 
     private static String gender = "";
 
-    private static boolean foundUser = true;
+    private static boolean foundUser = true; //is this variable being used?
 
     public static boolean login(String username, String password) {
 
