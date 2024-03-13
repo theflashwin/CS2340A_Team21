@@ -1,6 +1,5 @@
 package com.example.cs2340a_team21.views;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,16 +10,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.cs2340a_team21.R;
-import com.example.cs2340a_team21.viewmodels.LoginViewModel;
 import com.example.cs2340a_team21.viewmodels.SignInViewModel;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    FirebaseAuth auth;
+    private FirebaseAuth auth;
 
     private EditText usernameInput;
     private EditText passwordInput;
@@ -48,11 +43,12 @@ public class SignUpActivity extends AppCompatActivity {
             // sends to SignInView model
 
             if (successful) {
-                Log.d("here:","signInWithCustomToken:success");
+                Log.d("here:", "signInWithCustomToken:success");
                 Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
                 startActivity(intent);
             } else {
-                Toast toast = Toast.makeText(this, "Some error occurred when making your account", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(this,
+                        "Some error occurred when making your account", Toast.LENGTH_SHORT);
                 toast.show();
             }
 
