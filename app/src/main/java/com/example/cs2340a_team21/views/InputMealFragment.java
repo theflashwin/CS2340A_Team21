@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import com.example.cs2340a_team21.R;
 import com.example.cs2340a_team21.viewmodels.InputMealViewModel;
 
@@ -77,6 +79,8 @@ public class InputMealFragment extends Fragment {
         this.submitButton.setOnClickListener(v -> {
             InputMealViewModel.sendMeal(this.nameInput.getText().toString(),
                     this.caloriesInput.getText().toString());
+            TextView textViewCalories = view.findViewById(R.id.textViewCalories);
+            textViewCalories.setText("Total Calories: " + InputMealViewModel.sumCurrentCalories());
         });
 
         //Update Personal Info
@@ -86,14 +90,14 @@ public class InputMealFragment extends Fragment {
 
         // Set the text of the TextViews to display the data
         TextView textViewDataHeight = view.findViewById(R.id.textViewHeight);
-        if (userHeight != -1) {
+        if (userHeight != -1 && userHeight!= 0) {
             textViewDataHeight.setText("Height: " + userHeight + " inches");
         } else {
             textViewDataHeight.setText("Height: Please update your height!");
         }
 
         TextView textViewDataWeight = view.findViewById(R.id.textViewWeight);
-        if (userWeight != -1) {
+        if (userWeight != -1 && userWeight!= 0) {
             textViewDataWeight.setText("Weight: " + userWeight + " pounds");
         } else {
             textViewDataWeight.setText("Weight: Please update your weight!");
@@ -108,6 +112,21 @@ public class InputMealFragment extends Fragment {
 
         InputMealViewModel.sumCurrentCalories(); // for testing
 
+
         return view;
     }
+
+//    private void setupChart(BarChart chart) {
+//        ArrayList<BarEntry> entries = new ArrayList<>();
+//        entries.add(new BarEntry(0, 50)); // First bar
+//        entries.add(new BarEntry(1, 70)); // Second bar
+//
+//        BarDataSet dataSet = new BarDataSet(entries, "Data");
+//        dataSet.setColors(ColorTemplate.MATERIAL_COLORS); // Set colors for bars
+//
+//        BarData barData = new BarData(dataSet);
+//        chart.setData(barData);
+//        chart.invalidate(); // Refresh chart
+//    }
+
 }
