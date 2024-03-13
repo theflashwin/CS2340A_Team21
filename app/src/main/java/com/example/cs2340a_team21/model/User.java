@@ -59,9 +59,26 @@ public class User {
 
     }
 
+    public static class createAuth {
+        private volatile static createAuth uniqueInstance;
+        public FirebaseAuth auth;
+
+        private createAuth() {
+            this.auth = FirebaseAuth.getInstance();
+        }
+
+        public static synchronized createAuth getInstance() {
+            if (uniqueInstance == null) {
+                uniqueInstance = new createAuth();
+            }
+            return uniqueInstance;
+        }
+    }
+
     public static boolean signup(String username, String password) {
 
-        FirebaseAuth auth = FirebaseAuth.getInstance();
+        createAuth c = createAuth.getInstance();
+        FirebaseAuth auth = c.auth;
 
         auth.createUserWithEmailAndPassword(username, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
