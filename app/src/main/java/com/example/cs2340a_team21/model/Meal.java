@@ -10,6 +10,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -28,6 +29,7 @@ public class Meal {
         Map<String, Object> meal = new HashMap<>();
         meal.put("Name", name);
         meal.put("Calories", calories);
+        meal.put("timestamp", FieldValue.serverTimestamp());
         meal.put("User", User.getUserId());
 
         db.collection("meals").add(meal)
