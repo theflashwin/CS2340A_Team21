@@ -75,12 +75,6 @@ public class Meal {
                     }
                 });
 
-        try {
-            Thread.sleep(500); // Wait for 500 milliseconds (0.5 seconds)
-        } catch (InterruptedException e) {
-            e.printStackTrace(); // Handle interrupted exception
-        }
-
         return ret;
     }
 
