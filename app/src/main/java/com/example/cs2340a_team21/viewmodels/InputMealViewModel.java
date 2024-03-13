@@ -45,9 +45,7 @@ public class InputMealViewModel {
         for (Map<String, Object> map : meals) {
 
             try {
-                if (map.get("timestamp") != null) {
-                    ret.add(map);
-                }
+                ret.add(map);
             } catch (Exception e) {
                 ret.add(map);
             }
@@ -56,6 +54,11 @@ public class InputMealViewModel {
 
         return ret;
 
+    }
+
+    private void updateCaloriesSum() {
+        int sumCalories = InputMealViewModel.sumCurrentCalories();
+        sumCaloriesTextView.setText("Total Calories: " + sumCalories);
     }
 
     public static int sumCurrentCalories() {
