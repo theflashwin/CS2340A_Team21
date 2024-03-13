@@ -110,12 +110,8 @@ public class InputMealFragment extends Fragment {
             textViewDataGender.setText("Gender: Please update your gender!");
         }
 
-        TextView textViewDataCalories = view.findViewById(R.id.textViewCalories);
-        textViewDataCalories.setText("Total Calories: " + InputMealViewModel.sumCurrentCalories());
+        InputMealViewModel.sumCurrentCalories(); // for testing
 
-
-//        BarChart chart = view.findViewById(R.id.chart1);
-//        setupChart(chart);
 
         return view;
     }
