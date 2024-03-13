@@ -66,11 +66,4 @@ dependencies {
 
     // adding splash screen dependency
     implementation("androidx.core:core-splashscreen:1.0.0")
-
-}
-
-//repositories {
-//    maven {
-//        url("https://jitpack.io")
-//    }
-//}
+    implementation("com.github.AnyChart:AnyChart-Android:1.1.5")
