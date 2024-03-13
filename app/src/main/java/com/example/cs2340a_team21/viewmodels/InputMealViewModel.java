@@ -55,11 +55,7 @@ public class InputMealViewModel {
         return ret;
 
     }
-
-    private void updateCaloriesSum() {
-        int sumCalories = InputMealViewModel.sumCurrentCalories();
-        sumCaloriesTextView.setText("Total Calories: " + sumCalories);
-    }
+    
 
     public static int sumCurrentCalories() {
 
