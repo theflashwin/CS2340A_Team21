@@ -29,8 +29,5 @@ public class PersonalInfoViewModel {
         }
 
         return true;
-
-
     }
-
 }
