@@ -68,3 +68,9 @@ dependencies {
     implementation("androidx.core:core-splashscreen:1.0.0")
 
 }
+
+//repositories {
+//    maven {
+//        url("https://jitpack.io")
+//    }
+//}
