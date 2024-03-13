@@ -36,4 +36,30 @@
         android:layout_height="wrap_content"
         android:text="Submit" />
 
+    <TextView
+        android:id="@+id/textViewPersonal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="My Personal Information:"
+        android:textSize="34sp" />
+
+    <TextView
+        android:id="@+id/textViewHeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Height: N/A"
+        android:textSize="20sp"/>
+    <TextView
+        android:id="@+id/textViewWeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Weight: N/A"
+        android:textSize="20sp"/>
+    <TextView
+        android:id="@+id/textViewGender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gender: N/A"
+        android:textSize="20sp"/>
+
 </LinearLayout>
