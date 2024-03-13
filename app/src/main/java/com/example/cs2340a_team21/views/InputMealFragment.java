@@ -112,6 +112,8 @@ public class InputMealFragment extends Fragment {
 
         InputMealViewModel.sumCurrentCalories(); // for testing
 
+        TextView textViewDataCalc = view.findViewById(R.id.textViewCalculatedCalories);
+        textViewDataCalc.setText("Target Calories" + InputMealViewModel.calculateCalories());
 
         return view;
     }
