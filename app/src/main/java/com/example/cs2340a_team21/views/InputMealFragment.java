@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import com.example.cs2340a_team21.R;
 import com.example.cs2340a_team21.viewmodels.InputMealViewModel;
 
@@ -106,6 +108,23 @@ public class InputMealFragment extends Fragment {
             textViewDataGender.setText("Gender: Please update your gender!");
         }
 
+//        BarChart chart = view.findViewById(R.id.chart1);
+//        setupChart(chart);
+
         return view;
     }
+
+//    private void setupChart(BarChart chart) {
+//        ArrayList<BarEntry> entries = new ArrayList<>();
+//        entries.add(new BarEntry(0, 50)); // First bar
+//        entries.add(new BarEntry(1, 70)); // Second bar
+//
+//        BarDataSet dataSet = new BarDataSet(entries, "Data");
+//        dataSet.setColors(ColorTemplate.MATERIAL_COLORS); // Set colors for bars
+//
+//        BarData barData = new BarData(dataSet);
+//        chart.setData(barData);
+//        chart.invalidate(); // Refresh chart
+//    }
+
 }
