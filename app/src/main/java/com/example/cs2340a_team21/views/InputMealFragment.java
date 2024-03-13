@@ -1,5 +1,6 @@
 package com.example.cs2340a_team21.views;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -114,6 +115,9 @@ public class InputMealFragment extends Fragment {
 
         textViewCalories.setText("Total Calories: " + InputMealViewModel.sumCurrentCalories());
         InputMealViewModel.sumCurrentCalories(); // for testing
+
+        TextView textViewDataCalc = view.findViewById(R.id.textViewCalculatedCalories);
+        textViewDataCalc.setText("Target: " + Math.round(InputMealViewModel.calculateCalories()));
 
 
         return view;
