@@ -88,14 +88,14 @@ public class InputMealFragment extends Fragment {
 
         // Set the text of the TextViews to display the data
         TextView textViewDataHeight = view.findViewById(R.id.textViewHeight);
-        if (userHeight != -1) {
+        if (userHeight != -1 && userHeight!= 0) {
             textViewDataHeight.setText("Height: " + userHeight + " inches");
         } else {
             textViewDataHeight.setText("Height: Please update your height!");
         }
 
         TextView textViewDataWeight = view.findViewById(R.id.textViewWeight);
-        if (userWeight != -1) {
+        if (userWeight != -1 && userWeight!= 0) {
             textViewDataWeight.setText("Weight: " + userWeight + " pounds");
         } else {
             textViewDataWeight.setText("Weight: Please update your weight!");
