@@ -10,6 +10,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -28,6 +29,7 @@ public class Meal {
         Map<String, Object> meal = new HashMap<>();
         meal.put("Name", name);
         meal.put("Calories", calories);
+        meal.put("timestamp", FieldValue.serverTimestamp());
         meal.put("User", User.getUserId());
 
         db.collection("meals").add(meal)
@@ -51,10 +53,10 @@ public class Meal {
     public static List<Map<String, Object>> getMeals() {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        CollectionReference users = db.collection("users");
+        CollectionReference meals = db.collection("meals");
 
         List<Map<String, Object>> ret = new ArrayList<>();
-        users.whereEqualTo("User", User.getUserId()).orderBy("timestamp").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        meals.whereEqualTo("User", User.getUserId()).orderBy("timestamp").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.cs2340a_team21.R;
 import com.example.cs2340a_team21.viewmodels.InputMealViewModel;
@@ -80,6 +81,32 @@ public class InputMealFragment extends Fragment {
             InputMealViewModel.sendMeal(this.nameInput.getText().toString(), this.caloriesInput.getText().toString());
         });
 
+        //Update Personal Info
+        int userHeight = InputMealViewModel.getUserHeight();
+        int userWeight = InputMealViewModel.getUserWeight();
+        String userGender = InputMealViewModel.getUserGender();
+
+        // Set the text of the TextViews to display the data
+        TextView textViewDataHeight = view.findViewById(R.id.textViewHeight);
+        if (userHeight != -1 && userHeight!= 0) {
+            textViewDataHeight.setText("Height: " + userHeight + " inches");
+        } else {
+            textViewDataHeight.setText("Height: Please update your height!");
+        }
+
+        TextView textViewDataWeight = view.findViewById(R.id.textViewWeight);
+        if (userWeight != -1 && userWeight!= 0) {
+            textViewDataWeight.setText("Weight: " + userWeight + " pounds");
+        } else {
+            textViewDataWeight.setText("Weight: Please update your weight!");
+        }
+
+        TextView textViewDataGender = view.findViewById(R.id.textViewGender);
+        if (userGender != "") {
+            textViewDataGender.setText("Gender: " + userGender);
+        } else {
+            textViewDataGender.setText("Gender: Please update your gender!");
+        }
 
         return view;
     }
