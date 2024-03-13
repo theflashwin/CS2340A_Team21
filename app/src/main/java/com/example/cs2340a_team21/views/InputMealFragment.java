@@ -138,28 +138,31 @@ public class InputMealFragment extends Fragment {
         textViewDataCalories.setText("Total Calories: " + InputMealViewModel.sumCurrentCalories());
 
         //Add visualization 1
+
+        AnyChartView vis1 = view.findViewById(R.id.visualization1);
+//        AnyChartView vis2 = view.findViewById(R.id.visualization1);
+
         Button vis1Button = view.findViewById(R.id.visualization1Button);
         vis1Button.setOnClickListener(v -> {
-            AnyChartView vis1 = view.findViewById(R.id.visualization1);
 
             Cartesian cartesian = AnyChart.column();
 
             List<DataEntry> data = new ArrayList<>();
-            data.add(new ValueDataEntry("Rouge", 80540));
-            data.add(new ValueDataEntry("Foundation", 94190));
+            data.add(new ValueDataEntry("Target", InputMealViewModel.calculateCalories()));
+            data.add(new ValueDataEntry("Today", InputMealViewModel.sumCurrentCalories()));
 
             Column column = cartesian.column(data);
 
             cartesian.yScale().minimum(0d);
 
-            cartesian.yAxis(0).labels().format("${%Value}{groupsSeparator: }");
+            cartesian.yAxis(0).labels().format("{%Value}{groupsSeparator: }");
 
             cartesian.tooltip().positionMode(TooltipPositionMode.POINT);
             cartesian.interactivity().hoverMode(HoverMode.BY_X);
 
-            cartesian.xAxis(0).title("Product");
-            cartesian.yAxis(0).title("Revenue");
+            cartesian.yAxis(0).title("Calories");
 
+            vis1.clear();
             vis1.setChart(cartesian);
         });
 
@@ -168,18 +171,20 @@ public class InputMealFragment extends Fragment {
         // Add visualization 2
         Button vis2Button = view.findViewById(R.id.visualization2Button);
         vis2Button.setOnClickListener(v -> {
-            AnyChartView vis2 = view.findViewById(R.id.visualization2);
 
             Pie pie2 = AnyChart.pie();
             List<DataEntry> pieData2 = new ArrayList<>();
-            pieData2.add(new ValueDataEntry("Red", 10000));
-            pieData2.add(new ValueDataEntry("Blue", 10000));
+            pieData2.add(new ValueDataEntry("Target", InputMealViewModel.calculateCalories()));
+            pieData2.add(new ValueDataEntry("Today", InputMealViewModel.sumCurrentCalories()));
 
             pie2.data(pieData2);
 
-            vis2.setChart(pie2);
-
+            vis1.clear();
+            vis1.setChart(pie2);
         });
+
+        TextView textViewTarget = view.findViewById(R.id.textViewCalculatedCalories);
+        textViewTarget.setText("Target Calories: " + Double.toString(InputMealViewModel.calculateCalories()));
 
         return view;
     }
