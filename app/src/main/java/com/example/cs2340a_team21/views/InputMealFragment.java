@@ -1,6 +1,5 @@
 package com.example.cs2340a_team21.views;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -23,13 +22,10 @@ import com.anychart.AnyChartView;
 import com.anychart.chart.common.dataentry.DataEntry;
 import com.anychart.chart.common.dataentry.ValueDataEntry;
 import com.anychart.charts.Pie;
-import com.google.protobuf.Any;
 
 import com.anychart.charts.Cartesian;
 import com.anychart.core.cartesian.series.Column;
-import com.anychart.enums.Anchor;
 import com.anychart.enums.HoverMode;
-import com.anychart.enums.Position;
 import com.anychart.enums.TooltipPositionMode;
 
 /**
@@ -114,14 +110,14 @@ public class InputMealFragment extends Fragment {
 
         // Set the text of the TextViews to display the data
         TextView textViewDataHeight = view.findViewById(R.id.textViewHeight);
-        if (userHeight != -1 && userHeight!= 0) {
+        if (userHeight != -1 && userHeight != 0) {
             textViewDataHeight.setText("Height: " + userHeight + " inches");
         } else {
             textViewDataHeight.setText("Height: Please update your height!");
         }
 
         TextView textViewDataWeight = view.findViewById(R.id.textViewWeight);
-        if (userWeight != -1 && userWeight!= 0) {
+        if (userWeight != -1 && userWeight != 0) {
             textViewDataWeight.setText("Weight: " + userWeight + " pounds");
         } else {
             textViewDataWeight.setText("Weight: Please update your weight!");
@@ -140,7 +136,7 @@ public class InputMealFragment extends Fragment {
         //Add visualization 1
 
         AnyChartView vis1 = view.findViewById(R.id.visualization1);
-//        AnyChartView vis2 = view.findViewById(R.id.visualization1);
+        // AnyChartView vis2 = view.findViewById(R.id.visualization1);
 
         Button vis1Button = view.findViewById(R.id.visualization1Button);
         vis1Button.setOnClickListener(v -> {
@@ -186,7 +182,8 @@ public class InputMealFragment extends Fragment {
         });
 
         TextView textViewTarget = view.findViewById(R.id.textViewCalculatedCalories);
-        textViewTarget.setText("Target Calories: " + Double.toString(InputMealViewModel.calculateCalories()));
+        textViewTarget.setText("Target Calories: "
+                + Double.toString(InputMealViewModel.calculateCalories()));
 
         return view;
     }

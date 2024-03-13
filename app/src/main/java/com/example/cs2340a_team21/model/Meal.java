@@ -4,6 +4,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -21,6 +22,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Meal {
+
+    private static List<Map<String, Object>> ret = new ArrayList<>();
 
     public static boolean sendMeal(String name, int calories) {
 
@@ -56,7 +59,6 @@ public class Meal {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference meals = db.collection("meals");
 
-        List<Map<String, Object>> ret = new ArrayList<>();
         meals.whereEqualTo("User", User.getUserId()).orderBy("timestamp").
                 get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -74,6 +76,12 @@ public class Meal {
                         }
                     }
                 });
+
+        try {
+            Thread.sleep(500);
+        } catch (Exception e) {
+
+        }
 
         return ret;
     }
