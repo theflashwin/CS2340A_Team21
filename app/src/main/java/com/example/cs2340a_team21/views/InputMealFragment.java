@@ -163,6 +163,7 @@ public class InputMealFragment extends Fragment {
             cartesian.yAxis(0).title("Calories");
 
             vis1.clear();
+            vis1.invalidate();
             vis1.setChart(cartesian);
         });
 
@@ -174,12 +175,13 @@ public class InputMealFragment extends Fragment {
 
             Pie pie2 = AnyChart.pie();
             List<DataEntry> pieData2 = new ArrayList<>();
-            pieData2.add(new ValueDataEntry("Target", InputMealViewModel.calculateCalories()));
+            pieData2.add(new ValueDataEntry("Target!", InputMealViewModel.calculateCalories()));
             pieData2.add(new ValueDataEntry("Today", InputMealViewModel.sumCurrentCalories()));
 
             pie2.data(pieData2);
 
             vis1.clear();
+            vis1.invalidate();
             vis1.setChart(pie2);
         });
 
