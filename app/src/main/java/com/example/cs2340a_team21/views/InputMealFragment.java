@@ -79,6 +79,8 @@ public class InputMealFragment extends Fragment {
         this.submitButton.setOnClickListener(v -> {
             InputMealViewModel.sendMeal(this.nameInput.getText().toString(),
                     this.caloriesInput.getText().toString());
+            TextView textViewCalories = view.findViewById(R.id.textViewCalories);
+            textViewCalories.setText("Total Calories: " + InputMealViewModel.sumCurrentCalories());
         });
 
         //Update Personal Info
@@ -107,6 +109,10 @@ public class InputMealFragment extends Fragment {
         } else {
             textViewDataGender.setText("Gender: Please update your gender!");
         }
+
+        TextView textViewDataCalories = view.findViewById(R.id.textViewCalories);
+        textViewDataCalories.setText("Total Calories: " + InputMealViewModel.sumCurrentCalories());
+
 
 //        BarChart chart = view.findViewById(R.id.chart1);
 //        setupChart(chart);
