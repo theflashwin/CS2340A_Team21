@@ -51,6 +51,7 @@ public class InputMealViewModel {
         return ret;
 
     }
+    
 
     public static int sumCurrentCalories() {
 
