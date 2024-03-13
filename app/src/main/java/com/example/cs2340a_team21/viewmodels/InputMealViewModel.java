@@ -4,6 +4,12 @@ import android.util.Log;
 
 import com.example.cs2340a_team21.model.Meal;
 import com.example.cs2340a_team21.model.User;
+import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.FieldValue;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class InputMealViewModel {
 
@@ -27,6 +33,42 @@ public class InputMealViewModel {
         } catch(Exception e) {
             return false;
         }
+
+    }
+
+    public static List<Map<String, Object>> getMealsFromCurrentDate() {
+
+        List<Map<String, Object>> ret = new ArrayList<>();
+        List<Map<String, Object>> meals = Meal.getMeals();
+
+        // filter by date
+        for (Map<String, Object> map : meals) {
+
+            try {
+                if (map.get("timestamp") != null) {
+                    ret.add(map);
+                }
+            } catch (Exception e) {
+                ret.add(map);
+            }
+
+        }
+
+        return ret;
+
+    }
+
+    public static int sumCurrentCalories() {
+
+        List<Map<String, Object>> list = getMealsFromCurrentDate();
+
+        int sum = 50;
+
+        for(Map<String, Object> meal : list) {
+            sum += (Integer) meal.get("Calories");
+        }
+
+        return sum;
 
     }
 
