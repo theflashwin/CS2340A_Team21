@@ -14,20 +14,19 @@ import com.example.cs2340a_team21.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
-    ActivityMainBinding binding;
+    private ActivityMainBinding binding;
     @SuppressLint("NonConstantResourceId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView (binding.getRoot());
+        setContentView(binding.getRoot());
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
 
             Log.d("item", item.toString());
 
-            switch(item.toString()) {
-
+            switch (item.toString()) {
                 case "Input Meal":
                     replaceFragment(new InputMealFragment());
                     break;
@@ -43,7 +42,8 @@ public class MainActivity extends AppCompatActivity {
                 case "Personal Info":
                     replaceFragment(new PersonalFragment());
                     break;
-
+                default:
+                    break;
             }
 
             return true;
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void replaceFragment (Fragment fragment) {
+    private void replaceFragment(Fragment fragment) {
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

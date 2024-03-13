@@ -23,7 +23,6 @@ import com.example.cs2340a_team21.viewmodels.PersonalInfoViewModel;
  */
 public class PersonalFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -49,7 +48,6 @@ public class PersonalFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment PersonalFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static PersonalFragment newInstance(String param1, String param2) {
         PersonalFragment fragment = new PersonalFragment();
         Bundle args = new Bundle();
@@ -62,12 +60,6 @@ public class PersonalFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-//        this.height = getView().findViewById(R.id.editTextHeight);
-//        this.height = new EditText(R.id.editTextWeight);
-//
-//        this.gender = new RadioGroup(R.id.radioGroupGender);
-//        this.submitButton = new Button(R.id.submitButton);
 
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
@@ -90,7 +82,8 @@ public class PersonalFragment extends Fragment {
             RadioButton selectedGender = view.findViewById(gender.getCheckedRadioButtonId());
 
 
-            PersonalInfoViewModel.setUserInfo(this.height.getText().toString(), this.weight.getText().toString(), selectedGender.getText().toString());
+            PersonalInfoViewModel.setUserInfo(this.height.getText().toString(),
+                    this.weight.getText().toString(), selectedGender.getText().toString());
             Log.d("Submit Button: ", String.valueOf(gender.getCheckedRadioButtonId()));
 
         });
