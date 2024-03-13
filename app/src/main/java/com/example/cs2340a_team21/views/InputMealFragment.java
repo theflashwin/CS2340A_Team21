@@ -37,6 +37,8 @@ public class InputMealFragment extends Fragment {
     private EditText caloriesInput;
     private Button submitButton;
 
+    private Button calorieButton;
+
     private TextView textViewCalories;
 
     public InputMealFragment() {
@@ -78,11 +80,15 @@ public class InputMealFragment extends Fragment {
         this.nameInput = (EditText) view.findViewById(R.id.mealNameInput);
         this.caloriesInput = (EditText) view.findViewById(R.id.mealCaloriesInput);
         this.submitButton = (Button) view.findViewById(R.id.mealSubmit);
+        this.calorieButton = (Button) view.findViewById(R.id.calorieSubmit);
         this.textViewCalories = view.findViewById(R.id.textViewCalories);
 
         this.submitButton.setOnClickListener(v -> {
             InputMealViewModel.sendMeal(this.nameInput.getText().toString(),
                     this.caloriesInput.getText().toString());
+        });
+
+        this.calorieButton.setOnClickListener(v -> {
             textViewCalories.setText("Total Calories: " + InputMealViewModel.sumCurrentCalories());
         });
 
@@ -112,9 +118,6 @@ public class InputMealFragment extends Fragment {
         } else {
             textViewDataGender.setText("Gender: Please update your gender!");
         }
-
-        textViewCalories.setText("Total Calories: " + InputMealViewModel.sumCurrentCalories());
-        InputMealViewModel.sumCurrentCalories(); // for testing
 
         TextView textViewDataCalc = view.findViewById(R.id.textViewCalculatedCalories);
         textViewDataCalc.setText("Target: " + Math.round(InputMealViewModel.calculateCalories()));

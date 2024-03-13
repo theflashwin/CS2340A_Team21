@@ -58,14 +58,13 @@ public class InputMealViewModel {
     public static int sumCurrentCalories() {
 
         List<Map<String, Object>> list = Meal.getMeals();
+        Log.d("Retrieved getMeals successfully ", list.size() + "");
 
         int sum = 0;
 
         for (Map<String, Object> meal : list) {
-            if (meal.get("Calories") != null) {
-                sum += Integer.valueOf((Integer) meal.get("Calories"));
-                Log.d("Retrieved calorie successfully ", String.valueOf((Integer) meal.get("Calories")));
-            }
+            sum += (Integer) meal.get("Calories");
+            Log.d("Retrieved calorie successfully ", String.valueOf((Integer) meal.get("Calories")));
         }
 
         return sum;
