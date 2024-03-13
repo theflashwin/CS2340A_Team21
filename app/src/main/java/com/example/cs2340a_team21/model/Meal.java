@@ -58,8 +58,7 @@ public class Meal {
 
         List<Map<String, Object>> ret = new ArrayList<>();
         meals.whereEqualTo("User", User.getUserId()).orderBy("timestamp").
-                get().
-                addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
@@ -68,7 +67,7 @@ public class Meal {
                                 map.put("Name", document.get("Name"));
                                 map.put("Calories", document.get("Calories"));
                                 ret.add(map);
-                                Log.d("Got successfully", document.getId() + " => " + document.getData());
+                                Log.d("Got meal successfully", document.getId() + " => " + document.getData());
                             }
                         } else {
                             Log.d("Couldn't get", "Error getting documents: ", task.getException());

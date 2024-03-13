@@ -1,5 +1,7 @@
 package com.example.cs2340a_team21.viewmodels;
 
+import android.util.Log;
+
 import com.example.cs2340a_team21.model.Meal;
 import com.example.cs2340a_team21.model.User;
 
@@ -60,7 +62,10 @@ public class InputMealViewModel {
         int sum = 0;
 
         for (Map<String, Object> meal : list) {
-            sum += (Integer) meal.get("Calories");
+            if (meal.get("Calories") != null) {
+                sum += Integer.valueOf((Integer) meal.get("Calories"));
+                Log.d("Retrieved calorie successfully ", String.valueOf((Integer) meal.get("Calories")));
+            }
         }
 
         return sum;
