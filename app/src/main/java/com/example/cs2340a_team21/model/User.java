@@ -1,12 +1,9 @@
 package com.example.cs2340a_team21.model;
 
-import android.content.Intent;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.cs2340a_team21.views.LoginActivity;
-import com.example.cs2340a_team21.views.MainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -14,7 +11,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
@@ -28,9 +24,9 @@ import java.util.Map;
 
 public class User {
 
-    static boolean ret = false; // result of login attempt
+    private static boolean ret = false; // result of login attempt
 
-    static boolean ret2 = false; // result of signup attempt
+    private static boolean ret2 = false; // result of signup attempt
 
     private static int height = 0;
     private static int weight = 0;
@@ -43,56 +39,42 @@ public class User {
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
 
-        auth.signInWithEmailAndPassword(username, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    Log.d("here:", "yayyy");
-                    User.ret = true;
-                } else {
-                    User.ret = false;
-                }
-            }
-        });
+        auth.signInWithEmailAndPassword(username, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Log.d("here:", "yayyy");
+                            User.ret = true;
+                        } else {
+                            User.ret = false;
+                        }
+                    }
+                });
 
         return ret;
 
     }
 
-    public static class createAuth {
-        private volatile static createAuth uniqueInstance;
-        public FirebaseAuth auth;
-
-        private createAuth() {
-            this.auth = FirebaseAuth.getInstance();
-        }
-
-        public static synchronized createAuth getInstance() {
-            if (uniqueInstance == null) {
-                uniqueInstance = new createAuth();
-            }
-            return uniqueInstance;
-        }
-    }
-
     public static boolean signup(String username, String password) {
 
-        createAuth c = createAuth.getInstance();
+        CreateAuth c = CreateAuth.getInstance();
         FirebaseAuth auth = c.auth;
 
-        auth.createUserWithEmailAndPassword(username, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    Log.d("here:", "Success!");
-                    FirebaseUser user = auth.getCurrentUser();
-                    User.ret2 = true;
-                } else {
-                    Log.d("here:", "Didn't work.");
-                    User.ret2 = false;
-                }
-            }
-        });
+        auth.createUserWithEmailAndPassword(username, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Log.d("here:", "Success!");
+                            FirebaseUser user = auth.getCurrentUser();
+                            User.ret2 = true;
+                        } else {
+                            Log.d("here:", "Didn't work.");
+                            User.ret2 = false;
+                        }
+                    }
+                });
 
         return User.ret2;
 
@@ -125,7 +107,8 @@ public class User {
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        Log.d("Adding user", "DocumentSnapshot added with ID: " + documentReference.getId());
+                        Log.d("Adding user", "DocumentSnapshot added with ID: "
+                                + documentReference.getId());
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -134,27 +117,6 @@ public class User {
                         Log.w("Failed", "Error adding document", e);
                     }
                 });
-
-        //        db.collection("users").whereEqualTo("user", getUserId()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                if (task.isSuccessful()) {
-//                    for (QueryDocumentSnapshot document : task.getResult()) {
-//                       if (document.exists()) {
-//                           db.collection("users").document(document.getId()).update("weight", weight);
-//                           db.collection("users").document(document.getId()).update("height", height);
-//                           db.collection("users").document(document.getId()).update("gender", gender);
-//                       }
-//                    }
-//                } else {
-//                    Log.d("Couldn't get", "Error getting documents: ", task.getException());
-//                }
-//            }
-//        });
-
-//        if (userExists(getUserId())) {
-//
-//        }
 
         return true;
 
@@ -171,21 +133,22 @@ public class User {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference users = db.collection("users");
-        users.whereEqualTo("user", getUserId()).orderBy("timestamp").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        height = Integer.parseInt(document.get("height").toString());
-                        Log.d("Got successfully", document.getId() + " => " + height);
+        users.whereEqualTo("user", getUserId()).orderBy("timestamp").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                height = Integer.parseInt(document.get("height").toString());
+                                Log.d("Got successfully", document.getId() + " => " + height);
+                            }
+                        } else {
+                            Log.d("Couldn't get", "Error getting documents: ", task.getException());
+                        }
                     }
-                } else {
-                    Log.d("Couldn't get", "Error getting documents: ", task.getException());
-                }
-            }
-        });
+                });
 
-        Log.d("Got successfully"," => " + height);
+        Log.d("Got successfully",  " => " + height);
         return height;
 
     }
@@ -193,21 +156,22 @@ public class User {
     public static int getUserWeight() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference users = db.collection("users");
-        users.whereEqualTo("user", getUserId()).orderBy("timestamp").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        weight = Integer.parseInt(document.get("weight").toString());
-                        Log.d("Got successfully", document.getId() + " => " + weight);
+        users.whereEqualTo("user", getUserId()).orderBy("timestamp").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                weight = Integer.parseInt(document.get("weight").toString());
+                                Log.d("Got successfully", document.getId() + " => " + weight);
+                            }
+                        } else {
+                            Log.d("Couldn't get", "Error getting documents: ", task.getException());
+                        }
                     }
-                } else {
-                    Log.d("Couldn't get", "Error getting documents: ", task.getException());
-                }
-            }
-        });
+                });
 
-        Log.d("Got successfully"," => " + weight);
+        Log.d("Got successfully", " => " + weight);
 
         return weight;
     }
@@ -216,25 +180,44 @@ public class User {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference users = db.collection("users");
-        users.whereEqualTo("user", getUserId()).orderBy("timestamp").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        gender = (String) document.get("gender");
-                        Log.d("Got successfully", document.getId() + " => " + gender);
+        users.whereEqualTo("user", getUserId()).orderBy("timestamp").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                gender = (String) document.get("gender");
+                                Log.d("Got successfully", document.getId() + " => " + gender);
+                            }
+                        } else {
+                            Log.d("Couldn't get", "Error getting documents: ", task.getException());
+                        }
                     }
-                } else {
-                    Log.d("Couldn't get", "Error getting documents: ", task.getException());
-                }
-            }
-        });
+                });
 
         Log.w("Gender:", gender);
 
         return gender;
 
     }
+
+    public static class CreateAuth {
+        private static volatile CreateAuth uniqueInstance;
+        private FirebaseAuth auth;
+
+        private CreateAuth() {
+            this.auth = FirebaseAuth.getInstance();
+        }
+
+        public static synchronized CreateAuth getInstance() {
+            if (uniqueInstance == null) {
+                uniqueInstance = new CreateAuth();
+            }
+            return uniqueInstance;
+        }
+    }
+
+
 
 
 }

@@ -36,7 +36,8 @@ public class Meal {
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        Log.d("Adding meal", "DocumentSnapshot added with ID: " + documentReference.getId());
+                        Log.d("Adding meal", "DocumentSnapshot added with ID: "
+                                + documentReference.getId());
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -56,22 +57,24 @@ public class Meal {
         CollectionReference meals = db.collection("meals");
 
         List<Map<String, Object>> ret = new ArrayList<>();
-        meals.whereEqualTo("User", User.getUserId()).orderBy("timestamp").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        Map<String, Object> map = new HashMap<>();
-                        map.put("Name", document.get("Name"));
-                        map.put("Calories", document.get("Calories"));
-                        ret.add(map);
-                        Log.d("Got successfully", document.getId() + " => ");
+        meals.whereEqualTo("User", User.getUserId()).orderBy("timestamp").
+                get().
+                addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Map<String, Object> map = new HashMap<>();
+                                map.put("Name", document.get("Name"));
+                                map.put("Calories", document.get("Calories"));
+                                ret.add(map);
+                                Log.d("Got successfully", document.getId() + " => ");
+                            }
+                        } else {
+                            Log.d("Couldn't get", "Error getting documents: ", task.getException());
+                        }
                     }
-                } else {
-                    Log.d("Couldn't get", "Error getting documents: ", task.getException());
-                }
-            }
-        });
+                });
 
         return ret;
 
