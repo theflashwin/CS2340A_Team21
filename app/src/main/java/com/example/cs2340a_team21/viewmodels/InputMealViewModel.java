@@ -63,7 +63,7 @@ public class InputMealViewModel {
         int sum = 0;
 
         for (Map<String, Object> meal : list) {
-            sum += Integer.parseInt(meal.get("Calories").toString());;
+            sum += Integer.parseInt(meal.get("Calories").toString());
         }
 
         return sum;
