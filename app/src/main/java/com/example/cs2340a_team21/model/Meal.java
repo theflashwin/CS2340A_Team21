@@ -22,8 +22,6 @@ import java.util.Map;
 
 public class Meal {
 
-    private static List<Map<String, Object>> ret = new ArrayList<>();
-
     public static boolean sendMeal(String name, int calories) {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -58,8 +56,7 @@ public class Meal {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference meals = db.collection("meals");
 
-        ret.clear();
-
+        List<Map<String, Object>> ret = new ArrayList<>();
         meals.whereEqualTo("User", User.getUserId()).orderBy("timestamp").
                 get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -77,12 +74,6 @@ public class Meal {
                         }
                     }
                 });
-
-        try {
-            Thread.sleep(1000); // Wait for 500 milliseconds (0.5 seconds)
-        } catch (InterruptedException e) {
-            e.printStackTrace(); // Handle interrupted exception
-        }
 
         return ret;
     }
