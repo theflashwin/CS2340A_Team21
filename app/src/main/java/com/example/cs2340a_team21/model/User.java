@@ -28,16 +28,16 @@ import java.util.Map;
 
 public class User {
 
-    static boolean ret = false; // login return value
+    static boolean ret = false; // result of login attempt
 
-    static boolean ret2 = false; // signup return value
+    static boolean ret2 = false; // result of signup attempt
 
     private static int height = 0;
     private static int weight = 0;
 
     private static String gender = "";
 
-    private static boolean foundUser = true;
+    private static boolean foundUser = true; //is this variable being used?
 
     public static boolean login(String username, String password) {
 
@@ -59,9 +59,26 @@ public class User {
 
     }
 
+    public static class createAuth {
+        private volatile static createAuth uniqueInstance;
+        public FirebaseAuth auth;
+
+        private createAuth() {
+            this.auth = FirebaseAuth.getInstance();
+        }
+
+        public static synchronized createAuth getInstance() {
+            if (uniqueInstance == null) {
+                uniqueInstance = new createAuth();
+            }
+            return uniqueInstance;
+        }
+    }
+
     public static boolean signup(String username, String password) {
 
-        FirebaseAuth auth = FirebaseAuth.getInstance();
+        createAuth c = createAuth.getInstance();
+        FirebaseAuth auth = c.auth;
 
         auth.createUserWithEmailAndPassword(username, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -159,8 +176,8 @@ public class User {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        height = (Integer) document.get("height");
-                        Log.d("Got successfully", document.getId() + " => " + document.get("height"));
+                        height = Integer.parseInt(document.get("height").toString());
+                        Log.d("Got successfully", document.getId() + " => " + height);
                     }
                 } else {
                     Log.d("Couldn't get", "Error getting documents: ", task.getException());
@@ -168,6 +185,7 @@ public class User {
             }
         });
 
+        Log.d("Got successfully"," => " + height);
         return height;
 
     }
@@ -180,14 +198,16 @@ public class User {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        weight = (Integer) document.get("weight");
-                        Log.d("Got successfully", document.getId() + " => " + document.getData());
+                        weight = Integer.parseInt(document.get("weight").toString());
+                        Log.d("Got successfully", document.getId() + " => " + weight);
                     }
                 } else {
                     Log.d("Couldn't get", "Error getting documents: ", task.getException());
                 }
             }
         });
+
+        Log.d("Got successfully"," => " + weight);
 
         return weight;
     }
@@ -202,13 +222,15 @@ public class User {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         gender = (String) document.get("gender");
-                        Log.d("Got successfully", document.getId() + " => " + document.getData());
+                        Log.d("Got successfully", document.getId() + " => " + gender);
                     }
                 } else {
                     Log.d("Couldn't get", "Error getting documents: ", task.getException());
                 }
             }
         });
+
+        Log.w("Gender:", gender);
 
         return gender;
 
