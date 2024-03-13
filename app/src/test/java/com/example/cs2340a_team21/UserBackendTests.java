@@ -16,15 +16,6 @@ public class UserBackendTests {
 
     }
 
-    // valid info - Mukund
-//    @Test
-//    public void userInfoCorrect() {
-//
-//        boolean x = PersonalInfoViewModel.setUserInfo("70", "150", "Male");
-//        assertEquals(true, x);
-//
-//    }
-
     // user info null checks - Ashwin
     @Test
     public void userInfoNull() {
