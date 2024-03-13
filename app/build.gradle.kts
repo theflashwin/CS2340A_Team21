@@ -67,7 +67,4 @@ dependencies {
     // adding splash screen dependency
     implementation("androidx.core:core-splashscreen:1.0.0")
 
-    //Any Charts dependency
-    implementation("com.github.AnyChart:AnyChart-Android:1.1.5")
-
 }
