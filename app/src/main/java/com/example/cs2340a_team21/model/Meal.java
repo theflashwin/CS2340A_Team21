@@ -51,10 +51,10 @@ public class Meal {
     public static List<Map<String, Object>> getMeals() {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        CollectionReference users = db.collection("users");
+        CollectionReference meals = db.collection("meals");
 
         List<Map<String, Object>> ret = new ArrayList<>();
-        users.whereEqualTo("User", User.getUserId()).orderBy("timestamp").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        meals.whereEqualTo("User", User.getUserId()).orderBy("timestamp").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
