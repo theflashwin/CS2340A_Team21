@@ -1,7 +1,5 @@
 package com.example.cs2340a_team21.viewmodels;
 
-import android.util.Log;
-
 import com.example.cs2340a_team21.model.User;
 
 public class PersonalInfoViewModel {

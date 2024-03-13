@@ -1,11 +1,7 @@
 package com.example.cs2340a_team21.viewmodels;
 
-import android.util.Log;
-
 import com.example.cs2340a_team21.model.Meal;
 import com.example.cs2340a_team21.model.User;
-import com.google.firebase.Timestamp;
-import com.google.firebase.firestore.FieldValue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +26,7 @@ public class InputMealViewModel {
         try {
             int caloriesValue = Integer.parseInt(calories);
             return Meal.sendMeal(name, caloriesValue);
-        } catch(Exception e) {
+        } catch (Exception e) {
             return false;
         }
 
@@ -45,9 +41,7 @@ public class InputMealViewModel {
         for (Map<String, Object> map : meals) {
 
             try {
-                if (map.get("timestamp") != null) {
-                    ret.add(map);
-                }
+                ret.add(map);
             } catch (Exception e) {
                 ret.add(map);
             }
@@ -64,7 +58,7 @@ public class InputMealViewModel {
 
         int sum = 50;
 
-        for(Map<String, Object> meal : list) {
+        for (Map<String, Object> meal : list) {
             sum += (Integer) meal.get("Calories");
         }
 
@@ -73,7 +67,7 @@ public class InputMealViewModel {
     }
 
     public static int getUserHeight() {
-        try{
+        try {
             return User.getUserHeight();
         } catch (Exception E) {
             return -1;
@@ -81,7 +75,7 @@ public class InputMealViewModel {
     }
 
     public static int getUserWeight() {
-        try{
+        try {
             return User.getUserWeight();
         } catch (Exception E) {
             return -1;
@@ -89,7 +83,7 @@ public class InputMealViewModel {
     }
 
     public static String getUserGender() {
-        try{
+        try {
             return User.getGender();
         } catch (Exception E) {
             return "";
