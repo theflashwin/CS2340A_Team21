@@ -68,7 +68,7 @@ public class Meal {
                                 map.put("Name", document.get("Name"));
                                 map.put("Calories", document.get("Calories"));
                                 ret.add(map);
-                                Log.d("Got successfully", document.getId() + " => ");
+                                Log.d("Got successfully", document.getId() + " => " + document.getData());
                             }
                         } else {
                             Log.d("Couldn't get", "Error getting documents: ", task.getException());

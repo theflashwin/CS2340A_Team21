@@ -106,6 +106,8 @@ public class InputMealFragment extends Fragment {
             textViewDataGender.setText("Gender: Please update your gender!");
         }
 
+        InputMealViewModel.sumCurrentCalories(); // for testing
+
         return view;
     }
 }
