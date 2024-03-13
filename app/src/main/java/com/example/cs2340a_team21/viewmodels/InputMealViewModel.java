@@ -67,7 +67,7 @@ public class InputMealViewModel {
             Log.d("Retrieved calorie successfully ", String.valueOf((Integer) meal.get("Calories")));
         }
 
-        return sum;
+        return 100;
 
     }
 
