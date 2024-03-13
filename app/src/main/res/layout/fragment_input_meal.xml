@@ -61,5 +61,18 @@
         android:layout_height="wrap_content"
         android:text="Gender: N/A"
         android:textSize="20sp"/>
+    <TextView
+        android:id="@+id/textViewCalories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Calories: N/A"
+        android:textSize="30sp"/>
+
+    <TextView
+        android:id="@+id/sumCaloriesTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Calories: "
+        android:textSize="20sp"/>
 
 </LinearLayout>
