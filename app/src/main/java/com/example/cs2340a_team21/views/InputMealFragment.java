@@ -1,5 +1,6 @@
 package com.example.cs2340a_team21.views;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -51,6 +52,10 @@ public class InputMealFragment extends Fragment {
     private EditText caloriesInput;
     private Button submitButton;
 
+    private Button calorieButton;
+
+    private TextView textViewCalories;
+
     public InputMealFragment() {
         // Required empty public constructor
     }
@@ -90,11 +95,15 @@ public class InputMealFragment extends Fragment {
         this.nameInput = (EditText) view.findViewById(R.id.mealNameInput);
         this.caloriesInput = (EditText) view.findViewById(R.id.mealCaloriesInput);
         this.submitButton = (Button) view.findViewById(R.id.mealSubmit);
+        this.calorieButton = (Button) view.findViewById(R.id.calorieSubmit);
+        this.textViewCalories = view.findViewById(R.id.textViewCalories);
 
         this.submitButton.setOnClickListener(v -> {
             InputMealViewModel.sendMeal(this.nameInput.getText().toString(),
                     this.caloriesInput.getText().toString());
-            TextView textViewCalories = view.findViewById(R.id.textViewCalories);
+        });
+
+        this.calorieButton.setOnClickListener(v -> {
             textViewCalories.setText("Total Calories: " + InputMealViewModel.sumCurrentCalories());
         });
 
@@ -171,7 +180,6 @@ public class InputMealFragment extends Fragment {
             vis2.setChart(pie2);
 
         });
-
 
         return view;
     }

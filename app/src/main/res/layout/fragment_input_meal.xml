@@ -65,8 +65,20 @@
         android:id="@+id/textViewCalories"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Total Calories: N/A"
+        android:text="Total Calories: 0"
         android:textSize="30sp"/>
+    <Button
+        android:id="@+id/calorieSubmit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Refresh Current Calories" />
+    <TextView
+        android:id="@+id/textViewCalculatedCalories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Target: N/A"
+        android:textSize="30sp"/>
+
 
     <Button
         android:id="@+id/visualization1Button"
