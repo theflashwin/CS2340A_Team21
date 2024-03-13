@@ -72,6 +72,17 @@ public class InputMealViewModel {
 
     }
 
+    public static double calculateCalories() {
+        double calories;
+        if (User.getGender().equals("Male")) {
+            calories = 66 + (6.23 * getUserWeight()) + (12.7 * getUserHeight()) - (6.8 * 18);
+        } else {
+            calories = 655 + (4.3 * getUserWeight()) + (4.7 * getUserHeight()) - (4.7 * 18);
+        }
+
+        return calories;
+    }
+
     public static int getUserHeight() {
         try {
             return User.getUserHeight();
