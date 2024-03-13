@@ -43,7 +43,7 @@ public class InputMealViewModel {
             try {
                 ret.add(map);
             } catch (Exception e) {
-                ret.add(map);
+                //ret.add(map);
             }
 
         }
@@ -55,9 +55,9 @@ public class InputMealViewModel {
 
     public static int sumCurrentCalories() {
 
-        List<Map<String, Object>> list = getMealsFromCurrentDate();
+        List<Map<String, Object>> list = Meal.getMeals();
 
-        int sum = 50;
+        int sum = 0;
 
         for (Map<String, Object> meal : list) {
             sum += (Integer) meal.get("Calories");
