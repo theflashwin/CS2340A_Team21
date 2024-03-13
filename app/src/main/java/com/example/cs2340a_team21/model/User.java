@@ -176,8 +176,8 @@ public class User {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        height = (Integer) document.get("height");
-                        Log.d("Got successfully", document.getId() + " => " + document.get("height"));
+                        height = Integer.parseInt(document.get("height").toString());
+                        Log.d("Got successfully", document.getId() + " => " + height);
                     }
                 } else {
                     Log.d("Couldn't get", "Error getting documents: ", task.getException());
@@ -185,6 +185,7 @@ public class User {
             }
         });
 
+        Log.d("Got successfully"," => " + height);
         return height;
 
     }
@@ -197,14 +198,16 @@ public class User {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        weight = (Integer) document.get("weight");
-                        Log.d("Got successfully", document.getId() + " => " + document.getData());
+                        weight = Integer.parseInt(document.get("weight").toString());
+                        Log.d("Got successfully", document.getId() + " => " + weight);
                     }
                 } else {
                     Log.d("Couldn't get", "Error getting documents: ", task.getException());
                 }
             }
         });
+
+        Log.d("Got successfully"," => " + weight);
 
         return weight;
     }
@@ -219,13 +222,15 @@ public class User {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         gender = (String) document.get("gender");
-                        Log.d("Got successfully", document.getId() + " => " + document.getData());
+                        Log.d("Got successfully", document.getId() + " => " + gender);
                     }
                 } else {
                     Log.d("Couldn't get", "Error getting documents: ", task.getException());
                 }
             }
         });
+
+        Log.w("Gender:", gender);
 
         return gender;
 
