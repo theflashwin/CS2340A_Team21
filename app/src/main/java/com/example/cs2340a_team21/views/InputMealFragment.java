@@ -1,5 +1,6 @@
 package com.example.cs2340a_team21.views;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -35,6 +36,8 @@ public class InputMealFragment extends Fragment {
     private EditText nameInput;
     private EditText caloriesInput;
     private Button submitButton;
+
+    private TextView textViewCalories;
 
     public InputMealFragment() {
         // Required empty public constructor
@@ -75,11 +78,11 @@ public class InputMealFragment extends Fragment {
         this.nameInput = (EditText) view.findViewById(R.id.mealNameInput);
         this.caloriesInput = (EditText) view.findViewById(R.id.mealCaloriesInput);
         this.submitButton = (Button) view.findViewById(R.id.mealSubmit);
+        this.textViewCalories = view.findViewById(R.id.textViewCalories);
 
         this.submitButton.setOnClickListener(v -> {
             InputMealViewModel.sendMeal(this.nameInput.getText().toString(),
                     this.caloriesInput.getText().toString());
-            TextView textViewCalories = view.findViewById(R.id.textViewCalories);
             textViewCalories.setText("Total Calories: " + InputMealViewModel.sumCurrentCalories());
         });
 
@@ -110,7 +113,11 @@ public class InputMealFragment extends Fragment {
             textViewDataGender.setText("Gender: Please update your gender!");
         }
 
+        textViewCalories.setText("Total Calories: " + InputMealViewModel.sumCurrentCalories());
         InputMealViewModel.sumCurrentCalories(); // for testing
+
+        TextView textViewDataCalc = view.findViewById(R.id.textViewCalculatedCalories);
+        textViewDataCalc.setText("Target: " + Math.round(InputMealViewModel.calculateCalories()));
 
 
         return view;
