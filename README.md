@@ -2,7 +2,6 @@ CS2340A_Team21
 
 Sprint 1 and Sprint 2 Repo
 
-<<<<<<< HEAD
 FIREBASE NOTES:
 
 only accepts emails
