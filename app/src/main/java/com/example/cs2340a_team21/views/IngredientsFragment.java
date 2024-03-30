@@ -15,6 +15,15 @@ import com.example.cs2340a_team21.R;
  * Use the {@link IngredientsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+
+/**
+ * Fragment representing an ingredients list.
+ * Class is responsible for displaying ingredients to the user.
+ * Encapsulates the UI and logic needed to show ingredients possibly for a recipe or a food item.
+ * <p>
+ * Activities containing this fragment must use the {@link IngredientsFragment#newInstance} method
+ * to create an instance of this fragment and add it to their user interface.
+ */
 public class IngredientsFragment extends Fragment {
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
