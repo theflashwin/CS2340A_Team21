@@ -14,13 +14,13 @@ public class PersonalInfoViewModel {
             return false;
         }
 
-
+// cleaned up here
 
         try {
 
-            int h = Integer.parseInt(height);
-            int w = Integer.parseInt(weight);
-            User.updateInfo(h, w, gender);
+            int hin = Integer.parseInt(height);
+            int win = Integer.parseInt(weight);
+            User.updateInfo(hin, win, gender);
 
         } catch (Exception e) {
             return false;
