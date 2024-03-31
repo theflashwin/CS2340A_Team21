@@ -20,8 +20,3 @@ Tasks for Sprint 2
 Personal info Screen
 Link Meal and User Databases
 2 Visualization buttons
-
-
-Tasks for Sprint 3 
-
-Global cookbook database on Recipe Screen
