@@ -12,9 +12,21 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.example.cs2340a_team21.R;
 import com.example.cs2340a_team21.viewmodels.InputMealViewModel;
+
+import com.anychart.AnyChart;
+import com.anychart.AnyChartView;
+import com.anychart.chart.common.dataentry.DataEntry;
+import com.anychart.chart.common.dataentry.ValueDataEntry;
+import com.anychart.charts.Pie;
+
+import com.anychart.charts.Cartesian;
+import com.anychart.core.cartesian.series.Column;
+import com.anychart.enums.HoverMode;
+import com.anychart.enums.TooltipPositionMode;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,6 +47,10 @@ public class InputMealFragment extends Fragment {
     private EditText nameInput;
     private EditText caloriesInput;
     private Button submitButton;
+
+    private Button calorieButton;
+
+    private TextView textViewCalories;
 
     public InputMealFragment() {
         // Required empty public constructor
@@ -75,11 +91,15 @@ public class InputMealFragment extends Fragment {
         this.nameInput = (EditText) view.findViewById(R.id.mealNameInput);
         this.caloriesInput = (EditText) view.findViewById(R.id.mealCaloriesInput);
         this.submitButton = (Button) view.findViewById(R.id.mealSubmit);
+        this.calorieButton = (Button) view.findViewById(R.id.calorieSubmit);
+        this.textViewCalories = view.findViewById(R.id.textViewCalories);
 
         this.submitButton.setOnClickListener(v -> {
             InputMealViewModel.sendMeal(this.nameInput.getText().toString(),
                     this.caloriesInput.getText().toString());
-            TextView textViewCalories = view.findViewById(R.id.textViewCalories);
+        });
+
+        this.calorieButton.setOnClickListener(v -> {
             textViewCalories.setText("Total Calories: " + InputMealViewModel.sumCurrentCalories());
         });
 
@@ -90,14 +110,14 @@ public class InputMealFragment extends Fragment {
 
         // Set the text of the TextViews to display the data
         TextView textViewDataHeight = view.findViewById(R.id.textViewHeight);
-        if (userHeight != -1 && userHeight!= 0) {
+        if (userHeight != -1 && userHeight != 0) {
             textViewDataHeight.setText("Height: " + userHeight + " inches");
         } else {
             textViewDataHeight.setText("Height: Please update your height!");
         }
 
         TextView textViewDataWeight = view.findViewById(R.id.textViewWeight);
-        if (userWeight != -1 && userWeight!= 0) {
+        if (userWeight != -1 && userWeight != 0) {
             textViewDataWeight.setText("Weight: " + userWeight + " pounds");
         } else {
             textViewDataWeight.setText("Weight: Please update your weight!");
@@ -110,25 +130,64 @@ public class InputMealFragment extends Fragment {
             textViewDataGender.setText("Gender: Please update your gender!");
         }
 
-        InputMealViewModel.sumCurrentCalories(); // for testing
+        TextView textViewDataCalories = view.findViewById(R.id.textViewCalories);
+        textViewDataCalories.setText("Total Calories: " + InputMealViewModel.sumCurrentCalories());
+
+        //Add visualization 1
+
+        AnyChartView vis1 = view.findViewById(R.id.visualization1);
+        // AnyChartView vis2 = view.findViewById(R.id.visualization1);
+
+        Button vis1Button = view.findViewById(R.id.visualization1Button);
+        vis1Button.setOnClickListener(v -> {
+
+            Cartesian cartesian = AnyChart.column();
+
+            List<DataEntry> data = new ArrayList<>();
+            data.add(new ValueDataEntry("Target", InputMealViewModel.calculateCalories()));
+            data.add(new ValueDataEntry("Today", InputMealViewModel.sumCurrentCalories()));
+
+            Column column = cartesian.column(data);
+
+            cartesian.yScale().minimum(0d);
 
         TextView textViewDataCalc = view.findViewById(R.id.textViewCalculatedCalories);
         textViewDataCalc.setText("Target Calories" + InputMealViewModel.calculateCalories());
+            cartesian.yAxis(0).labels().format("{%Value}{groupsSeparator: }");
+
+            cartesian.tooltip().positionMode(TooltipPositionMode.POINT);
+            cartesian.interactivity().hoverMode(HoverMode.BY_X);
+
+            cartesian.yAxis(0).title("Calories");
+
+            vis1.clear();
+            vis1.invalidate();
+            vis1.setChart(cartesian);
+        });
+
+
+
+        // Add visualization 2
+        Button vis2Button = view.findViewById(R.id.visualization2Button);
+        vis2Button.setOnClickListener(v -> {
+
+            Pie pie2 = AnyChart.pie();
+            List<DataEntry> pieData2 = new ArrayList<>();
+            pieData2.add(new ValueDataEntry("Target!", InputMealViewModel.calculateCalories()));
+            pieData2.add(new ValueDataEntry("Today", InputMealViewModel.sumCurrentCalories()));
+
+            pie2.data(pieData2);
+
+            vis1.clear();
+            vis1.invalidate();
+            vis1.setChart(pie2);
+        });
+
+        TextView textViewTarget = view.findViewById(R.id.textViewCalculatedCalories);
+        textViewTarget.setText("Target Calories: "
+                + Double.toString(InputMealViewModel.calculateCalories()));
 
         return view;
     }
-
-//    private void setupChart(BarChart chart) {
-//        ArrayList<BarEntry> entries = new ArrayList<>();
-//        entries.add(new BarEntry(0, 50)); // First bar
-//        entries.add(new BarEntry(1, 70)); // Second bar
-//
-//        BarDataSet dataSet = new BarDataSet(entries, "Data");
-//        dataSet.setColors(ColorTemplate.MATERIAL_COLORS); // Set colors for bars
-//
-//        BarData barData = new BarData(dataSet);
-//        chart.setData(barData);
-//        chart.invalidate(); // Refresh chart
-//    }
 
 }
