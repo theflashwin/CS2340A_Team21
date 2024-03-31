@@ -151,8 +151,6 @@ public class InputMealFragment extends Fragment {
 
             cartesian.yScale().minimum(0d);
 
-        TextView textViewDataCalc = view.findViewById(R.id.textViewCalculatedCalories);
-        textViewDataCalc.setText("Target Calories" + InputMealViewModel.calculateCalories());
             cartesian.yAxis(0).labels().format("{%Value}{groupsSeparator: }");
 
             cartesian.tooltip().positionMode(TooltipPositionMode.POINT);
