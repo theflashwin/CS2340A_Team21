@@ -27,23 +27,23 @@ public class MainActivity extends AppCompatActivity {
             Log.d("item", item.toString());
 
             switch (item.toString()) {
-                case "Input Meal":
-                    replaceFragment(new InputMealFragment());
-                    break;
-                case "Recipe":
-                    replaceFragment(new RecipeFragment());
-                    break;
-                case "Ingredients":
-                    replaceFragment(new IngredientsFragment());
-                    break;
-                case "Shopping List":
-                    replaceFragment(new ShoppingListFragment());
-                    break;
-                case "Personal Info":
-                    replaceFragment(new PersonalFragment());
-                    break;
-                default:
-                    break;
+            case "Input Meal":
+                replaceFragment(new InputMealFragment());
+                break;
+            case "Recipe":
+                replaceFragment(new RecipeFragment());
+                break;
+            case "Ingredients":
+                replaceFragment(new IngredientsFragment());
+                break;
+            case "Shopping List":
+                replaceFragment(new ShoppingListFragment());
+                break;
+            case "Personal Info":
+                replaceFragment(new PersonalFragment());
+                break;
+            default:
+                break;
             }
 
             return true;
