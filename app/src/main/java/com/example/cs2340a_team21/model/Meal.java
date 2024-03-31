@@ -4,6 +4,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -21,6 +22,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Meal {
+
+    private static List<Map<String, Object>> ret = new ArrayList<>();
 
     public static boolean sendMeal(String name, int calories) {
 
@@ -56,10 +59,8 @@ public class Meal {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference meals = db.collection("meals");
 
-        List<Map<String, Object>> ret = new ArrayList<>();
         meals.whereEqualTo("User", User.getUserId()).orderBy("timestamp").
-                get().
-                addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
@@ -68,13 +69,19 @@ public class Meal {
                                 map.put("Name", document.get("Name"));
                                 map.put("Calories", document.get("Calories"));
                                 ret.add(map);
-                                Log.d("Got successfully", document.getId() + " => " + document.getData());
+                                Log.d("Got meal successfully", document.get("Calories") + "");
                             }
                         } else {
                             Log.d("Couldn't get", "Error getting documents: ", task.getException());
                         }
                     }
                 });
+
+        try {
+            Thread.sleep(500);
+        } catch (Exception e) {
+
+        }
 
         return ret;
     }
