@@ -135,16 +135,5 @@ public class PantryTests {
         assertEquals("Open", RecipeViewModel.getCanClick(recipe));
     }
 
-//    @Test
-//    public void testCanClickExtraIngredients() {
-//        List<Ingredient> ingredients = new ArrayList<>();
-//        ingredients.add(new Ingredient("Flour", 2, 0, ""));
-//        ingredients.add(new Ingredient("Sugar", 1, 0, ""));
-//        Pantry.getInstance().getIngredients().addAll(ingredients);
-//        Pantry.getInstance().getIngredients().add(new Ingredient("Eggs", 6, 0, ""));
-//        Recipe recipe = new Recipe("Cake", ingredients);
-//
-//        assertEquals("Open", RecipeViewModel.getCanClick(recipe));
-//    }
 
 }
