@@ -83,6 +83,13 @@ public class PantryTests {
         assertTrue(IngredientsViewModel.getIngredients().isEmpty());
     }
 
+//    @Test
+//    public void testRemoveIngredient() {
+//        IngredientsViewModel.addIngredient("Protein Powder", "50", "50", "N/A");
+//        assertTrue(IngredientsViewModel.getIngredients().size() > 0);
+//        IngredientsViewModel.getIngredients().remove(0);
+//        assertTrue(IngredientsViewModel.getIngredients().isEmpty());
+//    }
 
 
 }
