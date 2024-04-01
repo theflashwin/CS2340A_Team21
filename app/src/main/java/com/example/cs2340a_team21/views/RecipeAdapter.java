@@ -13,6 +13,8 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cs2340a_team21.R;
+import com.example.cs2340a_team21.Strategies.QuantityIngredientsSortingStrategy;
+import com.example.cs2340a_team21.Strategies.SortingStrategy;
 import com.example.cs2340a_team21.objects.Ingredient;
 import com.example.cs2340a_team21.objects.Recipe;
 import com.example.cs2340a_team21.viewmodels.IngredientsViewModel;
@@ -87,6 +89,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
                 context.startActivity(intent);
             } else {
                 Toast.makeText(context, "Ingredients not Available", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(this.context, RecipeIngredients.class);
+                intent.putExtra("Recipe", getRecipeText(r));
+                context.startActivity(intent);
             }
         });
 
@@ -99,7 +104,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     }
 
     public String getRecipeText(Recipe re) {
-        String output = re.name + " ";
+        String output = re.name + " - ";
         List<Ingredient> iList = re.ingredients;
         for (int idx = 0; idx < iList.size() - 1; idx++) {
             output += iList.get(idx).name + " (qty: " + iList.get(idx).quantity + "), ";
@@ -109,7 +114,12 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     }
 
     public void sortRecipes() {
+        SortingStrategy strategy = new QuantityIngredientsSortingStrategy();
+        RecipeViewModel.sort(strategy);
+    }
 
+    public void refresh() {
+        this.recipes = RecipeViewModel.recipes;
     }
 
 
