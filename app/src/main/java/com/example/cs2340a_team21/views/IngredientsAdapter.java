@@ -57,10 +57,12 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
 
         viewHolder.decrease.setOnClickListener(v -> {
             IngredientsViewModel.decreaseIngredient(i.name);
+            viewHolder.getTextViewQuantity().setText(String.valueOf(i.quantity));
         });
 
         viewHolder.increase.setOnClickListener(v -> {
             IngredientsViewModel.increaseIngredient(i.name);
+            viewHolder.getTextViewQuantity().setText(String.valueOf(i.quantity));
         });
 
     }
