@@ -42,7 +42,7 @@ public class PantryTests {
 
     @Test
     public void testNullEntry() {
-        assertEquals("null", IngredientsViewModel.addIngredient("Strawberries", null, "25", "01/31");
+        assertEquals("null", IngredientsViewModel.addIngredient("Strawberries", null, "25", "01/31"));
     }
 
 //    @Test
