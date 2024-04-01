@@ -38,8 +38,12 @@ public class IngredientsFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+
+    private EditText name;
+    private EditText quantity;
+    private EditText calories;
+    private EditText expiration;
     private Button addIngredientButton;
-    private Button refreshButton;
 
     private RecyclerView recyclerView;
 
@@ -81,25 +85,26 @@ public class IngredientsFragment extends Fragment {
 
         IngredientsViewModel.handleOnLoad();
 
-        addIngredientButton = view.findViewById(R.id.addIngredientButton);
-        addIngredientButton.setOnClickListener(v -> {
-            //adapter.refreshData(IngredientsViewModel.getIngredients());
-            Intent intent = new Intent(getActivity(), AddIngredientActivity.class);
-            startActivity(intent);
-        });
+        this.name = view.findViewById(R.id.recipeNameInput);
+        this.quantity = view.findViewById(R.id.recipeIngredients);
+        this.calories = view.findViewById(R.id.editCalories);
+        this.expiration = view.findViewById(R.id.editExpiration);
 
-        refreshButton = view.findViewById(R.id.refreshButton);
-        refreshButton.setOnClickListener(v -> {
-            String result = IngredientsViewModel.addIngredient("", "",
-                    "", "");
+        this.addIngredientButton = view.findViewById(R.id.addIngredientButton);
+
+        this.addIngredientButton.setOnClickListener(v -> {
+            String result = IngredientsViewModel.addIngredient(this.name.getText().toString(), this.quantity.getText().toString(),
+                    this.calories.getText().toString(), this.expiration.getText().toString());
+
+            if (result.equals("negative")) {
+                Toast.makeText(getContext(), "Quantity must be positive", Toast.LENGTH_LONG).show();
+            }
         });
 
         this.recyclerView = view.findViewById(R.id.ingredients_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         this.adapter = new IngredientsAdapter(IngredientsViewModel.getIngredients());
         recyclerView.setAdapter(adapter);
-        //recyclerView.setVisibility(View.VISIBLE);
-        //adapter.refreshData(IngredientsViewModel.getIngredients());
 
 
 

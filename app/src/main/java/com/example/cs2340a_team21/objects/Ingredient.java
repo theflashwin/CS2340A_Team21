@@ -19,4 +19,16 @@ public class Ingredient {
         this.expirationDate = expirationDate;
     }
 
+    @Override
+    public boolean equals(Object o) {
+
+        if (o instanceof Ingredient) {
+            Ingredient i = (Ingredient) o;
+            return i.name.equals(this.name);
+        } else {
+            return false;
+        }
+
+    }
+
 }
