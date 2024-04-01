@@ -95,13 +95,15 @@ public class RecipeFragment extends Fragment {
 
         this.submitButton.setOnClickListener(v -> {
             RecipeViewModel.sendRecipe(nameInput.getText().toString(), ingredientsInput.getText().toString());
+            adapter.refresh();
         });
 
         this.sortButton = view.findViewById(R.id.sortRecipes);
 
 
-        this.submitButton.setOnClickListener(v -> {
+        this.sortButton.setOnClickListener(v -> {
             adapter.sortRecipes();
+            adapter.refresh();
         });
 
         return view;

@@ -46,13 +46,13 @@
             android:id="@+id/sortRecipes"
             android:layout_width="match_parent"
             android:layout_height="61dp"
-            android:text="Sort Recipe List by Alphabetical" />
+            android:text="Sort Recipe List" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recipes_view"
 
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
