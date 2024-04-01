@@ -10,13 +10,16 @@ import com.example.cs2340a_team21.model.User;
 import com.example.cs2340a_team21.objects.Ingredient;
 import com.example.cs2340a_team21.views.IngredientsFragment;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModel;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class IngredientsViewModel {
+public class IngredientsViewModel extends ViewModel{
 
     private static List<Ingredient> ingredients;
 
@@ -79,6 +82,7 @@ public class IngredientsViewModel {
             } else {
                 User.pantry.addIngredient(nameIn, quantity, calories, null, false);
             }
+            ingredients = Pantry.getInstance().getIngredients();
 
         } catch (Exception e) {
         }
@@ -89,13 +93,13 @@ public class IngredientsViewModel {
     public static void increaseIngredient(String name) {
 
         Pantry.getInstance().increaseIngredient(name);
-
+        ingredients = Pantry.getInstance().getIngredients();
     }
 
     public static void decreaseIngredient(String name) {
 
         Pantry.getInstance().decreaseIngredient(name);
-
+        ingredients = Pantry.getInstance().getIngredients();
     }
 
     public static List<Ingredient> getIngredients() {

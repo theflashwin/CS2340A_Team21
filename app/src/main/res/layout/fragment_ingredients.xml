@@ -28,6 +28,14 @@
             android:text="Available Ingredients"
             android:textSize="30sp" />
 
+        <Button
+            android:id="@+id/refreshButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Ingredient"
+            android:layout_margin="16dp"
+            android:layout_gravity="center_horizontal"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/ingredients_recycler_view"
             android:layout_width="match_parent"

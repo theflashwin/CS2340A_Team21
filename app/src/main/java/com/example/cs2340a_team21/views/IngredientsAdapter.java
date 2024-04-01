@@ -69,5 +69,11 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
     public int getItemCount() {
         return ingredients.size();
     }
+
+    public void refreshData(List<Ingredient> newList){
+        this.ingredients.clear();
+        this.ingredients.addAll(newList);
+        notifyDataSetChanged();
+    }
 }
 
