@@ -32,28 +32,20 @@
             android:inputType="text" />
 
         <EditText
-            android:id="@+id/editQuantity"
+            android:id="@+id/editIngredients"
             android:layout_width="match_parent"
             android:layout_height="97dp"
             android:ems="10"
-            android:hint="Enter Quantity"
+            android:hint="Enter Ingredients (Seperated with Commas)"
             android:inputType="numberSigned" />
 
         <EditText
-            android:id="@+id/editCalories"
+            android:id="@+id/editQuantities"
             android:layout_width="match_parent"
             android:layout_height="97dp"
             android:ems="10"
-            android:hint="Enter Calories per Serving/Quantity"
+            android:hint="Enter Quantity for Each Ingredient"
             android:inputType="numberSigned" />
-
-        <EditText
-            android:id="@+id/editExpiration"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="[Optional] Enter Expiration"
-            android:inputType="date" />
 
         <Button
             android:id="@+id/submit"
