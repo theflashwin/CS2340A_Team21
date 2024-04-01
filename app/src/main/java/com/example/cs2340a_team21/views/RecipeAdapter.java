@@ -109,7 +109,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     }
 
     public void sortRecipes() {
-//        recipes.sort(Comparator.comparingInt(r -> Integer.parseInt(r.name)));
+
     }
 
 
