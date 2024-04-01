@@ -5,7 +5,7 @@ import android.util.Log;
 public class Ingredient {
 
     public String name;
-    public int quanity;
+    public int quantity;
     public int calories;
     public String expirationDate;
 
@@ -14,7 +14,7 @@ public class Ingredient {
         Log.w("creating ingredient...", "");
 
         this.name = name;
-        this.quanity = quanity;
+        this.quantity = quanity;
         this.calories = calories;
         this.expirationDate = expirationDate;
     }
