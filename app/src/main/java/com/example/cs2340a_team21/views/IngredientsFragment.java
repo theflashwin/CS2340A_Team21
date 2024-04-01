@@ -14,6 +14,7 @@ import com.example.cs2340a_team21.R;
  * A simple {@link Fragment} subclass.
  * Use the {@link IngredientsFragment#newInstance} factory method to
  * create an instance of this fragment.
+ 
  */
 
 /**
@@ -35,6 +36,7 @@ public class IngredientsFragment extends Fragment {
 
     public IngredientsFragment() {
         // Required empty public constructor
+        // Prevents default constructor
     }
 
     /**
