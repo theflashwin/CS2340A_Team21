@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.example.cs2340a_team21.R;
 
@@ -23,6 +25,11 @@ public class RecipeFragment extends Fragment {
 
     private String mParam1;
     private String mParam2;
+
+    private EditText RecipeName;
+    private EditText enterIngredients;
+    private EditText enterIngredientsQuantities;
+    private Button submitButton;
 
     public RecipeFragment() {
         // Required empty public constructor
@@ -58,6 +65,13 @@ public class RecipeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_recipe, container, false);
+        View view =  inflater.inflate(R.layout.fragment_recipe, container, false);
+
+        this.RecipeName = view.findViewById(R.id.editName);
+        this.enterIngredients = view.findViewById(R.id.editIngredients);
+        this.enterIngredientsQuantities = view.findViewById(R.id.editQuantities);
+
+
+        return view;
     }
 }
