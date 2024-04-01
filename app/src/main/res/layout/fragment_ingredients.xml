@@ -13,6 +13,46 @@
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="0dp">
 
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:text="Add Ingredients"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/recipeNameInput"
+            android:layout_width="match_parent"
+            android:layout_height="97dp"
+            android:ems="10"
+            android:hint="Enter Ingredient Name"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/recipeIngredients"
+            android:layout_width="match_parent"
+            android:layout_height="97dp"
+            android:ems="10"
+            android:hint="Enter Quantity"
+            android:inputType="numberSigned" />
+
+        <EditText
+            android:id="@+id/editCalories"
+            android:layout_width="match_parent"
+            android:layout_height="97dp"
+            android:ems="10"
+            android:hint="Enter Calories per Serving/Quantity"
+            android:inputType="numberSigned" />
+
+        <EditText
+            android:id="@+id/editExpiration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="[Optional] Enter Expiration"
+            android:inputType="date" />
+
+
         <Button
             android:id="@+id/addIngredientButton"
             android:layout_width="wrap_content"

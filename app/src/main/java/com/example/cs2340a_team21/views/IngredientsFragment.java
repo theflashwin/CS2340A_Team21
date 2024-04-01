@@ -78,10 +78,21 @@ public class IngredientsFragment extends Fragment {
 
         IngredientsViewModel.handleOnLoad();
 
-        addIngredientButton = view.findViewById(R.id.addIngredientButton);
-        addIngredientButton.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), AddIngredientActivity.class);
-            startActivity(intent);
+        this.name = view.findViewById(R.id.recipeNameInput);
+        this.quantity = view.findViewById(R.id.recipeIngredients);
+        this.calories = view.findViewById(R.id.editCalories);
+        this.expiration = view.findViewById(R.id.editExpiration);
+
+        this.submitButton = view.findViewById(R.id.submit);
+
+        this.submitButton.setOnClickListener(v -> {
+            String result = IngredientsViewModel.addIngredient(this.name.getText().toString(), this.quantity.getText().toString(),
+                    this.calories.getText().toString(), this.expiration.getText().toString());
+
+            if (result.equals("negative")) {
+                Toast.makeText(getContext(), "Quantity must be positive", Toast.LENGTH_LONG).show();
+            }
+
         });
 
 

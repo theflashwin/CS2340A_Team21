@@ -96,6 +96,7 @@ public class Cookbook {
 
         Map<String, Object> recipe = new HashMap<>();
         recipe.put("user", User.getUserId());
+        recipe.put("name", name);
         recipe.put("ingredients", ingredients);
 
         db.collection("cookbook").add(recipe)
