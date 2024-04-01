@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -98,6 +99,7 @@ public class RecipeFragment extends Fragment {
         this.openButton = view.findViewById(R.id.recipeOpen);
 
         this.submitButton.setOnClickListener(v -> {
+            Log.d("clicked!", "click click click");
             RecipeViewModel.sendRecipe(nameInput.getText().toString(), ingredientsInput.getText().toString());
         });
 
