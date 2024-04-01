@@ -38,9 +38,16 @@ public class IngredientsFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+
+    private EditText name;
+    private EditText quantity;
+    private EditText calories;
+    private EditText expiration;
     private Button addIngredientButton;
 
     private RecyclerView recyclerView;
+
+    private IngredientsAdapter adapter;
 
     public IngredientsFragment() {
         // Required empty public constructor
@@ -83,23 +90,23 @@ public class IngredientsFragment extends Fragment {
         this.calories = view.findViewById(R.id.editCalories);
         this.expiration = view.findViewById(R.id.editExpiration);
 
-        this.submitButton = view.findViewById(R.id.submit);
+        this.addIngredientButton = view.findViewById(R.id.addIngredientButton);
 
-        this.submitButton.setOnClickListener(v -> {
+        this.addIngredientButton.setOnClickListener(v -> {
             String result = IngredientsViewModel.addIngredient(this.name.getText().toString(), this.quantity.getText().toString(),
                     this.calories.getText().toString(), this.expiration.getText().toString());
 
             if (result.equals("negative")) {
                 Toast.makeText(getContext(), "Quantity must be positive", Toast.LENGTH_LONG).show();
             }
-
         });
-
 
         this.recyclerView = view.findViewById(R.id.ingredients_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        IngredientsAdapter adapter = new IngredientsAdapter(IngredientsViewModel.getIngredients());
+        this.adapter = new IngredientsAdapter(IngredientsViewModel.getIngredients());
         recyclerView.setAdapter(adapter);
+
+
 
         return view;
 

@@ -26,10 +26,10 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
 
         public ViewHolder(View view) {
             super(view);
-            textViewName = view.findViewById(R.id.recipeName);
+            textViewName = view.findViewById(R.id.ingredientName);
             textViewQuantity = view.findViewById(R.id.ingredientQuantity);
             decrease = view.findViewById(R.id.decreaseButton);
-            increase = view.findViewById(R.id.openButton);
+            increase = view.findViewById(R.id.increaseButton);
         }
 
         public TextView getTextViewName() {
@@ -68,6 +68,12 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
     @Override
     public int getItemCount() {
         return ingredients.size();
+    }
+
+    public void refreshData(List<Ingredient> newList){
+        this.ingredients.clear();
+        this.ingredients.addAll(newList);
+        notifyDataSetChanged();
     }
 }
 
