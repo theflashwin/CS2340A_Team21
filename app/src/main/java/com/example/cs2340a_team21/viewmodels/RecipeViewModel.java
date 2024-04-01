@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.cs2340a_team21.Strategies.SortingStrategy;
 import com.example.cs2340a_team21.model.Cookbook;
+import com.example.cs2340a_team21.model.Pantry;
 import com.example.cs2340a_team21.objects.Ingredient;
 import com.example.cs2340a_team21.objects.Recipe;
 
@@ -15,10 +16,38 @@ public class RecipeViewModel {
     public static List<Recipe> recipes;
 
     public static void handleOnLoad() {
-        Log.w("w;eg;leakrg;lkaejg;lajkg", "HEY HEY HEY");
         if (recipes == null) {
             recipes = Cookbook.getInstance().getRecipes();
         }
+    }
+
+    public static String getCanClick(Recipe r) {
+
+        List<Ingredient> userIngredients = Pantry.getInstance().getIngredients();
+
+        for (Ingredient i : r.ingredients) {
+
+            boolean found = false;
+
+            for (Ingredient x : userIngredients) {
+                if (x.name.equals(i.name)) {
+                    found = true;
+
+                    if (i.quantity > x.quantity) {
+                        return "Can't Make";
+                    }
+
+                }
+            }
+
+            if (!found) {
+                return "Can't Make";
+            }
+
+        }
+
+        return "Open";
+
     }
 
     public static void sendRecipe(String name, String ingredients) {

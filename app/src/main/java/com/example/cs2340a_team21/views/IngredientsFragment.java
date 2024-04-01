@@ -82,8 +82,8 @@ public class IngredientsFragment extends Fragment {
 
         IngredientsViewModel.handleOnLoad();
 
-        this.name = view.findViewById(R.id.editName);
-        this.quantity = view.findViewById(R.id.editQuantity);
+        this.name = view.findViewById(R.id.recipeNameInput);
+        this.quantity = view.findViewById(R.id.recipeIngredients);
         this.calories = view.findViewById(R.id.editCalories);
         this.expiration = view.findViewById(R.id.editExpiration);
 

@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/teal_200"
-    tools:context=".views.RecipeFragment" >
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="409dp"
@@ -17,32 +13,32 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
-            android:id="@+id/RecipeFormText"
+            android:id="@+id/title"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Make a New Recipe"
-            android:textSize="34sp" />
+            android:layout_height="45dp"
+            android:text="Add Ingredients"
+            android:textSize="30sp" />
 
         <EditText
             android:id="@+id/recipeNameInput"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="97dp"
             android:ems="10"
-            android:hint="Recipe Name"
+            android:hint="Enter Ingredient Name"
             android:inputType="text" />
 
         <EditText
             android:id="@+id/recipeIngredients"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="97dp"
             android:ems="10"
-            android:hint="eg: sugar: 15, eggs: 2"
-            android:inputType="text" />
+            android:hint="Enter Quantity"
+            android:inputType="numberSigned" />
 
         <Button
             android:id="@+id/recipeSubmit"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="61dp"
             android:text="Button" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -50,4 +46,5 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
