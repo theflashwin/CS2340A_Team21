@@ -86,6 +86,18 @@ public class IngredientsViewModel {
         return "success";
     }
 
+    public static void increaseIngredient(String name) {
+
+        Pantry.getInstance().increaseIngredient(name);
+
+    }
+
+    public static void decreaseIngredient(String name) {
+
+        Pantry.getInstance().decreaseIngredient(name);
+
+    }
+
     public static List<Ingredient> getIngredients() {
         List<Ingredient> ingredients = User.pantry.getIngredients();
         return ingredients;
