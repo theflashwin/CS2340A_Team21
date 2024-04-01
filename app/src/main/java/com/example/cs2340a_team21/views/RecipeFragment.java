@@ -16,6 +16,9 @@ import com.example.cs2340a_team21.R;
 import com.example.cs2340a_team21.objects.Recipe;
 import com.example.cs2340a_team21.viewmodels.RecipeViewModel;
 
+import java.util.Collections;
+import java.util.Comparator;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link RecipeFragment#newInstance} factory method to
@@ -34,7 +37,11 @@ public class RecipeFragment extends Fragment {
     private EditText ingredientsInput;
     private Button submitButton;
 
+    private Button sortButton;
+
     private RecyclerView recyclerView;
+
+    private RecipeAdapter adapter;
 
     public RecipeFragment() {
         // Required empty public constructor
@@ -78,18 +85,26 @@ public class RecipeFragment extends Fragment {
 
         this.recyclerView = view.findViewById(R.id.recipes_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(new RecipeAdapter(RecipeViewModel.recipes));
+
+        adapter = new RecipeAdapter(RecipeViewModel.recipes, getActivity());
+        recyclerView.setAdapter(adapter);
 
         this.nameInput = view.findViewById(R.id.recipeNameInput);
         this.ingredientsInput = view.findViewById(R.id.recipeIngredients);
         this.submitButton = view.findViewById(R.id.recipeSubmit);
 
         this.submitButton.setOnClickListener(v -> {
-
             RecipeViewModel.sendRecipe(nameInput.getText().toString(), ingredientsInput.getText().toString());
+        });
 
+        this.sortButton = view.findViewById(R.id.sortRecipes);
+
+
+        this.submitButton.setOnClickListener(v -> {
+            adapter.sortRecipes();
         });
 
         return view;
     }
+
 }
