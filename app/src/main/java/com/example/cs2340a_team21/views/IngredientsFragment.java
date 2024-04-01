@@ -39,8 +39,11 @@ public class IngredientsFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     private Button addIngredientButton;
+    private Button refreshButton;
 
     private RecyclerView recyclerView;
+
+    private IngredientsAdapter adapter;
 
     public IngredientsFragment() {
         // Required empty public constructor
@@ -80,15 +83,25 @@ public class IngredientsFragment extends Fragment {
 
         addIngredientButton = view.findViewById(R.id.addIngredientButton);
         addIngredientButton.setOnClickListener(v -> {
+            //adapter.refreshData(IngredientsViewModel.getIngredients());
             Intent intent = new Intent(getActivity(), AddIngredientActivity.class);
             startActivity(intent);
         });
 
+        refreshButton = view.findViewById(R.id.refreshButton);
+        refreshButton.setOnClickListener(v -> {
+            String result = IngredientsViewModel.addIngredient("", "",
+                    "", "");
+        });
 
         this.recyclerView = view.findViewById(R.id.ingredients_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        IngredientsAdapter adapter = new IngredientsAdapter(IngredientsViewModel.getIngredients());
+        this.adapter = new IngredientsAdapter(IngredientsViewModel.getIngredients());
         recyclerView.setAdapter(adapter);
+        //recyclerView.setVisibility(View.VISIBLE);
+        //adapter.refreshData(IngredientsViewModel.getIngredients());
+
+
 
         return view;
 
