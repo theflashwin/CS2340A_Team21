@@ -14,7 +14,6 @@ public class RecipeIngredients extends AppCompatActivity {
     private TextView info;
     private Button back;
 
-    private String val;
 
 
     @Override
@@ -26,8 +25,7 @@ public class RecipeIngredients extends AppCompatActivity {
         this.back = findViewById(R.id.backBut);
 
         Intent intent = getIntent();
-        this.val = intent.getStringExtra("recipe");
-        info.setText(val);
+        info.setText(intent.getStringExtra("Recipe"));
         back.setOnClickListener(v -> goBack());
     }
 
