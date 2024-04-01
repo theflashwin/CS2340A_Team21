@@ -1,5 +1,6 @@
 package com.example.cs2340a_team21.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -37,12 +38,7 @@ public class IngredientsFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private EditText name;
-    private EditText quantity;
-    private EditText calories;
-    private EditText expiration;
-
-    private Button submitButton;
+    private Button addIngredientButton;
 
     private RecyclerView recyclerView;
 

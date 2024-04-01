@@ -73,6 +73,7 @@ public class RecipeFragment extends Fragment {
         RecipeViewModel.handleOnLoad();
 
         // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_recipe, container, false);
 
         this.recyclerView = view.findViewById(R.id.recipes_view);
