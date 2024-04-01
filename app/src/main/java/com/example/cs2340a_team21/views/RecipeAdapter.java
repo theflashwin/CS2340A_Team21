@@ -1,5 +1,6 @@
 package com.example.cs2340a_team21.views;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.cs2340a_team21.R;
 import com.example.cs2340a_team21.objects.Ingredient;
 import com.example.cs2340a_team21.objects.Recipe;
+import com.example.cs2340a_team21.viewmodels.RecipeViewModel;
 
 import java.util.List;
 
@@ -56,15 +58,19 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         Recipe r = recipes.get(position);
+
+        Log.w("Item Name", r.name + "");
+
         viewHolder.getName().setText(r.name);
 
-        String canOpen = "hey";
+        String canOpen = RecipeViewModel.getCanClick(r);
 
         viewHolder.getOpen().setText(canOpen);
     }
 
     @Override
     public int getItemCount() {
+        Log.w("Item Count", recipes.size() + "");
         return recipes.size();
     }
 
