@@ -30,7 +30,7 @@ public class RecipeViewModel {
             boolean found = false;
 
             for (Ingredient x : userIngredients) {
-                if (x.name.equals(i.name)) {
+                if (x.name.equalsIgnoreCase(i.name)) {
                     found = true;
 
                     if (i.quantity > x.quantity) {

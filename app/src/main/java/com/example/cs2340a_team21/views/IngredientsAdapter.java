@@ -36,6 +36,14 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
             return textViewName; }
         public TextView getTextViewQuantity() {
             return textViewQuantity; }
+
+        public Button getDecrease() {
+            return decrease;
+        }
+
+        public Button getIncrease() {
+            return increase;
+        }
     }
 
     public IngredientsAdapter(List<Ingredient> dataSet) {
@@ -55,12 +63,12 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
         viewHolder.getTextViewName().setText(i.name);
         viewHolder.getTextViewQuantity().setText(String.valueOf(i.quantity));
 
-        viewHolder.decrease.setOnClickListener(v -> {
+        viewHolder.getDecrease().setOnClickListener(v -> {
             IngredientsViewModel.decreaseIngredient(i.name);
             viewHolder.getTextViewQuantity().setText(String.valueOf(i.quantity));
         });
 
-        viewHolder.increase.setOnClickListener(v -> {
+        viewHolder.getIncrease().setOnClickListener(v -> {
             IngredientsViewModel.increaseIngredient(i.name);
             viewHolder.getTextViewQuantity().setText(String.valueOf(i.quantity));
         });
