@@ -27,7 +27,7 @@ public class IngredientsViewModel {
             return "null";
         }
 
-        if (nameIn == "") {
+        if (nameIn.equals("")) {
             return "null";
         }
 
@@ -35,20 +35,34 @@ public class IngredientsViewModel {
             return "null";
         }
 
+        if (quantityIn.equals("")) {
+            return "null";
+        }
+
+        if (caloriesIn == null) {
+            return "null";
+        }
+
+        if (caloriesIn.equals("")) {
+            return "null";
+        }
+
+        if (expiration == null) {
+            return "null";
+        }
+
+
         int quantity = Integer.parseInt(quantityIn);
         int calories = Integer.parseInt(caloriesIn);
 
         if (quantity <= 0) {
-            Log.d("NEGATIVE", "AHHHHHHH");
             return "negative";
         }
 
-        Log.d("ingredients size:", ingredients.size() + "");
 
         for (Ingredient i : ingredients) {
-            Log.w("Ingredient:", i.name);
             if (i.name.equals(nameIn)) {
-                if (i.quanity != 0) {
+                if (i.quantity != 0) {
                     return "duplicate";
                 }
             }
@@ -56,14 +70,13 @@ public class IngredientsViewModel {
 
         try {
 
-            if (expiration == "") {
+            if (expiration.equals("")) {
                 User.pantry.addIngredient(nameIn, quantity, calories, expiration, true);
             } else {
                 User.pantry.addIngredient(nameIn, quantity, calories, null, false);
             }
 
         } catch (Exception e) {
-            Log.d("Error", "lkjasd");
         }
 
         return "success";
