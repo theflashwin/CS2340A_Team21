@@ -33,6 +33,8 @@ public class User {
 
     private static String gender = "";
 
+    public static Pantry pantry;
+
     private static boolean foundUser = true; //is this variable being used?
 
     public static boolean login(String username, String password) {
@@ -51,6 +53,9 @@ public class User {
                         }
                     }
                 });
+
+
+        pantry = Pantry.getInstance();
 
         return ret;
 
