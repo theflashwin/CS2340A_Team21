@@ -44,6 +44,14 @@
             android:hint="Enter Calories per Serving/Quantity"
             android:inputType="numberSigned" />
 
+        <EditText
+            android:id="@+id/editExpiration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="[Optional] Enter Expiration"
+            android:inputType="date" />
+
         <Button
             android:id="@+id/submit"
             android:layout_width="match_parent"
