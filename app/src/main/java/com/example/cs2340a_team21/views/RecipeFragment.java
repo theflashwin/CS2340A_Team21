@@ -40,7 +40,6 @@ public class RecipeFragment extends Fragment {
     private Button submitButton;
 
     private Button sortButton;
-    private Button openButton;
 
     private RecyclerView recyclerView;
 
@@ -95,7 +94,6 @@ public class RecipeFragment extends Fragment {
         this.nameInput = view.findViewById(R.id.recipeNameInput);
         this.ingredientsInput = view.findViewById(R.id.recipeIngredients);
         this.submitButton = view.findViewById(R.id.recipeSubmit);
-        this.openButton = view.findViewById(R.id.recipeOpen);
 
         this.submitButton.setOnClickListener(v -> {
             RecipeViewModel.sendRecipe(nameInput.getText().toString(), ingredientsInput.getText().toString());
@@ -108,12 +106,6 @@ public class RecipeFragment extends Fragment {
         this.sortButton.setOnClickListener(v -> {
             adapter.sortRecipes();
             adapter.refresh();
-        });
-
-        this.openButton.setOnClickListener(v -> {
-
-            IngredientsViewModel.getIngredients();
-
         });
 
         return view;
