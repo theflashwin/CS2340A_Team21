@@ -4,13 +4,17 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.anychart.data.Tree;
 import com.example.cs2340a_team21.model.Pantry;
 import com.example.cs2340a_team21.model.User;
 import com.example.cs2340a_team21.objects.Ingredient;
 import com.example.cs2340a_team21.views.IngredientsFragment;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class IngredientsViewModel {
 
@@ -48,7 +52,7 @@ public class IngredientsViewModel {
         for (Ingredient i : ingredients) {
             Log.w("Ingredient:", i.name);
             if (i.name.equals(nameIn)) {
-                if (i.quanity != 0) {
+                if (i.quantity != 0) {
                     return "duplicate";
                 }
             }
@@ -68,5 +72,13 @@ public class IngredientsViewModel {
 
         return "success";
     }
+
+    public static List<Ingredient> getIngredients() {
+        List<Ingredient> ingredients = User.pantry.getIngredients();
+        return ingredients;
+
+    }
+
+
 
 }
