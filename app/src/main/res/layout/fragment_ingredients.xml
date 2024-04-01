@@ -65,9 +65,13 @@
             android:text="Available Ingredients"
             android:textSize="30sp" />
 
-        <ScrollView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ingredients_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+
+
+        </androidx.recyclerview.widget.RecyclerView>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

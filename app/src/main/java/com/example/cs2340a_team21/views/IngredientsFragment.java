@@ -14,6 +14,9 @@ import android.widget.Toast;
 import com.example.cs2340a_team21.R;
 import com.example.cs2340a_team21.viewmodels.IngredientsViewModel;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link IngredientsFragment#newInstance} factory method to
@@ -40,6 +43,8 @@ public class IngredientsFragment extends Fragment {
     private EditText expiration;
 
     private Button submitButton;
+
+    private RecyclerView recyclerView;
 
     public IngredientsFragment() {
         // Required empty public constructor
@@ -93,6 +98,12 @@ public class IngredientsFragment extends Fragment {
             }
 
         });
+
+
+        this.recyclerView = view.findViewById(R.id.ingredients_recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        IngredientsAdapter adapter = new IngredientsAdapter(IngredientsViewModel.getIngredients());
+        recyclerView.setAdapter(adapter);
 
         return view;
 

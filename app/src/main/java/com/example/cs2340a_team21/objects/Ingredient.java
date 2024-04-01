@@ -9,12 +9,12 @@ public class Ingredient {
     public int calories;
     public String expirationDate;
 
-    public Ingredient(String name, int quanity, int calories, String expirationDate) {
+    public Ingredient(String name, int quantity, int calories, String expirationDate) {
 
         Log.w("creating ingredient...", "");
 
         this.name = name;
-        this.quantity = quanity;
+        this.quantity = quantity;
         this.calories = calories;
         this.expirationDate = expirationDate;
     }
