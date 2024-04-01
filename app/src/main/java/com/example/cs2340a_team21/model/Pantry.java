@@ -180,6 +180,11 @@ public class Pantry {
                             Long quantity = ((Long) item.get("quantity"));
 
                             item.put("quantity", quantity.intValue() - 1);
+
+                            if (quantity.intValue() - 1 <= 0) {
+                                items.remove(item);
+                            }
+
                             break;
                         }
                     }
