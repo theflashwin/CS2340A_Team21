@@ -48,6 +48,12 @@
             android:layout_height="61dp"
             android:text="Sort Recipe List" />
 
+        <Button
+            android:id="@+id/recipeOpen"
+            android:layout_width="match_parent"
+            android:layout_height="61dp"
+            android:text="Button" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recipes_view"
 
