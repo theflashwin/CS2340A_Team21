@@ -99,7 +99,6 @@ public class RecipeFragment extends Fragment {
         this.openButton = view.findViewById(R.id.recipeOpen);
 
         this.submitButton.setOnClickListener(v -> {
-            Log.d("clicked!", "click click click");
             RecipeViewModel.sendRecipe(nameInput.getText().toString(), ingredientsInput.getText().toString());
         });
 
