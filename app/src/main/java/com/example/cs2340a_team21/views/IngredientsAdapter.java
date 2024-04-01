@@ -26,10 +26,10 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
 
         public ViewHolder(View view) {
             super(view);
-            textViewName = view.findViewById(R.id.ingredientName);
+            textViewName = view.findViewById(R.id.recipeName);
             textViewQuantity = view.findViewById(R.id.ingredientQuantity);
             decrease = view.findViewById(R.id.decreaseButton);
-            increase = view.findViewById(R.id.increaseButton);
+            increase = view.findViewById(R.id.openButton);
         }
 
         public TextView getTextViewName() {
