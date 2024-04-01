@@ -13,7 +13,9 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.cs2340a_team21.R;
+import com.example.cs2340a_team21.objects.Ingredient;
 import com.example.cs2340a_team21.objects.Recipe;
+import com.example.cs2340a_team21.viewmodels.IngredientsViewModel;
 import com.example.cs2340a_team21.viewmodels.RecipeViewModel;
 
 import java.util.Collections;
@@ -38,6 +40,7 @@ public class RecipeFragment extends Fragment {
     private Button submitButton;
 
     private Button sortButton;
+    private Button openButton;
 
     private RecyclerView recyclerView;
 
@@ -92,6 +95,7 @@ public class RecipeFragment extends Fragment {
         this.nameInput = view.findViewById(R.id.recipeNameInput);
         this.ingredientsInput = view.findViewById(R.id.recipeIngredients);
         this.submitButton = view.findViewById(R.id.recipeSubmit);
+        this.openButton = view.findViewById(R.id.recipeOpen);
 
         this.submitButton.setOnClickListener(v -> {
             RecipeViewModel.sendRecipe(nameInput.getText().toString(), ingredientsInput.getText().toString());
@@ -102,6 +106,12 @@ public class RecipeFragment extends Fragment {
 
         this.submitButton.setOnClickListener(v -> {
             adapter.sortRecipes();
+        });
+
+        this.openButton.setOnClickListener(v -> {
+
+            IngredientsViewModel.getIngredients();
+
         });
 
         return view;
