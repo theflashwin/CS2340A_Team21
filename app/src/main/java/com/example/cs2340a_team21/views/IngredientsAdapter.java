@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cs2340a_team21.R;
 import com.example.cs2340a_team21.objects.Ingredient;
+import com.example.cs2340a_team21.viewmodels.IngredientsViewModel;
 
 import java.util.List;
 
@@ -53,6 +54,15 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
         Ingredient i = ingredients.get(position);
         viewHolder.getTextViewName().setText(i.name);
         viewHolder.getTextViewQuantity().setText(String.valueOf(i.quantity));
+
+        viewHolder.decrease.setOnClickListener(v -> {
+            IngredientsViewModel.decreaseIngredient(i.name);
+        });
+
+        viewHolder.increase.setOnClickListener(v -> {
+            IngredientsViewModel.increaseIngredient(i.name);
+        });
+
     }
 
     @Override

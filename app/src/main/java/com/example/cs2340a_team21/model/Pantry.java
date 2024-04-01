@@ -140,4 +140,58 @@ public class Pantry {
 
     }
 
+    public void increaseIngredient(String name) {
+
+        pantryRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                if (document.exists()) {
+                    List<Map<String, Object>> items = (List<Map<String, Object>>) document.get("ingredients");
+                    for (Map<String, Object> item : items) {
+                        if (item.get("name").equals(name)) {
+
+                            Long quantity = ((Long) item.get("quantity"));
+
+                            item.put("quantity", quantity.intValue() + 1);
+                            break;
+                        }
+                    }
+                    // Now update the document with the modified array
+                    pantryRef.update("ingredients", items);
+                } else {
+                    Log.d("Document", "No such document");
+                }
+            } else {
+                Log.d("Document", "get failed with ", task.getException());
+            }
+        });
+
+    }
+
+    public void decreaseIngredient(String name) {
+        pantryRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                if (document.exists()) {
+                    List<Map<String, Object>> items = (List<Map<String, Object>>) document.get("ingredients");
+                    for (Map<String, Object> item : items) {
+                        if (item.get("name").equals(name)) {
+
+                            Long quantity = ((Long) item.get("quantity"));
+
+                            item.put("quantity", quantity.intValue() - 1);
+                            break;
+                        }
+                    }
+                    // Now update the document with the modified array
+                    pantryRef.update("ingredients", items);
+                } else {
+                    Log.d("Document", "No such document");
+                }
+            } else {
+                Log.d("Document", "get failed with ", task.getException());
+            }
+        });
+    }
+
 }
