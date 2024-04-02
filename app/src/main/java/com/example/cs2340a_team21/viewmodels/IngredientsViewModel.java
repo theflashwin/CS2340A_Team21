@@ -25,6 +25,7 @@ public class IngredientsViewModel extends ViewModel{
 
     public static void handleOnLoad() {
          ingredients = Pantry.getInstance().getIngredients();
+         Pantry.getInstance().initializeStaticIngredients();
     }
 
     public static String addIngredient(String nameIn, String quantityIn, String caloriesIn, String expiration) {
