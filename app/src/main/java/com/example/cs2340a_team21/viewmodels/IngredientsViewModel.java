@@ -1,34 +1,24 @@
 package com.example.cs2340a_team21.viewmodels;
 
-import android.content.Context;
-import android.util.Log;
-import android.widget.Toast;
-
-import com.anychart.data.Tree;
 import com.example.cs2340a_team21.model.Pantry;
 import com.example.cs2340a_team21.model.User;
 import com.example.cs2340a_team21.objects.Ingredient;
-import com.example.cs2340a_team21.views.IngredientsFragment;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
-public class IngredientsViewModel extends ViewModel{
+public class IngredientsViewModel extends ViewModel {
 
     private static List<Ingredient> ingredients;
 
     public static void handleOnLoad() {
-         ingredients = Pantry.getInstance().getIngredients();
-         Pantry.getInstance().initializeStaticIngredients();
+        ingredients = Pantry.getInstance().getIngredients();
+        Pantry.getInstance().initializeStaticIngredients();
     }
 
-    public static String addIngredient(String nameIn, String quantityIn, String caloriesIn, String expiration) {
+    public static String addIngredient(String nameIn, String quantityIn,
+                                       String caloriesIn, String expiration) {
 
 
         if (nameIn == null) {
@@ -79,9 +69,9 @@ public class IngredientsViewModel extends ViewModel{
         try {
 
             if (expiration.equals("")) {
-                User.pantry.addIngredient(nameIn, quantity, calories, expiration, true);
+                User.getPantry().addIngredient(nameIn, quantity, calories, expiration, true);
             } else {
-                User.pantry.addIngredient(nameIn, quantity, calories, null, false);
+                User.getPantry().addIngredient(nameIn, quantity, calories, null, false);
             }
             ingredients = Pantry.getInstance().getIngredients();
 
@@ -104,7 +94,7 @@ public class IngredientsViewModel extends ViewModel{
     }
 
     public static List<Ingredient> getIngredients() {
-        List<Ingredient> ingredients = User.pantry.getIngredients();
+        List<Ingredient> ingredients = User.getPantry().getIngredients();
         return ingredients;
 
     }
