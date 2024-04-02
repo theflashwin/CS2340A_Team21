@@ -28,12 +28,12 @@ public class RecipeViewModel {
             boolean found = false;
 
             for (Ingredient x : ingredients) {
-                Log.w("get name ", x.name + " " + x.name.equalsIgnoreCase(i.name));
-                if (x.name.equalsIgnoreCase(i.name)) {
+                Log.w("get name ", x.getName() + " " + x.getName().equalsIgnoreCase(i.getName()));
+                if (x.getName().equalsIgnoreCase(i.getName())) {
                     found = true;
 
                     if (i.quantity > x.quantity) {
-                        Log.w("Quantity Issue: ", x.name);
+                        Log.w("Quantity Issue: ", x.getName());
                         return "Can't Make";
                     }
 
@@ -41,7 +41,7 @@ public class RecipeViewModel {
             }
 
             if (!found) {
-                Log.w("name Issue: ", i.name);
+                Log.w("name Issue: ", i.getName());
                 return "Can't Make";
             }
 
@@ -52,6 +52,22 @@ public class RecipeViewModel {
     }
 
     public static void sendRecipe(String name, String ingredients) {
+
+        if (name == null) {
+          return;
+        }
+
+        if (name.equals("")) {
+            return;
+        }
+
+        if (ingredients == null) {
+            return;
+        }
+
+        if (ingredients.equals("")) {
+            return;
+        }
 
         ingredients = ingredients.trim();
         List<Ingredient> arr = new ArrayList<>();

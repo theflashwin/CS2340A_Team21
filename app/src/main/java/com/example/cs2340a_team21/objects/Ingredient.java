@@ -4,7 +4,7 @@ import android.util.Log;
 
 public class Ingredient {
 
-    public String name;
+    private String name;
     public int quantity;
     public int calories;
     public String expirationDate;
@@ -31,4 +31,15 @@ public class Ingredient {
 
     }
 
+    public String getName() {return this.name;}
+
+    public int getQuantity() {return this.quantity;}
+
+    public int getCalories() {
+        return calories;
+    }
+
+    public String getExpirationDate() {
+        return expirationDate;
+    }
 }
