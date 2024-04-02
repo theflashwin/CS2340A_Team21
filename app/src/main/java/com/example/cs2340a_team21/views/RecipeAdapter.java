@@ -16,6 +16,7 @@ import com.example.cs2340a_team21.R;
 import com.example.cs2340a_team21.Strategies.NumIngredientsSortingStrategy;
 import com.example.cs2340a_team21.Strategies.QuantityIngredientsSortingStrategy;
 import com.example.cs2340a_team21.Strategies.SortingStrategy;
+import com.example.cs2340a_team21.model.Pantry;
 import com.example.cs2340a_team21.objects.Ingredient;
 import com.example.cs2340a_team21.objects.Recipe;
 import com.example.cs2340a_team21.viewmodels.IngredientsViewModel;
@@ -72,29 +73,39 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         Recipe r = recipes.get(position);
 
-        Log.w("Item Name", r.name + "");
-
         viewHolder.getName().setText(r.name);
 
-        String canOpen = RecipeViewModel.getCanClick(r);
+        String canOpen = RecipeViewModel.getCanClick(r, Pantry.getInstance().staticIngredients);
+
+        Log.w("Item Name", r.name + "  " + canOpen);
 
         if (canOpen.equals("Open")) {
             viewHolder.getOpen().setText("Click to open");
         } else {
             viewHolder.getOpen().setText("Can't open");
         }
-        viewHolder.getOpen().setOnClickListener(v -> {
-            if (canOpen.equals("Open")) {
+
+        if (canOpen.equals("Open")) {
+            viewHolder.getOpen().setOnClickListener(v -> {
                 Intent intent = new Intent(this.context, RecipeIngredients.class);
                 intent.putExtra("Recipe", getRecipeText(r));
                 context.startActivity(intent);
-            } else {
+            });
+        } else {
+            viewHolder.getOpen().setOnClickListener(v -> {
                 Toast.makeText(context, "Ingredients not Available", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(this.context, RecipeIngredients.class);
-                intent.putExtra("Recipe", getRecipeText(r));
-                context.startActivity(intent);
-            }
-        });
+            });
+        }
+
+//        viewHolder.getOpen().setOnClickListener(v -> {
+//            if (canOpen.equals("Open")) {
+//                Intent intent = new Intent(this.context, RecipeIngredients.class);
+//                intent.putExtra("Recipe", getRecipeText(r));
+//                context.startActivity(intent);
+//            } else {
+//                Toast.makeText(context, "Ingredients not Available", Toast.LENGTH_LONG).show();
+//            }
+//        });
 
     }
 

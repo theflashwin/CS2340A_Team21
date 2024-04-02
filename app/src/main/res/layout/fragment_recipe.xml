@@ -59,7 +59,8 @@
             android:id="@+id/recipes_view"
 
             android:layout_width="match_parent"
-            android:layout_height="314dp" />
+            android:layout_height="370dp" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
