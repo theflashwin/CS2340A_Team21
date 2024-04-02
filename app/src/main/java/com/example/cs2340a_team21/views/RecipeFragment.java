@@ -40,7 +40,9 @@ public class RecipeFragment extends Fragment {
     private EditText ingredientsInput;
     private Button submitButton;
 
-    private Button sortButton;
+    private Button sortButtonNum;
+
+    private Button sortButtonQuantity;
 
     private RecyclerView recyclerView;
 
@@ -101,11 +103,17 @@ public class RecipeFragment extends Fragment {
             adapter.refresh();
         });
 
-        this.sortButton = view.findViewById(R.id.sortRecipes);
+        this.sortButtonNum = view.findViewById(R.id.sortRecipesNum);
+        this.sortButtonQuantity = view.findViewById(R.id.sortRecipesQuantity);
 
 
-        this.sortButton.setOnClickListener(v -> {
-            adapter.sortRecipes();
+        this.sortButtonNum.setOnClickListener(v -> {
+            adapter.sortRecipesNum();
+            adapter.refresh();
+        });
+
+        this.sortButtonQuantity.setOnClickListener(v -> {
+            adapter.sortRecipesQuantity();
             adapter.refresh();
         });
 

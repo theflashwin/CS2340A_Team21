@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cs2340a_team21.R;
+import com.example.cs2340a_team21.Strategies.NumIngredientsSortingStrategy;
 import com.example.cs2340a_team21.Strategies.QuantityIngredientsSortingStrategy;
 import com.example.cs2340a_team21.Strategies.SortingStrategy;
 import com.example.cs2340a_team21.model.Pantry;
@@ -124,7 +125,12 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         return output;
     }
 
-    public void sortRecipes() {
+    public void sortRecipesNum() {
+        SortingStrategy strategy = new NumIngredientsSortingStrategy();
+        RecipeViewModel.sort(strategy);
+    }
+
+    public void sortRecipesQuantity() {
         SortingStrategy strategy = new QuantityIngredientsSortingStrategy();
         RecipeViewModel.sort(strategy);
     }
