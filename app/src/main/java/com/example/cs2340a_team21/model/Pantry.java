@@ -34,6 +34,8 @@ public class Pantry {
 
     private DocumentReference pantryRef;
 
+    public List<Ingredient> staticIngredients;
+
     private Pantry() {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -58,6 +60,10 @@ public class Pantry {
             }
         });
 
+    }
+
+    public void initializeStaticIngredients() {
+        this.staticIngredients = getInstance().getIngredients();
     }
 
     public static Pantry getInstance() {
@@ -197,6 +203,8 @@ public class Pantry {
                 Log.d("Document", "get failed with ", task.getException());
             }
         });
+
+
     }
 
 }

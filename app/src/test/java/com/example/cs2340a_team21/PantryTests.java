@@ -97,7 +97,7 @@ public class PantryTests {
     public void testRecipeCanClick() {
         Recipe recipe = new Recipe("Recipe1", new ArrayList<>());
 
-        assertEquals("Can't Make", RecipeViewModel.getCanClick(recipe));
+        assertEquals("Can't Make", RecipeViewModel.getCanClick(recipe, Pantry.getInstance().getIngredients()));
     }
 
     @Test
@@ -108,7 +108,7 @@ public class PantryTests {
         Pantry.getInstance().getIngredients().addAll(ingredients);
         Recipe recipe = new Recipe("Cake", ingredients);
 
-        assertEquals("Open", RecipeViewModel.getCanClick(recipe));
+        assertEquals("Open", RecipeViewModel.getCanClick(recipe, Pantry.getInstance().getIngredients()));
     }
 
 
@@ -120,7 +120,7 @@ public class PantryTests {
         Pantry.getInstance().getIngredients().add(new Ingredient("Flour", 2, 0, ""));
         Recipe recipe = new Recipe("Cake", ingredients);
 
-        assertEquals("Can't Make", RecipeViewModel.getCanClick(recipe));
+        assertEquals("Can't Make", RecipeViewModel.getCanClick(recipe, Pantry.getInstance().getIngredients()));
     }
 
     @Test
@@ -132,7 +132,7 @@ public class PantryTests {
         Pantry.getInstance().getIngredients().add(new Ingredient("Eggs", 6, 0, ""));
         Recipe recipe = new Recipe("Cake", ingredients);
 
-        assertEquals("Open", RecipeViewModel.getCanClick(recipe));
+        assertEquals("Open", RecipeViewModel.getCanClick(recipe, Pantry.getInstance().getIngredients()));
     }
 
 
