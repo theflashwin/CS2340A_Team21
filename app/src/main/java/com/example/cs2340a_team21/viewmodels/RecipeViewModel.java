@@ -12,7 +12,7 @@ import java.util.List;
 
 public class RecipeViewModel {
 
-    public static List<Recipe> recipes;
+    private static List<Recipe> recipes;
 
     public static void handleOnLoad() {
         if (recipes == null) {
@@ -20,9 +20,13 @@ public class RecipeViewModel {
         }
     }
 
+    public static List<Recipe> getRecipes() {
+        return recipes;
+    }
+
     public static String getCanClick(Recipe r, List<Ingredient> ingredients) {
 
-        for (Ingredient i : r.ingredients) {
+        for (Ingredient i : r.getIngredients()) {
 
             boolean found = false;
 
@@ -31,7 +35,7 @@ public class RecipeViewModel {
                 if (x.getName().equalsIgnoreCase(i.getName())) {
                     found = true;
 
-                    if (i.quantity > x.quantity) {
+                    if (i.getQuantity() > x.getQuantity()) {
                         Log.w("Quantity Issue: ", x.getName());
                         return "Can't Make";
                     }

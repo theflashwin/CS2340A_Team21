@@ -5,9 +5,9 @@ import android.util.Log;
 public class Ingredient {
 
     private String name;
-    public int quantity;
-    public int calories;
-    public String expirationDate;
+    private int quantity;
+    private int calories;
+    private String expirationDate;
 
     public Ingredient(String name, int quantity, int calories, String expirationDate) {
 

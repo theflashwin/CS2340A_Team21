@@ -85,7 +85,7 @@ public class RecipeFragment extends Fragment {
         this.recyclerView = view.findViewById(R.id.recipes_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        adapter = new RecipeAdapter(RecipeViewModel.recipes, getActivity());
+        adapter = new RecipeAdapter(RecipeViewModel.getRecipes(), getActivity());
         recyclerView.setAdapter(adapter);
 
         this.nameInput = view.findViewById(R.id.recipeNameInput);

@@ -32,16 +32,19 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         Ingredient i = ingredients.get(position);
         viewHolder.getTextViewName().setText(i.getName());
-        viewHolder.getTextViewQuantity().setText(String.valueOf(i.quantity));
+
+        viewHolder.getTextViewQuantity().setText(String.valueOf(i.getQuantity()));
 
         viewHolder.getDecrease().setOnClickListener(v -> {
             IngredientsViewModel.decreaseIngredient(i.getName());
-            viewHolder.getTextViewQuantity().setText(String.valueOf(i.quantity));
+            viewHolder.getTextViewQuantity().setText(String.valueOf(i.getQuantity()));
+
         });
 
         viewHolder.getIncrease().setOnClickListener(v -> {
             IngredientsViewModel.increaseIngredient(i.getName());
             viewHolder.getTextViewQuantity().setText(String.valueOf(i.quantity));
+            viewHolder.getTextViewQuantity().setText(String.valueOf(i.getQuantity()));
         });
 
     }

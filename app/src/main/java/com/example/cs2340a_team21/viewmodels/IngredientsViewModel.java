@@ -60,7 +60,7 @@ public class IngredientsViewModel extends ViewModel {
 
         for (Ingredient i : ingredients) {
             if (i.getName().equals(nameIn)) {
-                if (i.quantity != 0) {
+                if (i.getQuantity() != 0) {
                     return "duplicate";
                 }
             }
