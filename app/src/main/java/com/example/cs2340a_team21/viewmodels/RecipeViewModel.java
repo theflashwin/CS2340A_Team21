@@ -21,19 +21,19 @@ public class RecipeViewModel {
         }
     }
 
-    public static String getCanClick(Recipe r) {
-
-        List<Ingredient> userIngredients = Pantry.getInstance().getIngredients();
+    public static String getCanClick(Recipe r, List<Ingredient> ingredients) {
 
         for (Ingredient i : r.ingredients) {
 
             boolean found = false;
 
-            for (Ingredient x : userIngredients) {
+            for (Ingredient x : ingredients) {
+                Log.w("get name ", x.name + " " + x.name.equalsIgnoreCase(i.name));
                 if (x.name.equalsIgnoreCase(i.name)) {
                     found = true;
 
                     if (i.quantity > x.quantity) {
+                        Log.w("Quantity Issue: ", x.name);
                         return "Can't Make";
                     }
 
@@ -41,6 +41,7 @@ public class RecipeViewModel {
             }
 
             if (!found) {
+                Log.w("name Issue: ", i.name);
                 return "Can't Make";
             }
 
