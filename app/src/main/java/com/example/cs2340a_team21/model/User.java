@@ -33,7 +33,11 @@ public class User {
 
     private static String gender = "";
 
-    public static Pantry pantry;
+    private static Pantry pantry;
+
+    public static Pantry getPantry() {
+        return pantry;
+    }
 
     private static boolean foundUser = true; //is this variable being used?
 
