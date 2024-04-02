@@ -49,7 +49,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
 
         viewHolder.getName().setText(r.getName());
 
-        String canOpen = RecipeViewModel.getCanClick(r, Pantry.getInstance().staticIngredients);
+        String canOpen = RecipeViewModel.getCanClick(r,
+                Pantry.getInstance().getStaticIngredients());
 
         Log.w("Item Name", r.getName() + "  " + canOpen);
 
@@ -96,7 +97,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         for (int idx = 0; idx < iList.size() - 1; idx++) {
             output += iList.get(idx).getName() + " (qty: " + iList.get(idx).getQuantity() + "), ";
         }
-        output += iList.get(iList.size() - 1).getName() + " (qty: " + iList.get(iList.size() - 1).getQuantity() + ").";
+        output += iList.get(iList.size() - 1).getName() + " (qty: " + iList.get(iList.size()
+                - 1).getQuantity() + ").";
         return output;
     }
 
