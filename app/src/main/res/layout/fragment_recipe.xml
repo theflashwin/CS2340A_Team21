@@ -43,10 +43,16 @@
             android:text="Submit Recipe" />
 
         <Button
-            android:id="@+id/sortRecipes"
+            android:id="@+id/sortRecipesNum"
             android:layout_width="match_parent"
             android:layout_height="61dp"
-            android:text="Sort Recipe List" />
+            android:text="Sort By Number of Ingredients" />
+
+        <Button
+            android:id="@+id/sortRecipesQuantity"
+            android:layout_width="match_parent"
+            android:layout_height="61dp"
+            android:text="Sort By Ingredient Quantities" />
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -54,6 +60,7 @@
 
             android:layout_width="match_parent"
             android:layout_height="370dp" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

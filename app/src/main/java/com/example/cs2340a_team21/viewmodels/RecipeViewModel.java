@@ -59,7 +59,9 @@ public class RecipeViewModel {
 
         for(String str : ings) {
             int index = str.indexOf(":");
-            arr.add(new Ingredient(str.substring(0, index), Integer.parseInt(str.substring(index+1)), 0, ""));
+            if (!str.substring(0, index).isEmpty()) {
+                arr.add(new Ingredient(str.substring(0, index), Integer.parseInt(str.substring(index+1)), 0, ""));
+            }
         }
 
         Cookbook.getInstance().addRecipe(name, arr);
