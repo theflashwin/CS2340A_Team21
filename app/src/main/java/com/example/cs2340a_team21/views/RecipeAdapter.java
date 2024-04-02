@@ -19,42 +19,15 @@ import com.example.cs2340a_team21.Strategies.SortingStrategy;
 import com.example.cs2340a_team21.model.Pantry;
 import com.example.cs2340a_team21.objects.Ingredient;
 import com.example.cs2340a_team21.objects.Recipe;
-import com.example.cs2340a_team21.viewmodels.IngredientsViewModel;
 import com.example.cs2340a_team21.viewmodels.RecipeViewModel;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-
-import org.w3c.dom.Text;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder> {
 
     private List<Recipe> recipes;
 
     private Context context;
-
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-
-        private final TextView name;
-        private final Button open;
-
-
-        public ViewHolder(View view) {
-            super(view);
-            name = view.findViewById(R.id.recipeName);
-            open = view.findViewById(R.id.openButton);
-        }
-
-        public TextView getName() {
-            return name;
-        }
-
-        public Button getOpen() {
-            return open;
-        }
-
-    }
 
     public RecipeAdapter(List<Recipe> data, Context c) {
 
@@ -65,7 +38,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recipe_item, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(
+                R.layout.recipe_item, viewGroup, false);
         return new ViewHolder(view);
     }
 
@@ -97,15 +71,16 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
             });
         }
 
-//        viewHolder.getOpen().setOnClickListener(v -> {
-//            if (canOpen.equals("Open")) {
-//                Intent intent = new Intent(this.context, RecipeIngredients.class);
-//                intent.putExtra("Recipe", getRecipeText(r));
-//                context.startActivity(intent);
-//            } else {
-//                Toast.makeText(context, "Ingredients not Available", Toast.LENGTH_LONG).show();
-//            }
-//        });
+        //        viewHolder.getOpen().setOnClickListener(v -> {
+        //            if (canOpen.equals("Open")) {
+        //                Intent intent = new Intent(this.context, RecipeIngredients.class);
+        //                intent.putExtra("Recipe", getRecipeText(r));
+        //                context.startActivity(intent);
+        //            } else {
+        //                Toast.makeText(context, "Ingredients not Available", Toast.LENGTH_LONG
+        //                ).show();
+        //            }
+        //        });
 
     }
 
@@ -139,5 +114,25 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         this.recipes = RecipeViewModel.getRecipes();
     }
 
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
+        private final TextView name;
+        private final Button open;
+
+
+        public ViewHolder(View view) {
+            super(view);
+            name = view.findViewById(R.id.recipeName);
+            open = view.findViewById(R.id.openButton);
+        }
+
+        public TextView getName() {
+            return name;
+        }
+
+        public Button getOpen() {
+            return open;
+        }
+
+    }
 }

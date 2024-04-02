@@ -31,9 +31,13 @@ public class Ingredient {
 
     }
 
-    public String getName() {return this.name;}
+    public String getName() {
+        return this.name;
+    }
 
-    public int getQuantity() {return this.quantity;}
+    public int getQuantity() {
+        return this.quantity;
+    }
 
     public int getCalories() {
         return calories;

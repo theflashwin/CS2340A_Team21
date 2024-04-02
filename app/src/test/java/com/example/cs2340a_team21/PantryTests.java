@@ -11,7 +11,6 @@ import com.example.cs2340a_team21.model.Pantry;
 import com.example.cs2340a_team21.objects.Ingredient;
 import com.example.cs2340a_team21.objects.Recipe;
 import com.example.cs2340a_team21.viewmodels.IngredientsViewModel;
-import com.example.cs2340a_team21.viewmodels.PersonalInfoViewModel;
 import com.example.cs2340a_team21.viewmodels.RecipeViewModel;
 
 import java.util.ArrayList;
@@ -21,45 +20,52 @@ public class PantryTests {
 
     @Before
     public void setup() {
-//        IngredientsViewModel.handleOnLoad();
+        // IngredientsViewModel.handleOnLoad();
     }
 
 
     @Test
     public void testDuplicateEntry() {
 
-        IngredientsViewModel.addIngredient("Protein Powder", "50", "50", "N/A");
-        assertEquals("duplicate", IngredientsViewModel.addIngredient("Protein Powder", "50", "50", "N/A"));
+        IngredientsViewModel.addIngredient("Protein Powder",
+                "50", "50", "N/A");
+        assertEquals("duplicate", IngredientsViewModel.addIngredient(
+                "Protein Powder", "50", "50", "N/A"));
 
     }
 
     @Test
     public void testNegativeEntry() {
 
-        assertEquals("negative", IngredientsViewModel.addIngredient("Protein Powder", "-5", "50", "N/A"));
+        assertEquals("negative", IngredientsViewModel.addIngredient(
+                "Protein Powder", "-5", "50", "N/A"));
 
     }
 
     @Test
     public void testZeroEntry() {
 
-        assertEquals("negative", IngredientsViewModel.addIngredient("Protein Powder", "0", "50", "N/A"));
+        assertEquals("negative", IngredientsViewModel.addIngredient(
+                "Protein Powder", "0", "50", "N/A"));
 
     }
 
     @Test
     public void testNullEntry() {
-        assertEquals("null", IngredientsViewModel.addIngredient("Strawberries", null, "25", "01/31"));
+        assertEquals("null", IngredientsViewModel.addIngredient(
+                "Strawberries", null, "25", "01/31"));
     }
 
     @Test
     public void testEmptyEntry() {
-        assertEquals("null", IngredientsViewModel.addIngredient("", "2", "50", "N/A"));
+        assertEquals("null", IngredientsViewModel.addIngredient(
+                "", "2", "50", "N/A"));
     }
 
     @Test
     public void testSuccessfulEntry() {
-        assertEquals("success", IngredientsViewModel.addIngredient("Protein Powder", "1", "50", "N/A"));
+        assertEquals("success", IngredientsViewModel.addIngredient(
+                "Protein Powder", "1", "50", "N/A"));
     }
 
     @Test
@@ -86,7 +92,8 @@ public class PantryTests {
 
     @Test
     public void testRemoveIngredient() {
-        IngredientsViewModel.addIngredient("Protein Powder", "50", "50", "N/A");
+        IngredientsViewModel.addIngredient("Protein Powder", "50",
+                "50", "N/A");
         assertTrue(IngredientsViewModel.getIngredients().size() > 0);
         IngredientsViewModel.getIngredients().remove(0);
 
@@ -97,42 +104,54 @@ public class PantryTests {
     public void testRecipeCanClick() {
         Recipe recipe = new Recipe("Recipe1", new ArrayList<>());
 
-        assertEquals("Can't Make", RecipeViewModel.getCanClick(recipe, Pantry.getInstance().getIngredients()));
+        assertEquals("Can't Make", RecipeViewModel.getCanClick(recipe,
+                Pantry.getInstance().getIngredients()));
     }
 
     @Test
     public void testCanClickEnoughIngredients() {
         List<Ingredient> ingredients = new ArrayList<>();
-        ingredients.add(new Ingredient("Flour", 2, 0, ""));
-        ingredients.add(new Ingredient("Sugar", 1, 0, ""));
+        ingredients.add(new Ingredient("Flour", 2,
+                0, ""));
+        ingredients.add(new Ingredient("Sugar", 1,
+                0, ""));
         Pantry.getInstance().getIngredients().addAll(ingredients);
         Recipe recipe = new Recipe("Cake", ingredients);
 
-        assertEquals("Open", RecipeViewModel.getCanClick(recipe, Pantry.getInstance().getIngredients()));
+        assertEquals("Open", RecipeViewModel.getCanClick(recipe,
+                Pantry.getInstance().getIngredients()));
     }
 
 
     @Test
     public void testCanClickMissingIngredients() {
         List<Ingredient> ingredients = new ArrayList<>();
-        ingredients.add(new Ingredient("Flour", 2, 0, ""));
-        ingredients.add(new Ingredient("Sugar", 1, 0, ""));
-        Pantry.getInstance().getIngredients().add(new Ingredient("Flour", 2, 0, ""));
+        ingredients.add(new Ingredient("Flour", 2,
+                0, ""));
+        ingredients.add(new Ingredient("Sugar", 1,
+                0, ""));
+        Pantry.getInstance().getIngredients().add(new Ingredient("Flour",
+                2, 0, ""));
         Recipe recipe = new Recipe("Cake", ingredients);
 
-        assertEquals("Can't Make", RecipeViewModel.getCanClick(recipe, Pantry.getInstance().getIngredients()));
+        assertEquals("Can't Make", RecipeViewModel.getCanClick(recipe,
+                Pantry.getInstance().getIngredients()));
     }
 
     @Test
     public void testCanClickExtraIngredients() {
         List<Ingredient> ingredients = new ArrayList<>();
-        ingredients.add(new Ingredient("Flour", 2, 0, ""));
-        ingredients.add(new Ingredient("Sugar", 1, 0, ""));
+        ingredients.add(new Ingredient("Flour", 2,
+                0, ""));
+        ingredients.add(new Ingredient("Sugar", 1,
+                0, ""));
         Pantry.getInstance().getIngredients().addAll(ingredients);
-        Pantry.getInstance().getIngredients().add(new Ingredient("Eggs", 6, 0, ""));
+        Pantry.getInstance().getIngredients().add(new Ingredient("Eggs",
+                6, 0, ""));
         Recipe recipe = new Recipe("Cake", ingredients);
 
-        assertEquals("Open", RecipeViewModel.getCanClick(recipe, Pantry.getInstance().getIngredients()));
+        assertEquals("Open", RecipeViewModel.getCanClick(recipe,
+                Pantry.getInstance().getIngredients()));
     }
 
 
