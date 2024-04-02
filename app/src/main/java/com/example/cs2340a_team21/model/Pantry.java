@@ -29,7 +29,11 @@ public class Pantry {
 
     private DocumentReference pantryRef;
 
-    public List<Ingredient> staticIngredients;
+    private List<Ingredient> staticIngredients;
+
+    public List<Ingredient> getStaticIngredients() {
+        return staticIngredients;
+    }
 
     private Pantry() {
 
