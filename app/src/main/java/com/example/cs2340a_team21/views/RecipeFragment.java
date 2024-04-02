@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,13 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.cs2340a_team21.R;
-import com.example.cs2340a_team21.objects.Ingredient;
-import com.example.cs2340a_team21.objects.Recipe;
-import com.example.cs2340a_team21.viewmodels.IngredientsViewModel;
 import com.example.cs2340a_team21.viewmodels.RecipeViewModel;
 
-import java.util.Collections;
-import java.util.Comparator;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -99,7 +93,8 @@ public class RecipeFragment extends Fragment {
         this.submitButton = view.findViewById(R.id.recipeSubmit);
 
         this.submitButton.setOnClickListener(v -> {
-            RecipeViewModel.sendRecipe(nameInput.getText().toString(), ingredientsInput.getText().toString());
+            RecipeViewModel.sendRecipe(nameInput.getText().toString(),
+                    ingredientsInput.getText().toString());
             adapter.refresh();
         });
 

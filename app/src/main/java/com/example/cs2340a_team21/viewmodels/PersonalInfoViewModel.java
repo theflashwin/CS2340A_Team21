@@ -14,7 +14,7 @@ public class PersonalInfoViewModel {
             return false;
         }
 
-// cleaned up here
+        // cleaned up here
 
         try {
 

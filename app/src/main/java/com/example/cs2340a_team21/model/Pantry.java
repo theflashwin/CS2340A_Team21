@@ -17,16 +17,11 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import org.checkerframework.checker.units.qual.A;
-
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
-import java.util.Date;
 
 public class Pantry {
 
@@ -73,7 +68,9 @@ public class Pantry {
         return instance;
     }
 
-    public boolean addIngredient(String name, int quantity, int calories, String expiration, boolean includeExpiration) throws InterruptedException {
+    public boolean addIngredient(String name, int quantity, int calories,
+                                 String expiration, boolean includeExpiration)
+            throws InterruptedException {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -97,7 +94,8 @@ public class Pantry {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 DocumentSnapshot doc = task.getResult();
-                List<Map<String, Object>> ingredients = (List<Map<String, Object>>) doc.get("ingredients");
+                List<Map<String, Object>> ingredients = (List<Map<String, Object>>)
+                        doc.get("ingredients");
                 ingredients.forEach(ingredient -> {
 
                     Long quantity = ((Long) ingredient.get("quantity"));
@@ -152,7 +150,8 @@ public class Pantry {
             if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();
                 if (document.exists()) {
-                    List<Map<String, Object>> items = (List<Map<String, Object>>) document.get("ingredients");
+                    List<Map<String, Object>> items = (List<Map<String, Object>>)
+                            document.get("ingredients");
                     for (Map<String, Object> item : items) {
                         if (item.get("name").equals(name)) {
 
@@ -179,7 +178,8 @@ public class Pantry {
             if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();
                 if (document.exists()) {
-                    List<Map<String, Object>> items = (List<Map<String, Object>>) document.get("ingredients");
+                    List<Map<String, Object>> items = (List<Map<String, Object>>)
+                            document.get("ingredients");
                     for (Map<String, Object> item : items) {
                         if (item.get("name").equals(name)) {
 

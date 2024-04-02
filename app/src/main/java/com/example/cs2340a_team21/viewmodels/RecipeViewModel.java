@@ -4,7 +4,6 @@ import android.util.Log;
 
 import com.example.cs2340a_team21.Strategies.SortingStrategy;
 import com.example.cs2340a_team21.model.Cookbook;
-import com.example.cs2340a_team21.model.Pantry;
 import com.example.cs2340a_team21.objects.Ingredient;
 import com.example.cs2340a_team21.objects.Recipe;
 
@@ -54,7 +53,7 @@ public class RecipeViewModel {
     public static void sendRecipe(String name, String ingredients) {
 
         if (name == null) {
-          return;
+            return;
         }
 
         if (name.equals("")) {
@@ -73,10 +72,11 @@ public class RecipeViewModel {
         List<Ingredient> arr = new ArrayList<>();
         String[] ings = ingredients.split(",");
 
-        for(String str : ings) {
+        for (String str : ings) {
             int index = str.indexOf(":");
             if (!str.substring(0, index).isEmpty()) {
-                arr.add(new Ingredient(str.substring(0, index), Integer.parseInt(str.substring(index+1)), 0, ""));
+                arr.add(new Ingredient(str.substring(0, index), Integer.parseInt(
+                        str.substring(index + 1)), 0, ""));
             }
         }
 

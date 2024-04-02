@@ -17,6 +17,46 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
 
     private List<Ingredient> ingredients;
 
+    public IngredientsAdapter(List<Ingredient> dataSet) {
+        ingredients = dataSet;
+    }
+
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+        View view = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.ingredients_item, viewGroup, false);
+        return new ViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(ViewHolder viewHolder, final int position) {
+        Ingredient i = ingredients.get(position);
+        viewHolder.getTextViewName().setText(i.getName());
+        viewHolder.getTextViewQuantity().setText(String.valueOf(i.quantity));
+
+        viewHolder.getDecrease().setOnClickListener(v -> {
+            IngredientsViewModel.decreaseIngredient(i.getName());
+            viewHolder.getTextViewQuantity().setText(String.valueOf(i.quantity));
+        });
+
+        viewHolder.getIncrease().setOnClickListener(v -> {
+            IngredientsViewModel.increaseIngredient(i.getName());
+            viewHolder.getTextViewQuantity().setText(String.valueOf(i.quantity));
+        });
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return ingredients.size();
+    }
+
+    public void refreshData(List<Ingredient> newList) {
+        this.ingredients.clear();
+        this.ingredients.addAll(newList);
+        notifyDataSetChanged();
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView textViewName;
         private final TextView textViewQuantity;
@@ -46,44 +86,5 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
         }
     }
 
-    public IngredientsAdapter(List<Ingredient> dataSet) {
-        ingredients = dataSet;
-    }
-
-    @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.ingredients_item, viewGroup, false);
-        return new ViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-        Ingredient i = ingredients.get(position);
-        viewHolder.getTextViewName().setText(i.name);
-        viewHolder.getTextViewQuantity().setText(String.valueOf(i.quantity));
-
-        viewHolder.getDecrease().setOnClickListener(v -> {
-            IngredientsViewModel.decreaseIngredient(i.name);
-            viewHolder.getTextViewQuantity().setText(String.valueOf(i.quantity));
-        });
-
-        viewHolder.getIncrease().setOnClickListener(v -> {
-            IngredientsViewModel.increaseIngredient(i.name);
-            viewHolder.getTextViewQuantity().setText(String.valueOf(i.quantity));
-        });
-
-    }
-
-    @Override
-    public int getItemCount() {
-        return ingredients.size();
-    }
-
-    public void refreshData(List<Ingredient> newList){
-        this.ingredients.clear();
-        this.ingredients.addAll(newList);
-        notifyDataSetChanged();
-    }
 }
 

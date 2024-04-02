@@ -1,6 +1,5 @@
 package com.example.cs2340a_team21.views;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -73,8 +72,6 @@ public class IngredientsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
     }
 
     @Override
@@ -93,11 +90,13 @@ public class IngredientsFragment extends Fragment {
         this.addIngredientButton = view.findViewById(R.id.addIngredientButton);
 
         this.addIngredientButton.setOnClickListener(v -> {
-            String result = IngredientsViewModel.addIngredient(this.name.getText().toString(), this.quantity.getText().toString(),
+            String result = IngredientsViewModel.addIngredient(this.name.getText().toString(),
+                    this.quantity.getText().toString(),
                     this.calories.getText().toString(), this.expiration.getText().toString());
 
             if (result.equals("negative")) {
-                Toast.makeText(getContext(), "Quantity must be positive", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Quantity must be positive",
+                        Toast.LENGTH_LONG).show();
             }
         });
 
