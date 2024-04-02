@@ -73,11 +73,11 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         Recipe r = recipes.get(position);
 
-        viewHolder.getName().setText(r.name);
+        viewHolder.getName().setText(r.getName());
 
         String canOpen = RecipeViewModel.getCanClick(r, Pantry.getInstance().staticIngredients);
 
-        Log.w("Item Name", r.name + "  " + canOpen);
+        Log.w("Item Name", r.getName() + "  " + canOpen);
 
         if (canOpen.equals("Open")) {
             viewHolder.getOpen().setText("Click to open");
@@ -116,12 +116,12 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     }
 
     public String getRecipeText(Recipe re) {
-        String output = re.name + " - ";
-        List<Ingredient> iList = re.ingredients;
+        String output = re.getName() + " - ";
+        List<Ingredient> iList = re.getIngredients();
         for (int idx = 0; idx < iList.size() - 1; idx++) {
-            output += iList.get(idx).name + " (qty: " + iList.get(idx).quantity + "), ";
+            output += iList.get(idx).getName() + " (qty: " + iList.get(idx).getQuantity() + "), ";
         }
-        output += iList.get(iList.size() - 1).name + " (qty: " + iList.get(iList.size() - 1).quantity + ").";
+        output += iList.get(iList.size() - 1).getName() + " (qty: " + iList.get(iList.size() - 1).getQuantity() + ").";
         return output;
     }
 
@@ -136,7 +136,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     }
 
     public void refresh() {
-        this.recipes = RecipeViewModel.recipes;
+        this.recipes = RecipeViewModel.getRecipes();
     }
 
 

@@ -11,7 +11,7 @@ public class NumIngredientsSortingStrategy implements SortingStrategy {
         Comparator<Recipe> ret = new Comparator<Recipe>() {
             @Override
             public int compare(Recipe recipe, Recipe t1) {
-                return recipe.ingredients.size() - t1.ingredients.size();
+                return recipe.getIngredients().size() - t1.getIngredients().size();
             }
         };
 
