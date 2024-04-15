@@ -74,7 +74,7 @@ public class Pantry {
 
     public boolean addIngredient(String name, int quantity, int calories,
                                  String expiration, boolean includeExpiration)
-            throws InterruptedException {
+    {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 

@@ -49,6 +49,12 @@
             android:layout_height="wrap_content"
             android:text="Submit" />
 
+        <Button
+            android:id="@+id/shoppingListCheckout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Checkout" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/shopping_list_recycler"
             android:layout_width="match_parent"
