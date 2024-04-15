@@ -17,22 +17,23 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import org.checkerframework.checker.units.qual.A;
-
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
-import java.util.Date;
 
 public class Pantry {
 
     private static Pantry instance;
 
     private DocumentReference pantryRef;
+
+    private List<Ingredient> staticIngredients;
+
+    public List<Ingredient> getStaticIngredients() {
+        return staticIngredients;
+    }
 
     private Pantry() {
 
@@ -60,6 +61,10 @@ public class Pantry {
 
     }
 
+    public void initializeStaticIngredients() {
+        this.staticIngredients = getInstance().getIngredients();
+    }
+
     public static Pantry getInstance() {
         if (instance == null) {
             instance = new Pantry();
@@ -67,7 +72,9 @@ public class Pantry {
         return instance;
     }
 
-    public boolean addIngredient(String name, int quantity, int calories, String expiration, boolean includeExpiration) throws InterruptedException {
+    public boolean addIngredient(String name, int quantity, int calories,
+                                 String expiration, boolean includeExpiration)
+            throws InterruptedException {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -95,7 +102,8 @@ public class Pantry {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 DocumentSnapshot doc = task.getResult();
-                List<Map<String, Object>> ingredients = (List<Map<String, Object>>) doc.get("ingredients");
+                List<Map<String, Object>> ingredients = (List<Map<String, Object>>)
+                        doc.get("ingredients");
                 ingredients.forEach(ingredient -> {
 
                     Long quantity = ((Long) ingredient.get("quantity"));
@@ -151,7 +159,8 @@ public class Pantry {
             if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();
                 if (document.exists()) {
-                    List<Map<String, Object>> items = (List<Map<String, Object>>) document.get("ingredients");
+                    List<Map<String, Object>> items = (List<Map<String, Object>>)
+                            document.get("ingredients");
                     for (Map<String, Object> item : items) {
                         if (item.get("name").equals(name)) {
 
@@ -178,13 +187,19 @@ public class Pantry {
             if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();
                 if (document.exists()) {
-                    List<Map<String, Object>> items = (List<Map<String, Object>>) document.get("ingredients");
+                    List<Map<String, Object>> items = (List<Map<String, Object>>)
+                            document.get("ingredients");
                     for (Map<String, Object> item : items) {
                         if (item.get("name").equals(name)) {
 
                             Long quantity = ((Long) item.get("quantity"));
 
                             item.put("quantity", quantity.intValue() - 1);
+
+                            if (quantity.intValue() - 1 <= 0) {
+                                items.remove(item);
+                            }
+
                             break;
                         }
                     }
@@ -197,6 +212,8 @@ public class Pantry {
                 Log.d("Document", "get failed with ", task.getException());
             }
         });
+
+
     }
 
 }

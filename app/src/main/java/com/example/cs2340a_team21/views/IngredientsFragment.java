@@ -1,6 +1,5 @@
 package com.example.cs2340a_team21.views;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -38,14 +37,16 @@ public class IngredientsFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private Button submitButton;
     private EditText name;
     private EditText quantity;
     private EditText calories;
     private EditText expiration;
-
+  
+    private Button addIngredientButton;
 
     private RecyclerView recyclerView;
+
+    private IngredientsAdapter adapter;
 
     public IngredientsFragment() {
         // Required empty public constructor
@@ -72,8 +73,6 @@ public class IngredientsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
     }
 
     @Override
@@ -89,23 +88,25 @@ public class IngredientsFragment extends Fragment {
         this.calories = view.findViewById(R.id.editCalories);
         this.expiration = view.findViewById(R.id.editExpiration);
 
-        this.submitButton = view.findViewById(R.id.addIngredientButton);
+        this.addIngredientButton = view.findViewById(R.id.addIngredientButton);
 
-        this.submitButton.setOnClickListener(v -> {
-            String result = IngredientsViewModel.addIngredient(this.name.getText().toString(), this.quantity.getText().toString(),
+        this.addIngredientButton.setOnClickListener(v -> {
+            String result = IngredientsViewModel.addIngredient(this.name.getText().toString(),
+                    this.quantity.getText().toString(),
                     this.calories.getText().toString(), this.expiration.getText().toString());
 
             if (result.equals("negative")) {
-                Toast.makeText(getContext(), "Quantity must be positive", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Quantity must be positive",
+                        Toast.LENGTH_LONG).show();
             }
-
         });
-
 
         this.recyclerView = view.findViewById(R.id.ingredients_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        IngredientsAdapter adapter = new IngredientsAdapter(IngredientsViewModel.getIngredients());
+        this.adapter = new IngredientsAdapter(IngredientsViewModel.getIngredients());
         recyclerView.setAdapter(adapter);
+
+
 
         return view;
 

@@ -12,14 +12,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.sql.Array;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,29 +56,28 @@ public class Cookbook {
                     for (QueryDocumentSnapshot document : task.getResult()) {
 
                         ArrayList<Ingredient> ingredients = new ArrayList<>();
-                        ((List<Map<String, Object>>) document.get("ingredients")).forEach(ingredient -> {
+                        ((List<Map<String, Object>>) document.get("ingredients"))
+                                .forEach(ingredient -> {
 
-                            Long quantity = ((Long) ingredient.get("quantity"));
-                            Long calories = (Long) ingredient.get("calories");
+                                    Long quantity = ((Long) ingredient.get("quantity"));
+                                    Long calories = (Long) ingredient.get("calories");
 
-                            String expiration = "N/A";
+                                    String expiration = "N/A";
 
-                            if (ingredient.containsKey("expiration")) {
-                                expiration = (String) ingredient.get("expiration");
-                            }
+                                    if (ingredient.containsKey("expiration")) {
+                                        expiration = (String) ingredient.get("expiration");
+                                    }
 
-                            ingredients.add(new Ingredient((String) ingredient.get("name"),
-                                    quantity.intValue(),
-                                    calories.intValue(),
-                                    expiration));
+                                    ingredients.add(new Ingredient((String) ingredient.get("name"),
+                                            quantity.intValue(),
+                                            calories.intValue(),
+                                            expiration));
 
-                        });
+                                });
 
                         ret.add(new Recipe((String) document.get("name"), ingredients));
 
                     }
-                } else {
-
                 }
             }
         });

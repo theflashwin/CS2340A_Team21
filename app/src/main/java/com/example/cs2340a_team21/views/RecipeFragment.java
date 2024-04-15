@@ -13,8 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.cs2340a_team21.R;
-import com.example.cs2340a_team21.objects.Recipe;
 import com.example.cs2340a_team21.viewmodels.RecipeViewModel;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,7 +34,13 @@ public class RecipeFragment extends Fragment {
     private EditText ingredientsInput;
     private Button submitButton;
 
+    private Button sortButtonNum;
+
+    private Button sortButtonQuantity;
+
     private RecyclerView recyclerView;
+
+    private RecipeAdapter adapter;
 
     public RecipeFragment() {
         // Required empty public constructor
@@ -78,18 +84,35 @@ public class RecipeFragment extends Fragment {
 
         this.recyclerView = view.findViewById(R.id.recipes_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(new RecipeAdapter(RecipeViewModel.recipes));
+
+        adapter = new RecipeAdapter(RecipeViewModel.getRecipes(), getActivity());
+        recyclerView.setAdapter(adapter);
 
         this.nameInput = view.findViewById(R.id.recipeNameInput);
         this.ingredientsInput = view.findViewById(R.id.recipeIngredients);
         this.submitButton = view.findViewById(R.id.recipeSubmit);
 
         this.submitButton.setOnClickListener(v -> {
+            RecipeViewModel.sendRecipe(nameInput.getText().toString(),
+                    ingredientsInput.getText().toString());
+            adapter.refresh();
+        });
 
-            RecipeViewModel.sendRecipe(nameInput.getText().toString(), ingredientsInput.getText().toString());
+        this.sortButtonNum = view.findViewById(R.id.sortRecipesNum);
+        this.sortButtonQuantity = view.findViewById(R.id.sortRecipesQuantity);
 
+
+        this.sortButtonNum.setOnClickListener(v -> {
+            adapter.sortRecipesNum();
+            adapter.refresh();
+        });
+
+        this.sortButtonQuantity.setOnClickListener(v -> {
+            adapter.sortRecipesQuantity();
+            adapter.refresh();
         });
 
         return view;
     }
+
 }
