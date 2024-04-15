@@ -21,7 +21,7 @@ public class IngredientsViewModel {
     private static List<Ingredient> ingredients;
 
     public static void handleOnLoad() {
-         ingredients = Pantry.getInstance().getIngredients();
+         ingredients = User.pantry.getIngredients();
     }
 
     public static String addIngredient(String nameIn, String quantityIn, String caloriesIn, String expiration) {

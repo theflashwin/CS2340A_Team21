@@ -38,7 +38,12 @@ public class IngredientsFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private Button addIngredientButton;
+    private Button submitButton;
+    private EditText name;
+    private EditText quantity;
+    private EditText calories;
+    private EditText expiration;
+
 
     private RecyclerView recyclerView;
 
@@ -54,6 +59,7 @@ public class IngredientsFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment IngredientsFragment.
      */
+
     public static IngredientsFragment newInstance(String param1, String param2) {
         IngredientsFragment fragment = new IngredientsFragment();
         Bundle args = new Bundle();
@@ -83,7 +89,7 @@ public class IngredientsFragment extends Fragment {
         this.calories = view.findViewById(R.id.editCalories);
         this.expiration = view.findViewById(R.id.editExpiration);
 
-        this.submitButton = view.findViewById(R.id.submit);
+        this.submitButton = view.findViewById(R.id.addIngredientButton);
 
         this.submitButton.setOnClickListener(v -> {
             String result = IngredientsViewModel.addIngredient(this.name.getText().toString(), this.quantity.getText().toString(),
