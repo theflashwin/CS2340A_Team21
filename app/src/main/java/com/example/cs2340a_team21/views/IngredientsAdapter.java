@@ -17,27 +17,6 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
 
     private List<Ingredient> ingredients;
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView textViewName;
-        private final TextView textViewQuantity;
-
-        private final Button decrease;
-        private final Button increase;
-
-        public ViewHolder(View view) {
-            super(view);
-            textViewName = view.findViewById(R.id.recipeName);
-            textViewQuantity = view.findViewById(R.id.ingredientQuantity);
-            decrease = view.findViewById(R.id.decreaseButton);
-            increase = view.findViewById(R.id.openButton);
-        }
-
-        public TextView getTextViewName() {
-            return textViewName; }
-        public TextView getTextViewQuantity() {
-            return textViewQuantity; }
-    }
-
     public IngredientsAdapter(List<Ingredient> dataSet) {
         ingredients = dataSet;
     }
@@ -52,15 +31,19 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         Ingredient i = ingredients.get(position);
-        viewHolder.getTextViewName().setText(i.name);
-        viewHolder.getTextViewQuantity().setText(String.valueOf(i.quantity));
+        viewHolder.getTextViewName().setText(i.getName());
 
-        viewHolder.decrease.setOnClickListener(v -> {
-            IngredientsViewModel.decreaseIngredient(i.name);
+        viewHolder.getTextViewQuantity().setText(String.valueOf(i.getQuantity()));
+
+        viewHolder.getDecrease().setOnClickListener(v -> {
+            IngredientsViewModel.decreaseIngredient(i.getName());
+            viewHolder.getTextViewQuantity().setText(String.valueOf(i.getQuantity()));
+
         });
 
-        viewHolder.increase.setOnClickListener(v -> {
-            IngredientsViewModel.increaseIngredient(i.name);
+        viewHolder.getIncrease().setOnClickListener(v -> {
+            IngredientsViewModel.increaseIngredient(i.getName());
+            viewHolder.getTextViewQuantity().setText(String.valueOf(i.getQuantity()));
         });
 
     }
@@ -69,5 +52,41 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
     public int getItemCount() {
         return ingredients.size();
     }
+
+    public void refreshData(List<Ingredient> newList) {
+        this.ingredients.clear();
+        this.ingredients.addAll(newList);
+        notifyDataSetChanged();
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        private final TextView textViewName;
+        private final TextView textViewQuantity;
+
+        private final Button decrease;
+        private final Button increase;
+
+        public ViewHolder(View view) {
+            super(view);
+            textViewName = view.findViewById(R.id.ingredientName);
+            textViewQuantity = view.findViewById(R.id.ingredientQuantity);
+            decrease = view.findViewById(R.id.decreaseButton);
+            increase = view.findViewById(R.id.increaseButton);
+        }
+
+        public TextView getTextViewName() {
+            return textViewName; }
+        public TextView getTextViewQuantity() {
+            return textViewQuantity; }
+
+        public Button getDecrease() {
+            return decrease;
+        }
+
+        public Button getIncrease() {
+            return increase;
+        }
+    }
+
 }
 

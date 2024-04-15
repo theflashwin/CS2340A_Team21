@@ -35,10 +35,12 @@ public class AddIngredientActivity extends AppCompatActivity {
     }
 
     private void saveIngredient() {
-        String result = IngredientsViewModel.addIngredient(this.name.getText().toString(), this.quantity.getText().toString(),
+        String result = IngredientsViewModel.addIngredient(this.name.getText().toString(),
+                this.quantity.getText().toString(),
                 this.calories.getText().toString(), this.expiration.getText().toString());
         if (result.equals("negative")) {
-            Toast.makeText(this, "Quantity must be positive", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Quantity must be positive",
+                    Toast.LENGTH_SHORT).show();
         }
         finish();
     }

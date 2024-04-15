@@ -16,12 +16,12 @@ public class QuantityIngredientsSortingStrategy implements SortingStrategy {
                 int q1 = 0;
                 int q2 = 0;
 
-                for (Ingredient i : recipe.ingredients) {
-                    q1 += i.quantity;
+                for (Ingredient i : recipe.getIngredients()) {
+                    q1 += i.getQuantity();
                 }
 
-                for (Ingredient i : t1.ingredients) {
-                    q2 += i.quantity;
+                for (Ingredient i : t1.getIngredients()) {
+                    q2 += i.getQuantity();
                 }
 
                 return q1 - q2;

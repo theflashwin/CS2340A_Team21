@@ -4,7 +4,6 @@ import android.util.Log;
 
 import com.example.cs2340a_team21.Strategies.SortingStrategy;
 import com.example.cs2340a_team21.model.Cookbook;
-import com.example.cs2340a_team21.model.Pantry;
 import com.example.cs2340a_team21.objects.Ingredient;
 import com.example.cs2340a_team21.objects.Recipe;
 
@@ -13,7 +12,7 @@ import java.util.List;
 
 public class RecipeViewModel {
 
-    public static List<Recipe> recipes;
+    private static List<Recipe> recipes;
 
     public static void handleOnLoad() {
         if (recipes == null) {
@@ -21,19 +20,23 @@ public class RecipeViewModel {
         }
     }
 
-    public static String getCanClick(Recipe r) {
+    public static List<Recipe> getRecipes() {
+        return recipes;
+    }
 
-        List<Ingredient> userIngredients = Pantry.getInstance().getIngredients();
+    public static String getCanClick(Recipe r, List<Ingredient> ingredients) {
 
-        for (Ingredient i : r.ingredients) {
+        for (Ingredient i : r.getIngredients()) {
 
             boolean found = false;
 
-            for (Ingredient x : userIngredients) {
-                if (x.name.equals(i.name)) {
+            for (Ingredient x : ingredients) {
+                Log.w("get name ", x.getName() + " " + x.getName().equalsIgnoreCase(i.getName()));
+                if (x.getName().equalsIgnoreCase(i.getName())) {
                     found = true;
 
-                    if (i.quantity > x.quantity) {
+                    if (i.getQuantity() > x.getQuantity()) {
+                        Log.w("Quantity Issue: ", x.getName());
                         return "Can't Make";
                     }
 
@@ -41,6 +44,7 @@ public class RecipeViewModel {
             }
 
             if (!found) {
+                Log.w("name Issue: ", i.getName());
                 return "Can't Make";
             }
 
@@ -52,13 +56,32 @@ public class RecipeViewModel {
 
     public static void sendRecipe(String name, String ingredients) {
 
+        if (name == null) {
+            return;
+        }
+
+        if (name.equals("")) {
+            return;
+        }
+
+        if (ingredients == null) {
+            return;
+        }
+
+        if (ingredients.equals("")) {
+            return;
+        }
+
         ingredients = ingredients.trim();
         List<Ingredient> arr = new ArrayList<>();
         String[] ings = ingredients.split(",");
 
-        for(String str : ings) {
+        for (String str : ings) {
             int index = str.indexOf(":");
-            arr.add(new Ingredient(str.substring(0, index), Integer.parseInt(str.substring(index+1)), 0, ""));
+            if (!str.substring(0, index).isEmpty()) {
+                arr.add(new Ingredient(str.substring(0, index), Integer.parseInt(
+                        str.substring(index + 1)), 0, ""));
+            }
         }
 
         Cookbook.getInstance().addRecipe(name, arr);
