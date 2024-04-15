@@ -16,8 +16,38 @@
             android:id="@+id/textView6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:text="Shopping List"
             android:textSize="34sp" />
+
+        <EditText
+            android:id="@+id/shoppingListName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Name"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/shoppingListQuantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Quantity"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/shoppingListPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Price"
+            android:inputType="text" />
+
+        <Button
+            android:id="@+id/shoppingListSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/shopping_list_recycler"

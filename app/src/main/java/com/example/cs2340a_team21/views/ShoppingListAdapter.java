@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cs2340a_team21.R;
 import com.example.cs2340a_team21.objects.ShoppingListItem;
+import com.example.cs2340a_team21.viewmodels.ShoppingListViewModel;
 
 import java.util.ArrayList;
 
@@ -41,7 +42,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
 
         holder.getAddToCart().setOnClickListener(l -> {
 
-            // do this
+            ShoppingListViewModel.toggleCartItem(item, holder.getAddToCart());
 
         });
 
@@ -84,8 +85,6 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
         }
 
     }
-
-
 
 
 

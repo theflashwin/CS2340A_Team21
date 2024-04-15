@@ -1,8 +1,13 @@
 package com.example.cs2340a_team21.model;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,9 +15,15 @@ import com.example.cs2340a_team21.objects.Ingredient;
 import com.example.cs2340a_team21.objects.Recipe;
 import com.example.cs2340a_team21.objects.ShoppingListItem;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -24,18 +35,38 @@ public class ShoppingList {
 
     private ArrayList<ShoppingListItem> items;
 
-    private CollectionReference ref;
+    private DocumentReference ref;
 
     private FirebaseFirestore db;
 
     private ShoppingList() {
 
-        this.db = FirebaseFirestore.getInstance();
-        this.ref = db.collection("shopping-list");
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        this.items = new ArrayList<>();
+        Log.d("enter", "constructor");
 
-        fetchItems();
+        Query searchForPantry = db.collection("shopping-list").whereEqualTo("user", User.getUserId());
+        searchForPantry.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        ref = document.getReference();
+                        Log.d("Got shopping list successfully", "sldjkhnfsd");
+                    }
+
+                    if (ref == null) {
+                        createShoppingList();
+                    }
+
+                } else {
+                    Log.d("Couldn't get", "Error getting documents: ",
+                            task.getException());
+                }
+            }
+        });
+
+        items = new ArrayList<>();
 
     }
 
@@ -43,34 +74,87 @@ public class ShoppingList {
         fetchItems();
     }
 
-    private void fetchItems() {
+    public void addToShoppingList(ShoppingListItem e) {
 
-        items.clear();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        ref.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        Map<String, Object> item = new HashMap<>();
+
+        item.put("name", e.getName());
+        item.put("price", e.getPrice());
+        item.put("quantity", e.getQuantity());
+
+        ref.update("items", FieldValue.arrayUnion(item));
+
+    }
+
+    public void createShoppingList() {
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        Map<String, Object> shoppingList = new HashMap<>();
+        shoppingList.put("user", User.getUserId());
+        shoppingList.put("items", Collections.emptyList());
+
+        db.collection("shopping-list").add(shoppingList)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d("Adding pantry", "DocumentSnapshot added with ID: "
+                                + documentReference.getId());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("Failed", "Error adding document", e);
+                    }
+                });
+
+        Query searchForPantry = db.collection("shopping-list").whereEqualTo("user", User.getUserId());
+        searchForPantry.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
-
-                        Long quantity = (Long) document.get("quantity");
-                        Float price = (Float) document.get("price");
-
-                        items.add(new ShoppingListItem(
-                                (String) document.get("name"),
-                                quantity.intValue(),
-                                price.doubleValue()));
-
+                        ref = document.getReference();
+                        Log.d("Got meal successfully", "sldjkhnfsd");
                     }
-                } else {
 
+                } else {
+                    Log.d("Couldn't get", "Error getting documents: ", task.getException());
                 }
             }
         });
 
     }
 
-    public static synchronized ShoppingList getInstance() {
+    private void fetchItems() {
+
+        items.clear();
+
+        ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                DocumentSnapshot doc = task.getResult();
+                List<Map<String, Object>> l = (List<Map<String, Object>>) doc.get("items");
+                l.forEach(item -> {
+
+                    Long quantity = (Long) item.get("quantity");
+                    Double price = (Double) item.get("price");
+
+                    items.add(new ShoppingListItem(
+                            (String) item.get("name"),
+                            quantity.intValue(),
+                            price.doubleValue()));
+                });
+            }
+        });
+
+
+    }
+
+    public static ShoppingList getInstance() {
 
         if (instance == null) {
             instance = new ShoppingList();
@@ -81,7 +165,10 @@ public class ShoppingList {
     }
 
     public ArrayList<ShoppingListItem> getItems() {
+
+        update();
         return this.items;
+
     }
 
 }

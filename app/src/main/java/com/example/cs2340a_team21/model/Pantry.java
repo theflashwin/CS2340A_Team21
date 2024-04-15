@@ -94,16 +94,11 @@ public class Pantry {
 
         ArrayList<Ingredient> ret = new ArrayList<>();
 
-        if (pantryRef == null) {
-            return new ArrayList<>();
-        }
-
         pantryRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 DocumentSnapshot doc = task.getResult();
-                List<Map<String, Object>> ingredients = (List<Map<String, Object>>)
-                        doc.get("ingredients");
+                List<Map<String, Object>> ingredients = (List<Map<String, Object>>) doc.get("ingredients");
                 ingredients.forEach(ingredient -> {
 
                     Long quantity = ((Long) ingredient.get("quantity"));
@@ -127,7 +122,7 @@ public class Pantry {
 
     }
 
-    private void createPantry() {
+    private static void createPantry() {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -141,7 +136,6 @@ public class Pantry {
                     public void onSuccess(DocumentReference documentReference) {
                         Log.d("Adding pantry", "DocumentSnapshot added with ID: "
                                 + documentReference.getId());
-                        pantryRef = documentReference;
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

@@ -34,9 +34,14 @@ public class User {
     private static String gender = "";
 
     private static Pantry pantry;
+    private static ShoppingList shoppingList;
 
     public static Pantry getPantry() {
         return pantry;
+    }
+
+    public static ShoppingList getShoppingList() {
+        return shoppingList;
     }
 
     private static boolean foundUser = true; //is this variable being used?
@@ -60,6 +65,8 @@ public class User {
 
 
         pantry = Pantry.getInstance();
+
+        shoppingList = ShoppingList.getInstance();
 
         return ret;
 

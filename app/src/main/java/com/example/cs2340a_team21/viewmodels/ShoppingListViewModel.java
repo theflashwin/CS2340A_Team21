@@ -1,8 +1,10 @@
 package com.example.cs2340a_team21.viewmodels;
 
 import android.util.Log;
+import android.widget.Button;
 
 import com.example.cs2340a_team21.model.ShoppingList;
+import com.example.cs2340a_team21.model.User;
 import com.example.cs2340a_team21.objects.ShoppingListItem;
 
 import java.util.ArrayList;
@@ -12,10 +14,10 @@ public class ShoppingListViewModel {
     private static ShoppingList shoppingList;
     private static ArrayList<ShoppingListItem> items;
 
+    private static ArrayList<ShoppingListItem> cart = new ArrayList<>();
+
     public static void onLoad() {
-        shoppingList = ShoppingList.getInstance();
-        shoppingList.update();
-        fetchItems();
+        shoppingList = User.getShoppingList();
     }
 
     public static void fetchItems() {
@@ -32,7 +34,48 @@ public class ShoppingListViewModel {
 
     }
 
+    public static void addToCart(ShoppingListItem item) {
+        cart.add(item);
+    }
+
+    public static void removeFromCart(ShoppingListItem item) {
+        cart.remove(item);
+    }
+
+    public static void toggleCartItem(ShoppingListItem item, Button button) {
+
+        if (cart.contains(item)) {
+            removeFromCart(item);
+            button.setText("Remove from cart");
+        } else {
+            addToCart(item);
+            button.setText("Add to cart");
+        }
+
+    }
+
+    public static String addToShoppingList(String name, String quantity, String price) {
+
+        if (name == null || name.equals("")) {
+            return "null";
+        }
+
+        if (quantity == null || quantity.equals("")) {
+            return "null";
+        }
+
+        if (price == null || price.equals("")) {
+            return "null";
+        }
+
+        ShoppingList.getInstance().addToShoppingList(new ShoppingListItem(name,
+                Integer.parseInt(quantity), Double.parseDouble(price)));
+
+        return "success";
+
+    }
+
     public static ArrayList<ShoppingListItem> getItems() {
-        return items;
+        return shoppingList.getItems();
     }
 }

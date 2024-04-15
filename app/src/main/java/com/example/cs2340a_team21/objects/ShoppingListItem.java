@@ -26,4 +26,23 @@ public class ShoppingListItem {
         return this.price;
     }
 
+    @Override
+    public boolean equals(Object o) {
+
+        if (o instanceof ShoppingListItem) {
+
+            ShoppingListItem i = (ShoppingListItem) o;
+
+            if (i.getName().equals(this.name)
+                    && i.getPrice() == this.price
+                    && i.getQuantity() == this.quantity) {
+                return true;
+            }
+
+        }
+
+        return false;
+
+    }
+
 }
