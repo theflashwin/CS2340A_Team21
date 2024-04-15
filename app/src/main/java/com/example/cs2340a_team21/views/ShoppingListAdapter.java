@@ -46,6 +46,19 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
 
         });
 
+        holder.getDecreaseButton().setOnClickListener(v -> {
+
+            ShoppingListViewModel.decreaseQuantity(item);
+
+        });
+
+        holder.getIncreaseButton().setOnClickListener(v -> {
+
+            ShoppingListViewModel.increseQuantity(item);
+
+        });
+
+
     }
 
     @Override
@@ -59,6 +72,8 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
         private TextView quantity;
         private TextView price;
         private Button addToCart;
+        private Button increaseButton;
+        private Button decreaseButton;
 
         public ViewHolder(View view) {
             super(view);
@@ -66,6 +81,8 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
             this.quantity = view.findViewById(R.id.itemQuantity);
             this.price = view.findViewById(R.id.itemPrice);
             this.addToCart = view.findViewById(R.id.addToCartButton);
+            this.increaseButton = view.findViewById(R.id.shoppingListIncrease);
+            this.decreaseButton = view.findViewById(R.id.shoppingListDecrease);
         }
 
         public TextView getName() {
@@ -82,6 +99,14 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
 
         public Button getAddToCart() {
             return this.addToCart;
+        }
+
+        public Button getIncreaseButton() {
+            return this.increaseButton;
+        }
+
+        public Button getDecreaseButton() {
+            return this.decreaseButton;
         }
 
     }

@@ -1,5 +1,7 @@
 package com.example.cs2340a_team21.objects;
 
+import android.util.Log;
+
 public class ShoppingListItem {
 
     private String name;
@@ -33,16 +35,15 @@ public class ShoppingListItem {
 
             ShoppingListItem i = (ShoppingListItem) o;
 
-            if (i.getName().equals(this.name)
-                    && i.getPrice() == this.price
-                    && i.getQuantity() == this.quantity) {
-                return true;
-            }
+            Log.d("ShoppingListItem", "In equals statement");
+
+            return i.getName().equals(this.name);
 
         }
 
         return false;
 
     }
+
 
 }

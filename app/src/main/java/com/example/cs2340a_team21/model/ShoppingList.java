@@ -4,6 +4,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,11 +34,17 @@ public class ShoppingList {
 
     private static ShoppingList instance;
 
-    private ArrayList<ShoppingListItem> items;
+    private static ArrayList<ShoppingListItem> items;
 
     private DocumentReference ref;
 
     private FirebaseFirestore db;
+
+    public String toString() {
+
+        return ref.getPath();
+
+    }
 
     private ShoppingList() {
 
@@ -56,6 +63,7 @@ public class ShoppingList {
                     }
 
                     if (ref == null) {
+                        Log.e("Shopping List Error", "Couldn't get shopping list");
                         createShoppingList();
                     }
 
@@ -66,7 +74,7 @@ public class ShoppingList {
             }
         });
 
-        items = new ArrayList<>();
+        Log.d("exit", "constructor");
 
     }
 
@@ -74,21 +82,74 @@ public class ShoppingList {
         fetchItems();
     }
 
+    public void updateQuantity(ShoppingListItem e, int x) {
+
+        ref.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                if (document.exists()) {
+                    List<Map<String, Object>> items = (List<Map<String, Object>>)
+                            document.get("items");
+                    for (Map<String, Object> item : items) {
+                        if (item.get("name").equals(e.getName())) {
+
+                            Long quantity = ((Long) item.get("quantity"));
+
+                            if (quantity.intValue() + x <= 0) {
+                                items.remove(item);
+                            } else {
+                                item.put("quantity", quantity.intValue() + x);
+                            }
+                            break;
+                        }
+                    }
+                    // Now update the document with the modified array
+                    ref.update("items", items);
+                } else {
+                    Log.d("Document", "No such document");
+                }
+            } else {
+                Log.d("Document", "get failed with ", task.getException());
+            }
+        });
+
+    }
+
     public void addToShoppingList(ShoppingListItem e) {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        Map<String, Object> item = new HashMap<>();
+        // check if it is already in the shopping list
 
-        item.put("name", e.getName());
-        item.put("price", e.getPrice());
-        item.put("quantity", e.getQuantity());
+        ArrayList<ShoppingListItem> list = getItems();
 
-        ref.update("items", FieldValue.arrayUnion(item));
+        boolean hasElement = false;
+
+        for (ShoppingListItem i : items) {
+            if (i.equals(e)) {
+                hasElement = true;
+            }
+        }
+
+        if (hasElement) {
+
+            updateQuantity(e, e.getQuantity());
+
+        } else {
+
+            Map<String, Object> item = new HashMap<>();
+
+            item.put("name", e.getName());
+            item.put("price", e.getPrice());
+            item.put("quantity", e.getQuantity());
+
+            ref.update("items", FieldValue.arrayUnion(item));
+
+        }
 
     }
 
-    public void createShoppingList() {
+    public static void createShoppingList() {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -110,22 +171,6 @@ public class ShoppingList {
                         Log.w("Failed", "Error adding document", e);
                     }
                 });
-
-        Query searchForPantry = db.collection("shopping-list").whereEqualTo("user", User.getUserId());
-        searchForPantry.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        ref = document.getReference();
-                        Log.d("Got meal successfully", "sldjkhnfsd");
-                    }
-
-                } else {
-                    Log.d("Couldn't get", "Error getting documents: ", task.getException());
-                }
-            }
-        });
 
     }
 
@@ -166,8 +211,31 @@ public class ShoppingList {
 
     public ArrayList<ShoppingListItem> getItems() {
 
-        update();
-        return this.items;
+        ArrayList<ShoppingListItem> ret = new ArrayList<>();
+
+        ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                DocumentSnapshot doc = task.getResult();
+                List<Map<String, Object>> l = (List<Map<String, Object>>) doc.get("items");
+                l.forEach(item -> {
+
+                    Long quantity = (Long) item.get("quantity");
+                    Double price = (Double) item.get("price");
+
+                    ret.add(new ShoppingListItem(
+                            (String) item.get("name"),
+                            quantity.intValue(),
+                            price.doubleValue()));
+                });
+            }
+        });
+
+        if (items == null) {
+            items = ret;
+        }
+
+        return ret;
 
     }
 
