@@ -37,7 +37,6 @@ public class IngredientsFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-
     private EditText name;
     private EditText quantity;
     private EditText calories;
@@ -60,6 +59,7 @@ public class IngredientsFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment IngredientsFragment.
      */
+
     public static IngredientsFragment newInstance(String param1, String param2) {
         IngredientsFragment fragment = new IngredientsFragment();
         Bundle args = new Bundle();
