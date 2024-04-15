@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,6 +91,9 @@ public class IngredientsFragment extends Fragment {
         this.addIngredientButton = view.findViewById(R.id.addIngredientButton);
 
         this.addIngredientButton.setOnClickListener(v -> {
+
+            Log.d("code tag", "clicked add ingredient button");
+
             String result = IngredientsViewModel.addIngredient(this.name.getText().toString(),
                     this.quantity.getText().toString(),
                     this.calories.getText().toString(), this.expiration.getText().toString());

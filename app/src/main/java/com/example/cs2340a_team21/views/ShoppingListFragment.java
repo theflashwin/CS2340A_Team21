@@ -9,10 +9,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.example.cs2340a_team21.R;
+import com.example.cs2340a_team21.objects.Ingredient;
+import com.example.cs2340a_team21.objects.ShoppingListItem;
 import com.example.cs2340a_team21.viewmodels.IngredientsViewModel;
 import com.example.cs2340a_team21.viewmodels.ShoppingListViewModel;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +35,14 @@ public class ShoppingListFragment extends Fragment {
     private String mParam2;
 
     private RecyclerView recyclerView;
+
+    private EditText name;
+
+    private EditText price;
+
+    private EditText quantity;
+
+    private Button submit;
 
     public ShoppingListFragment() {
         // Required empty public constructor
@@ -64,10 +78,24 @@ public class ShoppingListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        ArrayList<ShoppingListItem> list = ShoppingListViewModel.getItems();
+
         ShoppingListViewModel.onLoad();
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_shopping_list, container, false);
+
+        this.name = view.findViewById(R.id.shoppingListName);
+        this.price = view.findViewById(R.id.shoppingListPrice);
+        this.quantity = view.findViewById(R.id.shoppingListQuantity);
+
+        this.submit = view.findViewById(R.id.shoppingListSubmit);
+
+        this.submit.setOnClickListener(v -> {
+
+
+
+        });
 
         this.recyclerView = view.findViewById(R.id.shopping_list_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
