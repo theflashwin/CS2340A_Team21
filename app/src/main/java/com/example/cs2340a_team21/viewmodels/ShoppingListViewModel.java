@@ -5,6 +5,7 @@ import android.widget.Button;
 
 import com.example.cs2340a_team21.model.ShoppingList;
 import com.example.cs2340a_team21.model.User;
+import com.example.cs2340a_team21.objects.Ingredient;
 import com.example.cs2340a_team21.objects.ShoppingListItem;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class ShoppingListViewModel {
     private static ArrayList<ShoppingListItem> cart = new ArrayList<>();
 
     public static void onLoad() {
-        shoppingList = User.getShoppingList();
+
     }
 
     public static void fetchItems() {
@@ -46,11 +47,31 @@ public class ShoppingListViewModel {
 
         if (cart.contains(item)) {
             removeFromCart(item);
-            button.setText("Remove from cart");
+            button.setText("Add to Cart");
         } else {
             addToCart(item);
-            button.setText("Add to cart");
+            button.setText("Remove from Cart");
         }
+
+    }
+
+    public static void checkout() {
+
+        for (ShoppingListItem item : cart) {
+            User.getPantry().addIngredient(item.getName(), item.getQuantity(), 100, "N/A", true);
+        }
+
+    }
+
+    public static void increseQuantity(ShoppingListItem e) {
+
+        User.getShoppingList().updateQuantity(e, 1);
+
+    }
+
+    public static void decreaseQuantity(ShoppingListItem e) {
+
+        User.getShoppingList().updateQuantity(e, -1);
 
     }
 
@@ -76,6 +97,7 @@ public class ShoppingListViewModel {
     }
 
     public static ArrayList<ShoppingListItem> getItems() {
+        shoppingList = User.getShoppingList();
         return shoppingList.getItems();
     }
 }

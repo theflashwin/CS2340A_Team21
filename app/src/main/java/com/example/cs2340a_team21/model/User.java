@@ -41,6 +41,11 @@ public class User {
     }
 
     public static ShoppingList getShoppingList() {
+
+        if (shoppingList == null) {
+            shoppingList = ShoppingList.getInstance();
+        }
+
         return shoppingList;
     }
 
@@ -67,6 +72,14 @@ public class User {
         pantry = Pantry.getInstance();
 
         shoppingList = ShoppingList.getInstance();
+
+        try {
+            Thread.sleep(1000);
+        } catch (Exception e) {
+
+        }
+
+//        Log.d("Constructor::", shoppingList.toString());
 
         return ret;
 

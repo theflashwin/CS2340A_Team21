@@ -44,6 +44,8 @@ public class ShoppingListFragment extends Fragment {
 
     private Button submit;
 
+    private Button checkout;
+
     public ShoppingListFragment() {
         // Required empty public constructor
     }
@@ -90,10 +92,18 @@ public class ShoppingListFragment extends Fragment {
         this.quantity = view.findViewById(R.id.shoppingListQuantity);
 
         this.submit = view.findViewById(R.id.shoppingListSubmit);
+        this.checkout = view.findViewById(R.id.shoppingListCheckout);
 
         this.submit.setOnClickListener(v -> {
 
+            ShoppingListViewModel.addToShoppingList(name.getText().toString(),
+                    quantity.getText().toString(), price.getText().toString());
 
+        });
+
+        this.checkout.setOnClickListener(v -> {
+
+            ShoppingListViewModel.checkout();
 
         });
 
