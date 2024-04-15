@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +38,6 @@ public class IngredientsFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-
     private EditText name;
     private EditText quantity;
     private EditText calories;
@@ -60,6 +60,7 @@ public class IngredientsFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment IngredientsFragment.
      */
+
     public static IngredientsFragment newInstance(String param1, String param2) {
         IngredientsFragment fragment = new IngredientsFragment();
         Bundle args = new Bundle();
@@ -90,6 +91,9 @@ public class IngredientsFragment extends Fragment {
         this.addIngredientButton = view.findViewById(R.id.addIngredientButton);
 
         this.addIngredientButton.setOnClickListener(v -> {
+
+            Log.d("code tag", "clicked add ingredient button");
+
             String result = IngredientsViewModel.addIngredient(this.name.getText().toString(),
                     this.quantity.getText().toString(),
                     this.calories.getText().toString(), this.expiration.getText().toString());

@@ -98,8 +98,7 @@ public class Pantry {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 DocumentSnapshot doc = task.getResult();
-                List<Map<String, Object>> ingredients = (List<Map<String, Object>>)
-                        doc.get("ingredients");
+                List<Map<String, Object>> ingredients = (List<Map<String, Object>>) doc.get("ingredients");
                 ingredients.forEach(ingredient -> {
 
                     Long quantity = ((Long) ingredient.get("quantity"));

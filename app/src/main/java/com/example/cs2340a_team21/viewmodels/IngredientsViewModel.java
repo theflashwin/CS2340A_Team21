@@ -45,9 +45,9 @@ public class IngredientsViewModel extends ViewModel {
             return "null";
         }
 
-        if (expiration == null) {
-            return "null";
-        }
+//        if (expiration == null) {
+//            return "null";
+//        }
 
 
         int quantity = Integer.parseInt(quantityIn);
