@@ -38,7 +38,7 @@ public class ShoppingListFragment extends Fragment {
 
     private EditText name;
 
-    private EditText price;
+    private EditText calories;
 
     private EditText quantity;
 
@@ -88,7 +88,7 @@ public class ShoppingListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_shopping_list, container, false);
 
         this.name = view.findViewById(R.id.shoppingListName);
-        this.price = view.findViewById(R.id.shoppingListPrice);
+        this.calories = view.findViewById(R.id.shoppingListCalories);
         this.quantity = view.findViewById(R.id.shoppingListQuantity);
 
         this.submit = view.findViewById(R.id.shoppingListSubmit);
@@ -97,7 +97,7 @@ public class ShoppingListFragment extends Fragment {
         this.submit.setOnClickListener(v -> {
 
             ShoppingListViewModel.addToShoppingList(name.getText().toString(),
-                    quantity.getText().toString(), price.getText().toString());
+                    quantity.getText().toString(), calories.getText().toString());
 
         });
 
