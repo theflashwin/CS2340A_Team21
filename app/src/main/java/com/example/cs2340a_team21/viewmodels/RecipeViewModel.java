@@ -4,8 +4,11 @@ import android.util.Log;
 
 import com.example.cs2340a_team21.Strategies.SortingStrategy;
 import com.example.cs2340a_team21.model.Cookbook;
+import com.example.cs2340a_team21.model.ShoppingList;
+import com.example.cs2340a_team21.model.User;
 import com.example.cs2340a_team21.objects.Ingredient;
 import com.example.cs2340a_team21.objects.Recipe;
+import com.example.cs2340a_team21.objects.ShoppingListItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +55,32 @@ public class RecipeViewModel {
 
         return "Open";
 
+    }
+
+    public static void shopIngredients (Recipe r, List<Ingredient> ingredients) {
+        for (Ingredient i : r.getIngredients()) {
+
+            boolean added = false;
+            for (Ingredient x : User.getPantry().getStaticIngredients()) {
+                Log.w("got name ", x.getName() + " " + x.getName().equalsIgnoreCase(i.getName()));
+
+                if (x.getName().equalsIgnoreCase(i.getName())) {
+
+                    if (i.getQuantity() > x.getQuantity()) {
+                        added = true;
+                        Log.w("Quantity Issue: ", x.getName());
+                        User.getShoppingList().addToShoppingList(new ShoppingListItem(i.getName(),
+                                (i.getQuantity() - x.getQuantity()), i.getCalories()));
+                    }
+                }
+            }
+
+            if (!added) {
+                Log.w("Quantity Issue (None): ", i.getName());
+                User.getShoppingList().addToShoppingList(new ShoppingListItem(i.getName(),
+                        (i.getQuantity()), i.getCalories()));
+            }
+        }
     }
 
     public static void sendRecipe(String name, String ingredients) {

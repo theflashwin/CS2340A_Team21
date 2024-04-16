@@ -56,8 +56,10 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
 
         if (canOpen.equals("Open")) {
             viewHolder.getOpen().setText("Click to open");
+            viewHolder.getBuy().setText("No shopping needed!");
         } else {
             viewHolder.getOpen().setText("Can't open");
+            viewHolder.getBuy().setText("Click to buy ingredients");
         }
 
         if (canOpen.equals("Open")) {
@@ -66,9 +68,21 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
                 intent.putExtra("Recipe", getRecipeText(r));
                 context.startActivity(intent);
             });
+
+            viewHolder.getBuy().setOnClickListener(v -> {
+                Toast.makeText(context, "Ingredients Already Available", Toast.LENGTH_LONG).show();
+            });
+
         } else {
             viewHolder.getOpen().setOnClickListener(v -> {
                 Toast.makeText(context, "Ingredients not Available", Toast.LENGTH_LONG).show();
+            });
+
+            // Add needed items to shopping list if not available in pantry
+            viewHolder.getBuy().setOnClickListener(v -> {
+                RecipeViewModel.shopIngredients(r, Pantry.getInstance().getStaticIngredients());
+                Toast.makeText(context, "Ingredients succesfully added to shopping list!",
+                        Toast.LENGTH_LONG).show();
             });
         }
 
@@ -121,11 +135,14 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         private final TextView name;
         private final Button open;
 
+        private final Button buy;
+
 
         public ViewHolder(View view) {
             super(view);
             name = view.findViewById(R.id.recipeName);
             open = view.findViewById(R.id.openButton);
+            buy = view.findViewById(R.id.addToShopping);
         }
 
         public TextView getName() {
@@ -136,5 +153,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
             return open;
         }
 
+        public Button getBuy() {
+            return buy;
+        }
     }
 }
