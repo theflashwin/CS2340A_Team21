@@ -3,12 +3,18 @@ package com.example.cs2340a_team21.views;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.example.cs2340a_team21.R;
+import com.example.cs2340a_team21.viewmodels.RecipeViewModel;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +29,18 @@ public class RecipeFragment extends Fragment {
 
     private String mParam1;
     private String mParam2;
+
+    private EditText nameInput;
+    private EditText ingredientsInput;
+    private Button submitButton;
+
+    private Button sortButtonNum;
+
+    private Button sortButtonQuantity;
+
+    private RecyclerView recyclerView;
+
+    private RecipeAdapter adapter;
 
     public RecipeFragment() {
         // Required empty public constructor
@@ -57,7 +75,44 @@ public class RecipeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        RecipeViewModel.handleOnLoad();
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_recipe, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_recipe, container, false);
+
+        this.recyclerView = view.findViewById(R.id.recipes_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        adapter = new RecipeAdapter(RecipeViewModel.getRecipes(), getActivity());
+        recyclerView.setAdapter(adapter);
+
+        this.nameInput = view.findViewById(R.id.recipeNameInput);
+        this.ingredientsInput = view.findViewById(R.id.recipeIngredients);
+        this.submitButton = view.findViewById(R.id.recipeSubmit);
+
+        this.submitButton.setOnClickListener(v -> {
+            RecipeViewModel.sendRecipe(nameInput.getText().toString(),
+                    ingredientsInput.getText().toString());
+            adapter.refresh();
+        });
+
+        this.sortButtonNum = view.findViewById(R.id.sortRecipesNum);
+        this.sortButtonQuantity = view.findViewById(R.id.sortRecipesQuantity);
+
+
+        this.sortButtonNum.setOnClickListener(v -> {
+            adapter.sortRecipesNum();
+            adapter.refresh();
+        });
+
+        this.sortButtonQuantity.setOnClickListener(v -> {
+            adapter.sortRecipesQuantity();
+            adapter.refresh();
+        });
+
+        return view;
     }
+
 }

@@ -1,47 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app ="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-    <!-- TODO: Update blank fragment layout -->
+        android:layout_width="409dp"
+        android:layout_height="729dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
+            android:id="@+id/title"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_height="45dp"
             android:text="Add Recipe"
-            android:textSize="26dp" />
+            android:textSize="30sp" />
 
         <EditText
-            android:id="@+id/ingredientName"
+            android:id="@+id/recipeNameInput"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="Enter Ingredient" />
+            android:layout_height="97dp"
+            android:ems="10"
+            android:hint="Enter Recipe Name"
+            android:inputType="text" />
 
         <EditText
-            android:id="@+id/ingredientQuantity"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="Ingredient Quantity" />
 
+            android:id="@+id/recipeIngredients"
+            android:layout_width="match_parent"
+            android:layout_height="97dp"
+            android:ems="10"
+            android:hint="Enter Ingredients (Seperated with Commas)"
+            android:inputType="text" />
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add recipe" />
+            android:id="@+id/recipeSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="61dp"
+            android:text="Submit Recipe" />
+
+        <Button
+            android:id="@+id/sortRecipesNum"
+            android:layout_width="match_parent"
+            android:layout_height="61dp"
+            android:text="Sort By Number of Ingredients" />
+
+        <Button
+            android:id="@+id/sortRecipesQuantity"
+            android:layout_width="match_parent"
+            android:layout_height="61dp"
+            android:text="Sort By Ingredient Quantities" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recipes_view"
+
+            android:layout_width="match_parent"
+            android:layout_height="370dp" />
 
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-

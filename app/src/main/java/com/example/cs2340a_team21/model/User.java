@@ -33,6 +33,22 @@ public class User {
 
     private static String gender = "";
 
+    private static Pantry pantry;
+    private static ShoppingList shoppingList;
+
+    public static Pantry getPantry() {
+        return pantry;
+    }
+
+    public static ShoppingList getShoppingList() {
+
+        if (shoppingList == null) {
+            shoppingList = ShoppingList.getInstance();
+        }
+
+        return shoppingList;
+    }
+
     private static boolean foundUser = true; //is this variable being used?
 
     public static boolean login(String username, String password) {
@@ -51,6 +67,19 @@ public class User {
                         }
                     }
                 });
+
+
+        pantry = Pantry.getInstance();
+
+        shoppingList = ShoppingList.getInstance();
+
+        try {
+            Thread.sleep(1000);
+        } catch (Exception e) {
+
+        }
+
+//        Log.d("Constructor::", shoppingList.toString());
 
         return ret;
 

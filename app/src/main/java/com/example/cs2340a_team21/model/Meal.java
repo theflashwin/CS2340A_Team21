@@ -77,7 +77,7 @@ public class Meal {
                     }
                 });
 
-//         Tried adding a sleep timer to see if it would work
+        // Tried adding a sleep timer to see if it would work
 
         try {
             Thread.sleep(500);

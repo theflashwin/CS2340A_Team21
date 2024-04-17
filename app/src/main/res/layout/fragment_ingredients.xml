@@ -21,7 +21,7 @@
             android:textSize="30sp" />
 
         <EditText
-            android:id="@+id/editName"
+            android:id="@+id/recipeNameInput"
             android:layout_width="match_parent"
             android:layout_height="97dp"
             android:ems="10"
@@ -29,7 +29,7 @@
             android:inputType="text" />
 
         <EditText
-            android:id="@+id/editQuantity"
+            android:id="@+id/recipeIngredients"
             android:layout_width="match_parent"
             android:layout_height="97dp"
             android:ems="10"
@@ -44,11 +44,37 @@
             android:hint="Enter Calories per Serving/Quantity"
             android:inputType="numberSigned" />
 
-        <Button
-            android:id="@+id/submit"
+        <EditText
+            android:id="@+id/editExpiration"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Submit" />
+            android:ems="10"
+            android:hint="[Optional] Enter Expiration"
+            android:inputType="date" />
+
+
+        <Button
+            android:id="@+id/addIngredientButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Ingredient"
+            android:layout_margin="16dp"
+            android:layout_gravity="center_horizontal"/>
+
+        <TextView
+            android:id="@+id/title2"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:text="Available Ingredients"
+            android:textSize="30sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ingredients_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+        </androidx.recyclerview.widget.RecyclerView>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

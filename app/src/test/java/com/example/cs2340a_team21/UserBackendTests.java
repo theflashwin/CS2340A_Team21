@@ -2,7 +2,6 @@ package com.example.cs2340a_team21;
 
 import static junit.framework.TestCase.assertEquals;
 
-import com.example.cs2340a_team21.model.User;
 import com.example.cs2340a_team21.viewmodels.InputMealViewModel;
 import com.example.cs2340a_team21.viewmodels.PersonalInfoViewModel;
 
