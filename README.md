@@ -1,6 +1,6 @@
 CS2340A_Team21
 
-Sprint 1, Sprint 2, Spring 3 Repo
+Sprint 1, Sprint 2, Sprint 3, Sprint 4 Repo
 
 FIREBASE NOTES:
 
