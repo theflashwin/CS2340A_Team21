@@ -9,9 +9,12 @@ import com.example.cs2340a_team21.model.User;
 import com.example.cs2340a_team21.objects.Ingredient;
 import com.example.cs2340a_team21.objects.Recipe;
 import com.example.cs2340a_team21.objects.ShoppingListItem;
+import com.example.cs2340a_team21.model.Pantry;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 public class RecipeViewModel {
 
@@ -29,6 +32,10 @@ public class RecipeViewModel {
 
     public static String getCanClick(Recipe r, List<Ingredient> ingredients) {
 
+        if (ingredients == null) {
+            ingredients = User.getPantry().getIngredients();
+        }
+
         for (Ingredient i : r.getIngredients()) {
 
             boolean found = false;
@@ -42,7 +49,6 @@ public class RecipeViewModel {
                         Log.w("Quantity Issue: ", x.getName());
                         return "Can't Make";
                     }
-
                 }
             }
 
@@ -60,14 +66,16 @@ public class RecipeViewModel {
     public static void shopIngredients (Recipe r, List<Ingredient> ingredients) {
         for (Ingredient i : r.getIngredients()) {
 
-            boolean added = false;
+            boolean ingredientPresent = false;
+
             for (Ingredient x : User.getPantry().getStaticIngredients()) {
                 Log.w("got name ", x.getName() + " " + x.getName().equalsIgnoreCase(i.getName()));
 
                 if (x.getName().equalsIgnoreCase(i.getName())) {
 
+                    ingredientPresent = true;
+
                     if (i.getQuantity() > x.getQuantity()) {
-                        added = true;
                         Log.w("Quantity Issue: ", x.getName());
                         User.getShoppingList().addToShoppingList(new ShoppingListItem(i.getName(),
                                 (i.getQuantity() - x.getQuantity()), i.getCalories()));
@@ -75,7 +83,7 @@ public class RecipeViewModel {
                 }
             }
 
-            if (!added) {
+            if (!ingredientPresent) {
                 Log.w("Quantity Issue (None): ", i.getName());
                 User.getShoppingList().addToShoppingList(new ShoppingListItem(i.getName(),
                         (i.getQuantity()), i.getCalories()));
@@ -123,6 +131,22 @@ public class RecipeViewModel {
 
         recipes.sort(strategy.getComparator());
 
+    }
+
+    public static void cookMeal (Recipe r) {
+        // Update meal database, Update calorie count, Remove used ingredients from pantry
+
+        int totalCalories = 0;
+        Map<String, Integer> ingredients = new HashMap<>();
+
+        for (Ingredient i : r.getIngredients()) {
+            totalCalories += i.getCalories() * i.getQuantity();
+            ingredients.put(i.getName(), i.getQuantity());
+        }
+
+        IngredientsViewModel.decreaseIngredientByNum(ingredients);
+        InputMealViewModel.sendMeal(r.getName(), Integer.toString(totalCalories));
+        Log.w("Successfully cooked", r.getName());
     }
 
 }
