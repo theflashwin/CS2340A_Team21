@@ -21,4 +21,4 @@ Personal info Screen
 Link Meal and User Databases
 2 Visualization buttons
 Tasks for Spring 4
--Sufficient Ingredient Feature
+-Sufficient Ingredient Feature .
