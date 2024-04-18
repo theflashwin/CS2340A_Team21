@@ -3,22 +3,73 @@ import javascriptLogo from './javascript.svg'
 import viteLogo from '/vite.svg'
 import { setupCounter } from './counter.js'
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
+// Tab selector logic
 
-setupCounter(document.querySelector('#counter'))
+const title = document.getElementById("text-box-title")
+const description = document.getElementById("text-box-description")
+
+const tab1 = document.getElementById("tab1")
+const tab2 = document.getElementById("tab2")
+const tab3 = document.getElementById("tab3")
+
+tab1.addEventListener("click", () => {
+  title.innerHTML = "Overall Design"
+  description.innerHTML = "Enter Overall Design Description Here"
+})
+
+tab2.addEventListener("click", () => {
+  title.innerHTML = "Singleton"
+  description.innerHTML = "Enter Singleton Description Here"
+})
+
+tab3.addEventListener("click", () => {
+  title.innerHTML = "Strategy"
+  description.innerHTML = "Enter Strategy Description Here"
+})
+
+// Image Selector
+
+const back = document.getElementById("back-button")
+const forward = document.getElementById("forward-button")
+
+const img1 = document.getElementById("image-box-1")
+const img2 = document.getElementById("image-box-2")
+const img3 = document.getElementById("image-box-3")
+const img4 = document.getElementById("image-box-4")
+const img5 = document.getElementById("image-box-5")
+
+
+let index = 0
+const images = [img1, img2, img3, img4, img5]
+
+back.addEventListener("click", () => {
+  
+  index = (index - 1) % images.length
+
+  if (index == -1) {
+    index = 4
+  }
+
+  for(let i = 0; i < images.length; i++) {
+    if (i == index) {
+      images[i].setAttribute("class", "duration-700 ease-in-out")
+    } else {
+      images[i].setAttribute("class", "hidden duration-700 ease-in-out")
+    }
+  }
+
+})
+
+forward.addEventListener("click", () => {
+
+  index = (index + 1) % images.length
+
+  for(let i = 0; i < images.length; i++) {
+    if (i == index) {
+      images[i].setAttribute("class", "duration-700 ease-in-out")
+    } else {
+      images[i].setAttribute("class", "hidden duration-700 ease-in-out")
+    }
+  }
+
+})
