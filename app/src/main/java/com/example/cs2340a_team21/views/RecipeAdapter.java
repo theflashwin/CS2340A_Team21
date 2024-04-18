@@ -49,8 +49,10 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
 
         viewHolder.getName().setText(r.getName());
 
+        List<Ingredient> list = Pantry.getInstance().getStaticIngredients();
+
         String canOpen = RecipeViewModel.getCanClick(r,
-                Pantry.getInstance().getStaticIngredients());
+                list);
 
         Log.w("Item Name", r.getName() + "  " + canOpen);
 
@@ -66,6 +68,10 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
             viewHolder.getOpen().setOnClickListener(v -> {
                 Intent intent = new Intent(this.context, RecipeIngredients.class);
                 intent.putExtra("Recipe", getRecipeText(r));
+                intent.putExtra("RecipePosition", position);
+
+                Log.w("Position", String.valueOf(position));
+
                 context.startActivity(intent);
             });
 

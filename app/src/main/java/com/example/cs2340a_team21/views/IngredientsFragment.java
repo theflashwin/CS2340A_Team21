@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.cs2340a_team21.R;
+import com.example.cs2340a_team21.model.Pantry;
 import com.example.cs2340a_team21.viewmodels.IngredientsViewModel;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -78,6 +79,8 @@ public class IngredientsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        Pantry.getInstance().initializeStaticIngredients();
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_ingredients, container, false);
 

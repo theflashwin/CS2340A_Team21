@@ -7,6 +7,7 @@ import com.example.cs2340a_team21.objects.Ingredient;
 import androidx.lifecycle.ViewModel;
 
 import java.util.List;
+import java.util.Map;
 
 public class IngredientsViewModel extends ViewModel {
 
@@ -91,6 +92,10 @@ public class IngredientsViewModel extends ViewModel {
 
         Pantry.getInstance().decreaseIngredient(name);
         ingredients = Pantry.getInstance().getIngredients();
+    }
+
+    public static void decreaseIngredientByNum(Map<String, Integer> ingredients) {
+        Pantry.getInstance().decreaseIngredientByNum(ingredients);
     }
 
     public static List<Ingredient> getIngredients() {

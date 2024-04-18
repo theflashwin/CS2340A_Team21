@@ -8,11 +8,18 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.cs2340a_team21.R;
+import com.example.cs2340a_team21.objects.Recipe;
+import com.example.cs2340a_team21.viewmodels.InputMealViewModel;
+import com.example.cs2340a_team21.viewmodels.RecipeViewModel;
+import android.util.Log;
+import android.widget.Toast;
+
 
 public class RecipeIngredients extends AppCompatActivity {
 
     private TextView info;
     private Button back;
+    private Button cook;
 
 
 
@@ -23,10 +30,22 @@ public class RecipeIngredients extends AppCompatActivity {
 
         this.info = findViewById(R.id.recipeInfoText);
         this.back = findViewById(R.id.backBut);
+        this.cook = findViewById(R.id.cookRecipe);
 
         Intent intent = getIntent();
         info.setText(intent.getStringExtra("Recipe"));
         back.setOnClickListener(v -> goBack());
+
+        this.cook.setOnClickListener(v -> {
+
+            int RecipePosition = intent.getIntExtra("RecipePosition", 3);
+            Recipe r = RecipeViewModel.getRecipes().get(RecipePosition);
+
+            String message = r.getName() + ", Position: " + RecipePosition;
+
+            Log.w("Calling method to cook", message);
+            RecipeViewModel.cookMeal(r);
+        });
     }
 
     private void goBack() {
