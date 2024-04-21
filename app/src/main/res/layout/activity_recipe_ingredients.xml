@@ -23,5 +23,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Go back" />
+
+        <Button
+            android:id="@+id/cookRecipe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cook this recipe" />
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

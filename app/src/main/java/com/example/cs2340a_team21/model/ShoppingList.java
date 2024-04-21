@@ -123,6 +123,8 @@ public class ShoppingList {
 
         ArrayList<ShoppingListItem> list = getItems();
 
+        Log.w("Entered add shopping list item", ".");
+
         boolean hasElement = false;
 
         for (ShoppingListItem i : items) {
@@ -133,6 +135,7 @@ public class ShoppingList {
 
         if (hasElement) {
 
+            Log.w("updating", "quantity");
             updateQuantity(e, e.getQuantity());
 
         } else {
@@ -140,10 +143,11 @@ public class ShoppingList {
             Map<String, Object> item = new HashMap<>();
 
             item.put("name", e.getName());
-            item.put("price", e.getPrice());
+            item.put("calories", e.getCalories());
             item.put("quantity", e.getQuantity());
 
             ref.update("items", FieldValue.arrayUnion(item));
+            Log.w("Item placed", e.getName());
 
         }
 
@@ -186,12 +190,12 @@ public class ShoppingList {
                 l.forEach(item -> {
 
                     Long quantity = (Long) item.get("quantity");
-                    Double price = (Double) item.get("price");
+                    Long calories = (Long) item.get("calories");
 
                     items.add(new ShoppingListItem(
                             (String) item.get("name"),
                             quantity.intValue(),
-                            price.doubleValue()));
+                            calories.intValue()));
                 });
             }
         });
@@ -221,12 +225,12 @@ public class ShoppingList {
                 l.forEach(item -> {
 
                     Long quantity = (Long) item.get("quantity");
-                    Double price = (Double) item.get("price");
+                    Long calories = (Long) item.get("calories");
 
                     ret.add(new ShoppingListItem(
                             (String) item.get("name"),
                             quantity.intValue(),
-                            price.doubleValue()));
+                            calories.intValue()));
                 });
             }
         });

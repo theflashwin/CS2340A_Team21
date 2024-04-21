@@ -33,11 +33,11 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/itemPrice"
+                android:id="@+id/itemCalories"
                 android:layout_width="7dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Price: 0"
+                android:text="Calories: 0"
                 android:textSize="18sp" />
 
             <Button

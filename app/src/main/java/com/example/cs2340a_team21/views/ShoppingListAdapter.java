@@ -37,7 +37,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
         ShoppingListItem item = items.get(position);
 
         holder.getName().setText(item.getName());
-        holder.getPrice().setText(String.valueOf(item.getPrice()));
+        holder.getCalories().setText(String.valueOf(item.getCalories()));
         holder.getQuantity().setText(String.valueOf(item.getQuantity()));
 
         holder.getAddToCart().setOnClickListener(l -> {
@@ -70,7 +70,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
 
         private TextView name;
         private TextView quantity;
-        private TextView price;
+        private TextView calories;
         private Button addToCart;
         private Button increaseButton;
         private Button decreaseButton;
@@ -79,7 +79,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
             super(view);
             this.name = view.findViewById(R.id.itemName);
             this.quantity = view.findViewById(R.id.itemQuantity);
-            this.price = view.findViewById(R.id.itemPrice);
+            this.calories = view.findViewById(R.id.itemCalories);
             this.addToCart = view.findViewById(R.id.addToCartButton);
             this.increaseButton = view.findViewById(R.id.shoppingListIncrease);
             this.decreaseButton = view.findViewById(R.id.shoppingListDecrease);
@@ -89,8 +89,8 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
             return this.name;
         }
 
-        public TextView getPrice() {
-            return this.price;
+        public TextView getCalories() {
+            return this.calories;
         }
 
         public TextView getQuantity() {

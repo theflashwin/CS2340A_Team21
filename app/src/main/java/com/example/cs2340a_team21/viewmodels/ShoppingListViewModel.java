@@ -27,7 +27,7 @@ public class ShoppingListViewModel {
 
         list.forEach(v -> {
             Log.d("Item Name:", v.getName());
-            Log.d("Item Price", String.valueOf(v.getPrice()));
+            Log.d("Item Calories", String.valueOf(v.getCalories()));
             Log.d("Item Quantity", String.valueOf(v.getQuantity()));
         });
 
@@ -58,7 +58,7 @@ public class ShoppingListViewModel {
     public static void checkout() {
 
         for (ShoppingListItem item : cart) {
-            User.getPantry().addIngredient(item.getName(), item.getQuantity(), 100, "N/A", true);
+            User.getPantry().addIngredient(item.getName(), item.getQuantity(), item.getCalories(), "N/A", true);
         }
 
     }
@@ -75,7 +75,7 @@ public class ShoppingListViewModel {
 
     }
 
-    public static String addToShoppingList(String name, String quantity, String price) {
+    public static String addToShoppingList(String name, String quantity, String calories) {
 
         if (name == null || name.equals("")) {
             return "null";
@@ -85,12 +85,12 @@ public class ShoppingListViewModel {
             return "null";
         }
 
-        if (price == null || price.equals("")) {
+        if (calories == null || calories.equals("")) {
             return "null";
         }
 
         ShoppingList.getInstance().addToShoppingList(new ShoppingListItem(name,
-                Integer.parseInt(quantity), Double.parseDouble(price)));
+                Integer.parseInt(quantity), Integer.parseInt(calories)));
 
         return "success";
 

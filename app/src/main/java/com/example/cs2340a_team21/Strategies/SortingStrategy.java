@@ -9,3 +9,4 @@ public interface SortingStrategy {
     public Comparator<Recipe> getComparator();
 
 }
+//can we use this pattern for Sprint 4? Or does it have to be new?

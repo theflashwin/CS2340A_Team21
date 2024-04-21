@@ -6,13 +6,13 @@ public class ShoppingListItem {
 
     private String name;
     private int quantity;
-    private double price;
+    private int calories;
 
-    public ShoppingListItem(String name, int quantity, double price) {
+    public ShoppingListItem(String name, int quantity, int calories) {
 
         this.name = name;
         this.quantity = quantity;
-        this.price = price;
+        this.calories = calories;
 
     }
 
@@ -24,8 +24,8 @@ public class ShoppingListItem {
         return this.quantity;
     }
 
-    public double getPrice() {
-        return this.price;
+    public int getCalories() {
+        return this.calories;
     }
 
     @Override
