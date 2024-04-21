@@ -2,6 +2,10 @@ import './style.css'
 
 import { description1, description2, description3, description4, description5, description6, description7 } from './descriptions'
 
+import javascriptLogo from './javascript.svg'
+import viteLogo from '/vite.svg'
+import { setupCounter } from './counter.js'
+
 // Tab selector logic
 
 const title = document.getElementById("text-box-title")
@@ -85,6 +89,7 @@ let index = 0
 const images = [img1, img2, img3, img4, img5, img6, img7]
 const captions = [caption1, caption2, caption3, caption4, caption5, caption6, caption7]
 
+
 back.addEventListener("click", () => {
   
   index = (index - 1) % images.length
@@ -118,7 +123,6 @@ forward.addEventListener("click", () => {
       images[i].setAttribute("class", "hidden duration-700 ease-in-out")
     }
   }
-
   caption.innerHTML = captions[index]
 
 })
