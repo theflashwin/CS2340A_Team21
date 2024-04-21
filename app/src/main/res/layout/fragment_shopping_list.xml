@@ -36,11 +36,11 @@
             android:inputType="text" />
 
         <EditText
-            android:id="@+id/shoppingListPrice"
+            android:id="@+id/shoppingListCalories"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Price"
+            android:hint="Calories"
             android:inputType="text" />
 
         <Button

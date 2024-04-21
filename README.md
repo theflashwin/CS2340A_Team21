@@ -1,6 +1,6 @@
 CS2340A_Team21
 
-Sprint 1, Sprint 2, Spring 3 Repo
+Sprint 1, Sprint 2, Sprint 3, Sprint 4 Repo
 
 FIREBASE NOTES:
 
@@ -20,3 +20,8 @@ Tasks for Sprint 2
 Personal info Screen
 Link Meal and User Databases
 2 Visualization buttons
+
+TODO:
+Tasks for Sprint 4
+-Sufficient Recipe Feature
+

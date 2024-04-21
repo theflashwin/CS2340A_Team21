@@ -20,6 +20,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.List;
 
@@ -199,6 +200,46 @@ public class Pantry {
                     }
                     // Now update the document with the modified array
                     pantryRef.update("ingredients", items);
+                } else {
+                    Log.d("Document", "No such document");
+                }
+            } else {
+                Log.d("Document", "get failed with ", task.getException());
+            }
+        });
+
+
+    }
+
+    public void decreaseIngredientByNum(Map<String, Integer> ingredients) {
+        pantryRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                if (document.exists()) {
+                    List<Map<String, Object>> items = (List<Map<String, Object>>)
+                            document.get("ingredients");
+
+                    List<Map<String, Object>> itemsFinal = new LinkedList<Map<String, Object>>();
+
+                    Log.w("Called dec successfully", "");
+                    for (Map<String, Object> item : items) {
+                        Log.w("Checking ingredient", (String) item.get("name"));
+                        if (ingredients.containsKey(item.get("name"))) {
+
+                            Log.w("Decrementing", (String) item.get("name"));
+
+                            Long quantity = ((Long) item.get("quantity"));
+
+                            if (!(quantity.intValue() - ingredients.get(item.get("name")) <= 0)) {
+                                item.put("quantity", quantity.intValue() - ingredients.get(item.get("name")));
+                                itemsFinal.add(item);
+                            }
+                        } else {
+                            itemsFinal.add(item);
+                        }
+                    }
+                    // Now update the document with the modified array
+                    pantryRef.update("ingredients", itemsFinal);
                 } else {
                     Log.d("Document", "No such document");
                 }

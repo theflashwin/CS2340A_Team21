@@ -14,6 +14,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.example.cs2340a_team21.R;
+import com.example.cs2340a_team21.model.Pantry;
 import com.example.cs2340a_team21.viewmodels.PersonalInfoViewModel;
 
 /**
@@ -70,6 +71,9 @@ public class PersonalFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        Pantry.getInstance().initializeStaticIngredients();
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_personal, container, false);
         this.height = (EditText) view.findViewById(R.id.editTextHeight);
