@@ -34,4 +34,4 @@ public class SplashActivity extends AppCompatActivity {
     }
 }
 
-//do we need to fix the splash page since we got points off? I don't think so, right?
+//all good
