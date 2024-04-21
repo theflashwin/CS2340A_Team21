@@ -23,5 +23,5 @@ Link Meal and User Databases
 
 TODO:
 Tasks for Sprint 4
--Sufficient Recipe Feature
+-Sufficient Recipe Feature, FINISHED
 
