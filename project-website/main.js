@@ -1,30 +1,61 @@
 import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
+
+import { description1, description2, description3, description4, description5, description6, description7 } from './descriptions'
 
 // Tab selector logic
 
 const title = document.getElementById("text-box-title")
 const description = document.getElementById("text-box-description")
+const img = document.getElementById("text-box-image")
 
 const tab1 = document.getElementById("tab1")
 const tab2 = document.getElementById("tab2")
 const tab3 = document.getElementById("tab3")
+const tab4 = document.getElementById("tab4")
+const tab5 = document.getElementById("tab5")
+const tab6 = document.getElementById("tab6")
+const tab7 = document.getElementById("tab7")
 
 tab1.addEventListener("click", () => {
-  title.innerHTML = "Overall Design"
-  description.innerHTML = "Enter Overall Design Description Here"
+  title.innerHTML = "DCD Diagram"
+  description.innerHTML = description1
+  img.src = "img/DCD.png"
 })
 
 tab2.addEventListener("click", () => {
-  title.innerHTML = "Singleton"
-  description.innerHTML = "Enter Singleton Description Here"
+  title.innerHTML = "Sequence Diagram"
+  description.innerHTML = description2
+  img.src = "img/sequence.png"
 })
 
 tab3.addEventListener("click", () => {
+  title.innerHTML = "Single Responsibility"
+  description.innerHTML = description3
+  img.src = "img/single.png"
+})
+
+tab4.addEventListener("click", () => {
+  title.innerHTML = "Interface Segregation Principle"
+  description.innerHTML = description4
+  img.src = "img/segregation.png"
+})
+
+tab5.addEventListener("click", () => {
+  title.innerHTML = "Open-Closed Principle"
+  description.innerHTML = description5
+  img.src = "img/openclosed.png"
+})
+
+tab6.addEventListener("click", () => {
   title.innerHTML = "Strategy"
-  description.innerHTML = "Enter Strategy Description Here"
+  description.innerHTML = description6
+  img.src = "img/strategy.png"
+})
+
+tab7.addEventListener("click", () => {
+  title.innerHTML = "Singleton"
+  description.innerHTML = description7
+  img.src = "img/singleton.png"
 })
 
 // Image Selector
