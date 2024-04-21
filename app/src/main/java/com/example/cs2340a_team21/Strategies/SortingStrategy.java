@@ -9,3 +9,6 @@ public interface SortingStrategy {
     public Comparator<Recipe> getComparator();
 
 }
+
+//strategy pattern
+
