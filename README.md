@@ -23,4 +23,5 @@ Link Meal and User Databases
 
 Tasks for Sprint 4
 -Sufficient Recipe Feature
+-Design Patterns
 
