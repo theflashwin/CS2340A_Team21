@@ -13,11 +13,20 @@ import com.example.cs2340a_team21.R;
 import com.example.cs2340a_team21.objects.ShoppingListItem;
 import com.example.cs2340a_team21.viewmodels.ShoppingListViewModel;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapter.ViewHolder> {
 
-    ArrayList<ShoppingListItem> items;
+    private ArrayList<ShoppingListItem> items;
+
+    public ArrayList<ShoppingListItem> getItems() {
+        return items;
+    }
+
+    public void setItems(ArrayList<ShoppingListItem> items) {
+        this.items = items;
+    }
 
     public ShoppingListAdapter(ArrayList<ShoppingListItem> items) {
         this.items = items;

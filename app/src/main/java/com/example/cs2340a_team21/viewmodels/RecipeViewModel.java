@@ -4,12 +4,10 @@ import android.util.Log;
 
 import com.example.cs2340a_team21.Strategies.SortingStrategy;
 import com.example.cs2340a_team21.model.Cookbook;
-import com.example.cs2340a_team21.model.ShoppingList;
 import com.example.cs2340a_team21.model.User;
 import com.example.cs2340a_team21.objects.Ingredient;
 import com.example.cs2340a_team21.objects.Recipe;
 import com.example.cs2340a_team21.objects.ShoppingListItem;
-import com.example.cs2340a_team21.model.Pantry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +61,7 @@ public class RecipeViewModel {
 
     }
 
-    public static void shopIngredients (Recipe r, List<Ingredient> ingredients) {
+    public static void shopIngredients(Recipe r, List<Ingredient> ingredients) {
         for (Ingredient i : r.getIngredients()) {
 
             boolean ingredientPresent = false;
@@ -133,7 +131,7 @@ public class RecipeViewModel {
 
     }
 
-    public static void cookMeal (Recipe r) {
+    public static void cookMeal(Recipe r) {
         // Update meal database, Update calorie count, Remove used ingredients from pantry
 
         int totalCalories = 0;

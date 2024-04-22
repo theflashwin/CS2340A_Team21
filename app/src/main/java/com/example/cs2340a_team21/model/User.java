@@ -79,8 +79,6 @@ public class User {
 
         }
 
-//        Log.d("Constructor::", shoppingList.toString());
-
         return ret;
 
     }

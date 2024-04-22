@@ -5,7 +5,6 @@ import android.widget.Button;
 
 import com.example.cs2340a_team21.model.ShoppingList;
 import com.example.cs2340a_team21.model.User;
-import com.example.cs2340a_team21.objects.Ingredient;
 import com.example.cs2340a_team21.objects.ShoppingListItem;
 
 import java.util.ArrayList;
@@ -58,7 +57,8 @@ public class ShoppingListViewModel {
     public static void checkout() {
 
         for (ShoppingListItem item : cart) {
-            User.getPantry().addIngredient(item.getName(), item.getQuantity(), item.getCalories(), "N/A", true);
+            User.getPantry().addIngredient(item.getName(), item.getQuantity(),
+                    item.getCalories(), "N/A", true);
         }
 
     }

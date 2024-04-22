@@ -13,9 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.cs2340a_team21.R;
-import com.example.cs2340a_team21.objects.Ingredient;
 import com.example.cs2340a_team21.objects.ShoppingListItem;
-import com.example.cs2340a_team21.viewmodels.IngredientsViewModel;
 import com.example.cs2340a_team21.viewmodels.ShoppingListViewModel;
 
 import java.util.ArrayList;

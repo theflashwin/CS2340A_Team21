@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 
 import com.example.cs2340a_team21.factory.Item;
 import com.example.cs2340a_team21.factory.ItemFactory;
-import com.example.cs2340a_team21.factory.Item;
 import com.example.cs2340a_team21.objects.Ingredient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -79,8 +78,7 @@ public class Pantry {
     }
 
     public boolean addIngredient(String name, int quantity, int calories,
-                                 String expiration, boolean includeExpiration)
-    {
+                                 String expiration, boolean includeExpiration) {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -104,7 +102,8 @@ public class Pantry {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 DocumentSnapshot doc = task.getResult();
-                List<Map<String, Object>> ingredients = (List<Map<String, Object>>) doc.get("ingredients");
+                List<Map<String, Object>> ingredients =
+                        (List<Map<String, Object>>) doc.get("ingredients");
                 ingredients.forEach(ingredient -> {
 
                     Long quantity = ((Long) ingredient.get("quantity"));
@@ -237,7 +236,8 @@ public class Pantry {
                             Long quantity = ((Long) item.get("quantity"));
 
                             if (!(quantity.intValue() - ingredients.get(item.get("name")) <= 0)) {
-                                item.put("quantity", quantity.intValue() - ingredients.get(item.get("name")));
+                                item.put("quantity",
+                                        quantity.intValue() - ingredients.get(item.get("name")));
                                 itemsFinal.add(item);
                             }
                         } else {
@@ -258,7 +258,8 @@ public class Pantry {
     }
 
     public class PantryItemFactory extends com.example.cs2340a_team21.factory.ItemFactory {
-        public Item makeIngredient (String name, int quantity, int calories, String expirationDate) {
+        public Item makeIngredient(String name, int quantity, int calories,
+                                    String expirationDate) {
             return new Ingredient(name, quantity, calories, expirationDate);
         }
     }

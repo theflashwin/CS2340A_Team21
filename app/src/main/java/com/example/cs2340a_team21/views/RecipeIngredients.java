@@ -9,10 +9,8 @@ import android.widget.TextView;
 
 import com.example.cs2340a_team21.R;
 import com.example.cs2340a_team21.objects.Recipe;
-import com.example.cs2340a_team21.viewmodels.InputMealViewModel;
 import com.example.cs2340a_team21.viewmodels.RecipeViewModel;
 import android.util.Log;
-import android.widget.Toast;
 
 
 public class RecipeIngredients extends AppCompatActivity {
@@ -38,10 +36,10 @@ public class RecipeIngredients extends AppCompatActivity {
 
         this.cook.setOnClickListener(v -> {
 
-            int RecipePosition = intent.getIntExtra("RecipePosition", 3);
-            Recipe r = RecipeViewModel.getRecipes().get(RecipePosition);
+            int recipePosition = intent.getIntExtra("RecipePosition", 3);
+            Recipe r = RecipeViewModel.getRecipes().get(recipePosition);
 
-            String message = r.getName() + ", Position: " + RecipePosition;
+            String message = r.getName() + ", Position: " + recipePosition;
 
             Log.w("Calling method to cook", message);
             RecipeViewModel.cookMeal(r);

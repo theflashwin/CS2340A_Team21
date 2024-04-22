@@ -4,8 +4,6 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import java.lang.reflect.Array;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -14,14 +12,11 @@ import java.util.Map;
 
 import com.example.cs2340a_team21.factory.Item;
 import com.example.cs2340a_team21.factory.ItemFactory;
-import com.example.cs2340a_team21.objects.Ingredient;
-import com.example.cs2340a_team21.objects.Recipe;
 import com.example.cs2340a_team21.objects.ShoppingListItem;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
@@ -29,8 +24,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
-import org.checkerframework.checker.units.qual.A;
 
 public class ShoppingList {
 
@@ -56,7 +49,8 @@ public class ShoppingList {
 
         Log.d("enter", "constructor");
 
-        Query searchForPantry = db.collection("shopping-list").whereEqualTo("user", User.getUserId());
+        Query searchForPantry = db.collection("shopping-list")
+                .whereEqualTo("user", User.getUserId());
         searchForPantry.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -231,7 +225,8 @@ public class ShoppingList {
                     Long quantity = (Long) item.get("quantity");
                     Long calories = (Long) item.get("calories");
 
-                    ShoppingListItem newItem = (ShoppingListItem) shoppingListItemFactory.createItem(
+                    ShoppingListItem newItem =
+                            (ShoppingListItem) shoppingListItemFactory.createItem(
                             (String) item.get("name"), quantity.intValue(), calories.intValue(),
                             "0");
 
@@ -250,7 +245,8 @@ public class ShoppingList {
 
     public class ShoppingListItemFactory extends ItemFactory {
         @Override
-        public Item makeIngredient (String name, int quantity, int calories, String expirationDate) {
+        public Item makeIngredient(String name,
+                                    int quantity, int calories, String expirationDate) {
             return new ShoppingListItem(name, quantity, calories);
         }
     }
