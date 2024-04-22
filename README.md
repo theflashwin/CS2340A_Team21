@@ -21,7 +21,7 @@ Personal info Screen
 Link Meal and User Databases
 2 Visualization buttons
 
-TODO:
+
 Tasks for Sprint 4
--Sufficient Recipe Feature, FINISHED
+
 
