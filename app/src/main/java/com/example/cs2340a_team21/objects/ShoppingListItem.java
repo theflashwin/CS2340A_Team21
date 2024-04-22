@@ -2,7 +2,9 @@ package com.example.cs2340a_team21.objects;
 
 import android.util.Log;
 
-public class ShoppingListItem {
+import com.example.cs2340a_team21.factory.Item;
+
+public class ShoppingListItem implements Item {
 
     private String name;
     private int quantity;

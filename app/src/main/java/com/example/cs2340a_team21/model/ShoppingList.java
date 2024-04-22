@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.example.cs2340a_team21.factory.Item;
+import com.example.cs2340a_team21.factory.ItemFactory;
 import com.example.cs2340a_team21.objects.Ingredient;
 import com.example.cs2340a_team21.objects.Recipe;
 import com.example.cs2340a_team21.objects.ShoppingListItem;
@@ -39,6 +41,8 @@ public class ShoppingList {
     private DocumentReference ref;
 
     private FirebaseFirestore db;
+
+    private ItemFactory shoppingListItemFactory = new ShoppingListItemFactory();
 
     public String toString() {
 
@@ -227,10 +231,11 @@ public class ShoppingList {
                     Long quantity = (Long) item.get("quantity");
                     Long calories = (Long) item.get("calories");
 
-                    ret.add(new ShoppingListItem(
-                            (String) item.get("name"),
-                            quantity.intValue(),
-                            calories.intValue()));
+                    ShoppingListItem newItem = (ShoppingListItem) shoppingListItemFactory.createItem(
+                            (String) item.get("name"), quantity.intValue(), calories.intValue(),
+                            "0");
+
+                    ret.add(newItem);
                 });
             }
         });
@@ -241,6 +246,13 @@ public class ShoppingList {
 
         return ret;
 
+    }
+
+    public class ShoppingListItemFactory extends ItemFactory {
+        @Override
+        public Item makeIngredient (String name, int quantity, int calories, String expirationDate) {
+            return new ShoppingListItem(name, quantity, calories);
+        }
     }
 
 }

@@ -4,6 +4,9 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.cs2340a_team21.factory.Item;
+import com.example.cs2340a_team21.factory.ItemFactory;
+import com.example.cs2340a_team21.factory.Item;
 import com.example.cs2340a_team21.objects.Ingredient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -35,6 +38,8 @@ public class Pantry {
     public List<Ingredient> getStaticIngredients() {
         return staticIngredients;
     }
+
+    private ItemFactory pantryItemFactory =  new PantryItemFactory();
 
     private Pantry() {
 
@@ -111,10 +116,11 @@ public class Pantry {
                         expiration = (String) ingredient.get("expiration");
                     }
 
-                    ret.add(new Ingredient((String) ingredient.get("name"),
-                            quantity.intValue(),
-                            calories.intValue(),
-                            expiration));
+                    Ingredient newIngredient = (Ingredient) pantryItemFactory.createItem(
+                            (String) ingredient.get("name"), quantity.intValue(),
+                            calories.intValue(), expiration);
+
+                    ret.add(newIngredient);
                 });
             }
         });
@@ -251,4 +257,9 @@ public class Pantry {
 
     }
 
+    public class PantryItemFactory extends com.example.cs2340a_team21.factory.ItemFactory {
+        public Item makeIngredient (String name, int quantity, int calories, String expirationDate) {
+            return new Ingredient(name, quantity, calories, expirationDate);
+        }
+    }
 }
