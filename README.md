@@ -10,7 +10,7 @@ Includes a digit
 Create Calorie Tracker
 
 Team Members: Ashwin, Neeti, Yashad, Mukund, Sachin, Suhas
-=======
+
 Adding login functionality
 Nav Bar Frontend and Backend Functionality Completed 
 Input Meal, Recipe, Ingredients, and Shopping Lists Screen Completed
@@ -21,7 +21,8 @@ Personal info Screen
 Link Meal and User Databases
 2 Visualization buttons
 
-
 Tasks for Sprint 4
-
+-Sufficient Recipe Feature
+-Design Patterns
+-Completed Website
 
